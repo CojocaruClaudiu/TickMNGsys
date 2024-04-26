@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class ="row">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Update ticket</h5>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label" >Issue Title</label>
+                        {% render_field form.title class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label" >Description</label>
+                        {% render_field form.description class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label" >Priority</label>
+                        {% render_field form.priority class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label" >Category</label>
+                        {% render_field form.category class="form-control" %}
+                    </div>
+                    <button class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+{% endblock content %}

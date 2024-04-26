@@ -1,0 +1,28 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    
+<div class ="card mx-auto" style="width: 40rem;">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Login to continue!</h5>
+                <div class="card-body">
+                    
+                  
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">Username</label>
+                            <input type="input" class="form-control" id="exampleInputEmail" name="username" placeholder="Enter username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
+                        </div>
+                        <button class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
