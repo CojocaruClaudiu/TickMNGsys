@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import User
 from django.contrib.auth.admin import UserAdmin
 
+
 class CustomerUserAdmin(UserAdmin):
     fieldsets= (
         *UserAdmin.fieldsets,
@@ -10,11 +11,12 @@ class CustomerUserAdmin(UserAdmin):
             {
                 'fields': (
                     'is_customer',
-                    'is engineer',
+                    'is_engineer',
                     
                 ),
             },
         )
     )
+
 
 admin.site.register(User, CustomerUserAdmin)

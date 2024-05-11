@@ -3,11 +3,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Ticket
 from .form import CreateTicketForm, UpdateTicketForm
-from users.models import User
+from users.models import User 
+from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 
+# vizualizarea detaliilor unui bilet
 
-# view ticket details
 
 @login_required
 def ticket_details(request, pk):
@@ -18,7 +19,7 @@ def ticket_details(request, pk):
     return render(request, 'ticket/ticket_details.html', context)
 
 
-# creating a ticket
+# crearea unui bilet
 @login_required
 def create_ticket(request):
     if request.method == 'POST':
@@ -28,10 +29,10 @@ def create_ticket(request):
             var.created_by = request.user
             var.ticket_status = 'Pending'
             var.save()
-            messages.info(request, "Your ticket has been successfully submitted. An engineer would be assigned soon!")
+            messages.info(request, "Biletul dumneavoastră a fost trimis cu succes. Un inginer va fi asignat în curând!")
             return redirect('dashboard')
         else:
-            messages.warning(request, 'Something went wrong. Please try again!')
+            messages.warning(request, 'Ceva nu a mers bine. Vă rugăm să încercați din nou!')
             return redirect('create-ticket')
     else:
         form = CreateTicketForm()
@@ -39,7 +40,7 @@ def create_ticket(request):
         return render(request, 'ticket/create_ticket.html', context)
 
 
-# updating a ticket
+# actualizarea unui bilet
 @login_required
 def update_ticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
@@ -48,20 +49,20 @@ def update_ticket(request, pk):
             form = UpdateTicketForm(request.POST, instance=ticket)
             if form.is_valid():
                 form.save()
-                messages.info(request, "Your ticket changes have been successfully updated. The changes have been saved!")
+                messages.info(request, "Modificările la biletul dumneavoastră au fost actualizate cu succes. Modificările au fost salvate!")
                 return redirect('dashboard')
             else:
-                messages.warning(request, 'Something went wrong. Please try again!')
+                messages.warning(request, 'Ceva nu a mers bine. Vă rugăm să încercați din nou!')
                 return redirect('create-ticket')
         else:
             form = UpdateTicketForm(instance=ticket)
             context = {'form': form}
             return render(request, 'ticket/update_ticket.html', context)
     else:
-        return messages.warning(request, 'You cannot make an changes!')
+        return messages.warning(request, 'Nu puteți face modificări!')
 
 
-# viewing all created tickets
+# vizualizarea tuturor biletelor create
 @login_required
 def all_tickets(request):
     tickets = Ticket.objects.filter(created_by=request.user).order_by('-date_created')  
@@ -69,7 +70,7 @@ def all_tickets(request):
     return render(request, 'ticket/all_tickets.html', context)
 
 
-# For Engineers
+# Pentru ingineri
 @login_required
 def ticket_queue(request):
     tickets = Ticket.objects.filter(ticket_status='Pending')
@@ -84,7 +85,7 @@ def accept_ticket(request, pk):
     ticket.ticket_status = 'Active'
     ticket.accepted_date = datetime. datetime.now()
     ticket.save()
-    messages.info(request, "Your ticket has been successfully accepted.")
+    messages.info(request, "Biletul dumneavoastră a fost acceptat cu succes.")
     return redirect('workspace')
 
 
@@ -95,11 +96,11 @@ def close_ticket(request, pk):
     ticket.is_resolved = True
     ticket.closed_date = datetime. datetime.now()
     ticket.save()
-    messages.info(request, "Your ticket has been successfully resolved.")
+    messages.info(request, "Biletul dumneavoastră a fost rezolvat cu succes.")
     return redirect('ticket-queue')
 
 
-# ticket engineer is working on
+# biletul la care lucrează inginerul
 @login_required
 def workspace(request):
     tickets = Ticket.objects.filter(assigned_to=request.user, is_resolved=False)
@@ -107,9 +108,37 @@ def workspace(request):
     return render(request, 'ticket/workspace.html', context)
 
 
-# all closed/resolved tickets
+# toate biletelor închise/rezolvate
 @login_required
 def all_closed_tickets(request):
     tickets = Ticket.objects.filter(assigned_to=request.user, is_resolved=True)
     context = {'tickets': tickets}
     return render(request, 'ticket/all_closed_tickets.html', context)
+
+
+@login_required
+def delete_ticket(request, pk):
+    ticket = Ticket.objects.get(pk=pk)
+    ticket.delete()
+    messages.info(request, "Biletul dumneavoastră a fost șters cu succes.")
+    return redirect('all-tickets')
+
+# dashboard
+
+
+@login_required
+def dashboard(request):
+    print("Dashboard view is called!")  # Debugging statement
+    # Get count of tickets based on their status
+    ticket_counts = Ticket.objects.values('ticket_status').annotate(total=Count('id'))
+
+    # Preparing data for the chart
+    labels = [ticket['ticket_status'] for ticket in ticket_counts]
+    data = [ticket['total'] for ticket in ticket_counts]
+
+    context = {
+        'labels': labels,
+        'data': data,
+    }
+
+    return render(request, 'dashboard/dashboard.html', context)

@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import users.urls
+from ticket import views  # Assuming 'dashboard' is in 'ticket/views.py'
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
-    path('', include('dashboard.urls')),
+    path('', include('dashboard.urls')),  # Only correct if 'dashboard' is a separate app with 'urls.py'
     path('admin/', admin.site.urls),
     path('ticket/', include('ticket.urls')),
-    path('accounts/', include(users.urls)),
-  
-]
+    path('accounts/', include('users.urls')),
+    path('dashboard/', views.dashboard, name='dashboard'),  # Correct path to 'dashboard' view
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

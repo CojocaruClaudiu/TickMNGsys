@@ -13,8 +13,11 @@
                         <th scope="col">Title</th>
                         <th scope="col">Created on</th>
                         <th scope="col">Created By</th>
+                        <th scope="col">Prioritate</th>
+                        <th scope="col">Categorie</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +27,8 @@
                         <td><small>{{ticket.title}}</small></td>
                         <td><small>{{ticket.date_created}}</small></td>
                         <td>{{ticket.created_by}}</td>
+                        <td><small>{{ticket.priority}}</small></td>
+                        <td><small>{{ticket.category}}</small></td>
                         {% if ticket.ticket_status == 'Active' %}
                         <td><span class="badge bg-success">Active</span></td>
                         {% elif ticket.ticket_status == 'Pending' %}
@@ -39,5 +44,6 @@
             </table>
         </div>
     </div>
+</div>
 
 {% endblock content %}

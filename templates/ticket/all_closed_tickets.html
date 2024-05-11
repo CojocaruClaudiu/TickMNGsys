@@ -1,43 +1,48 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Closed TIckets</h1>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Ticket ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Created on</th>
-                        <th scope="col">Created By</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for ticket in tickets %}
-                    <tr>
-                        <td><small>{{ticket.ticket_number}}</small></td>
-                        <td><small>{{ticket.title}}</small></td>
-                        <td><small>{{ticket.date_created}}</small></td>
-                        <td>{{ticket.created_by}}</td>
-                        {% if ticket.ticket_status == 'Active' %}
-                        <td><span class="badge bg-success">Active</span></td>
-                        {% elif ticket.ticket_status == 'Pending' %}
-                        <td><span class="badge bg-warning">Pending</span></td>
-                        {% elif ticket.ticket_status == 'Completed' %}
-                        <td><span class="badge bg-danger">Completed</span></td>
-                        {% endif %}
-                        <td><small><a href="{% url 'ticket-details' ticket.pk %}">View Details</a></small></td>
-                    
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Closed Tickets</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">ID Ticket</th>
+            <th scope="col">Titlu</th>
+            <th scope="col">Creat la</th>
+            <th scope="col">Atribuit către</th>
+            <th scope="col">Stare</th>
+            <th scope="col">Prioritate</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Acțiune</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in tickets %}
+          <tr>
+            <td><small>{{ticket.ticket_number}}</small></td>
+            <td><small>{{ticket.title}}</small></td>
+            <td><small>{{ticket.date_created}}</small></td>
+            <td>{{ticket.created_by}}</td>
+            {% if ticket.ticket_status == 'Active' %}
+            <td><span class="badge bg-success">Active</span></td>
+            {% elif ticket.ticket_status == 'Pending' %}
+            <td><span class="badge bg-warning">Pending</span></td>
+            {% elif ticket.ticket_status == 'Completed' %}
+            <td><span class="badge bg-danger">Completed</span></td>
+            {% endif %}
+            <td>
+              <small
+                ><a href="{% url 'ticket-details' ticket.pk %}"
+                  >View Details</a
+                ></small
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-
+  </div>
+</div>
 {% endblock content %}

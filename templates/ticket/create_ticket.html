@@ -2,33 +2,34 @@
 {% load widget_tweaks %}
 
 {% block content %}
-
-<div class ="row">
+<div class="row">
     <div class="col-md-6">
         <div class="card mx-auto" style="width: 40rem;">
             <div class="card-body">
-                <h5 class="card-title mb-3">Create a ticket</h5>
-
+                <h5 class="card-title mb-3">Creează un tichet</h5>
                 <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Issue Title</label>
-                        {% render_field form.title class="form-control" %}
+                        <label for="{{ form.title.id_for_label }}" class="form-label">Titlul problemei</label>
+                        {% render_field form.title class+="form-control" placeholder="Rezumați problema" %}
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Description</label>
-                        {% render_field form.description class="form-control" %}
+                        <label for="{{ form.description.id_for_label }}" class="form-label">Descriere</label>
+                        {% render_field form.description class+="form-control" placeholder="Detaliați problema" %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.priority.id_for_label }}" class="form-label">Prioritate</label>
+                        {% render_field form.priority class="form-select" %}
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Priority</label>
-                        {% render_field form.priority class="form-control" %}
+                        <label for="{{ form.category.id_for_label }}" class="form-label">Categorie</label>
+                        {% render_field form.category class+="form-control" %}
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Category</label>
-                        {% render_field form.category class="form-control" %}
-                    </div>
-                    <button class="btn btn-primary btn-block">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-block">Trimite tichetul <i class="fas fa-paper-plane button-icon"></i></button>
                 </form>
             </div>
         </div>
+    </div>
+</div>
 {% endblock content %}

@@ -4,21 +4,25 @@
     
 <div class ="card mx-auto" style="width: 40rem;">
     <div class="card-body">
-        <h5 class="card-title mb-3">Login to continue!</h5>
                 <div class="card-body">
-                    
+                    <h3 class="card-title text-center mb-4">Login to continue!</h3> <!-- Larger title, centered -->
+                    <form method="POST" action="{% url 'login' %}">
                   
                     <form method="POST" action="{% url 'login' %}">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="exampleInputEmail" class="form-label">Username</label>
-                            <input type="input" class="form-control" id="exampleInputEmail" name="username" placeholder="Enter username" required>
+                        <div class="form-floating mb-3">
+                            <input type="input" class="form-control" id="floatingUsername" name="username" placeholder="Enter username" required>
+                            <label for="floatingUsername">Username</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+                            <label for="floatingPassword">Password</label>
                         </div>
-                        <button class="btn btn-primary btn-block">Login</button>
+                        <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-block">  Login </button>
+                        
+                        
+                        </div>
                     </form>
                 </div>
             </div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Sidebar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            height: 100vh;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header, .menu-item {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-image img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+        .profile-info {
+            margin-top: 10px;
+        }
+        .menu-item {
+            margin-bottom: 10px;
+        }
+        .menu-icon {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .upgrade-button {
+            background-color: #6C5CE7;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .logout-button {
+            background: none;
+            border: 1px solid #ccc;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile-header">
+            <div class="profile-image">
+                <img src="https://i.pravatar.cc/150?img=3" alt="Profile Image">
+            </div>
+            <div class="profile-info">
+                <h3>Mathew Anderson</h3>
+                <p>Designer</p>
+                <p>info@modernize.com</p>
+            </div>
+        </div>
+        <div class="menu-item">
+            <i class="fas fa-user menu-icon"></i>
+            My Profile<br>
+            Account Settings
+        </div>
+        <div class="menu-item">
+            <i class="fas fa-envelope menu-icon"></i>
+            My Inbox<br>
+            Messages & Emails
+        </div>
+        <div class="menu-item">
+            <i class="fas fa-tasks menu-icon"></i>
+            My Tasks<br>
+            To-do and Daily Tasks
+        </div>
+        <div class="menu-item">
+            <button class="upgrade-button">Upgrade</button>
+        </div>
+        <div class="menu-item">
+            <button class="logout-button">Logout</button>
+        </div>
+    </div>
+</body>
+</html>
