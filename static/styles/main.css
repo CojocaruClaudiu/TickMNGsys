@@ -24,3 +24,122 @@
   object-fit: cover; /* This keeps the aspect ratio and covers the area */
 }
 
+/* Cards styling */
+.card {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow */
+    border: none; /* Remove borders */
+}
+
+.card-body {
+    padding: 20px; /* Consistent padding */
+    font-size: 16px; /* Larger font for visibility */
+}
+
+.card-number {
+    font-size: 28px; /* Larger number font */
+    font-weight: bold; /* Bold for numbers */
+}
+
+/* Table styling */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 15px; /* Space between rows */
+    width: 100%;
+}
+
+.table thead th {
+    background-color: #f8f9fa; /* Light header background */
+    color: #495057; /* Dark grey text */
+}
+
+.table td, .table th {
+    vertical-align: middle; /* Align cell content */
+    border-top: none; /* Hide top border */
+}
+
+.table td {
+    background-color: white; /* White row backgrounds */
+    border: none;
+}
+
+/* Search input styling */
+#searchInput {
+    background-color: #f8f9fa; /* Light background for input */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside search box */
+}
+
+/* Badge styling for status */
+.badge {
+    font-size: 0.8rem; /* Smaller font size */
+    padding: 0.5em 0.75em; /* Padding around text */
+}
+
+/* Icons and action buttons */
+.btn {
+    font-size: 0.8rem; /* Smaller button texts */
+    padding: 5px 8px; /* Smaller buttons */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 15px; /* Smaller padding on smaller screens */
+    }
+    .card-number {
+        font-size: 24px; /* Smaller number font on mobile */
+    }
+}
+
+
+/* culoare cards */
+
+/* Custom background colors for cards */
+.bg-total-tickets {
+  background-color: #ecf2ff; /* Light blue */
+  color: #5e87ff; /* Dark text color for better readability */
+}
+
+.bg-pending-tickets {
+  background-color: #fef5e5; /* Light yellow */
+  color: #ffae1f; /* Dark text color for better readability */
+}
+
+.bg-open-tickets {
+  background-color: #e6fffa; /* Light teal */
+  color: #13deb9; /* Dark text color for better readability */
+}
+
+.bg-closed-tickets {
+  background-color: #fdede8; /* Light coral */
+  color: #fa896b; /* Dark text color for better readability */
+}
+
+/* Applying additional styling for the cards for uniformity */
+/* Specific card styling for ticket stats */
+.ticket-card {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border: none; /* Remove any default borders */
+}
+
+.ticket-card-body {
+    padding: 20px; /* Consistent padding within the card */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Setting a fixed height for uniformity */
+}
+
+.ticket-card-title {
+    margin-top: 5px; /* Slight space between number and title */
+    font-size: 1rem; /* Suitable font size for titles */
+}
+
+.ticket-card-number {
+    font-weight: bold; /* Bold for the number to stand out */
+    font-size: 1.5rem; /* Larger font size for visibility */
+}
