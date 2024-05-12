@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Ticket
 from .form import CreateTicketForm, UpdateTicketForm
-from users.models import User 
+from users.models import User
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 
@@ -65,10 +65,24 @@ def update_ticket(request, pk):
 # vizualizarea tuturor biletelor create
 @login_required
 def all_tickets(request):
-    tickets = Ticket.objects.filter(created_by=request.user).order_by('-date_created')  
-    context = {'tickets': tickets}
-    return render(request, 'ticket/all_tickets.html', context)
+    if request.user.is_superuser:  # Admin users see all tickets
+        tickets = Ticket.objects.all()
+    else:  # Non-admin users see only their tickets
+        tickets = Ticket.objects.filter(created_by=request.user)
 
+    total_tickets = tickets.count()
+    pending_tickets = tickets.filter(ticket_status='Pending').count()
+    open_tickets = tickets.filter(ticket_status='Active').count()
+    closed_tickets = tickets.filter(ticket_status='Completed').count()
+
+    context = {
+        'tickets': tickets,
+        'total_tickets': total_tickets,
+        'pending_tickets': pending_tickets,
+        'open_tickets': open_tickets,
+        'closed_tickets': closed_tickets
+    }
+    return render(request, 'ticket/all_tickets.html', context)
 
 # Pentru ingineri
 @login_required
@@ -128,15 +142,26 @@ def delete_ticket(request, pk):
 
 @login_required
 def dashboard(request):
-    print("Dashboard view is called!")  # Debugging statement
-    # Get count of tickets based on their status
-    ticket_counts = Ticket.objects.values('ticket_status').annotate(total=Count('id'))
+    if request.user.is_superuser:  # Check if user is an admin
+        tickets_query = Ticket.objects.all()
+    else:
+        tickets_query = Ticket.objects.filter(created_by=request.user)
 
-    # Preparing data for the chart
-    labels = [ticket['ticket_status'] for ticket in ticket_counts]
-    data = [ticket['total'] for ticket in ticket_counts]
+    total_tickets = tickets_query.count()
+    pending_tickets = tickets_query.filter(ticket_status='Pending').count()
+    open_tickets = tickets_query.filter(ticket_status='Active').count()
+    closed_tickets = tickets_query.filter(ticket_status='Completed').count()
+
+    # Prepare chart data for ticket statuses
+    ticket_status_counts = tickets_query.values('ticket_status').annotate(total=Count('id')).order_by('ticket_status')
+    labels = [status['ticket_status'] for status in ticket_status_counts]
+    data = [status['total'] for status in ticket_status_counts]
 
     context = {
+        'total_tickets': total_tickets,
+        'pending_tickets': pending_tickets,
+        'open_tickets': open_tickets,
+        'closed_tickets': closed_tickets,
         'labels': labels,
         'data': data,
     }

@@ -39,8 +39,44 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h1>Toate Ticketele</h1>
-      <input
+
+      <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Tickets</h5>
+                        <p class="card-text">{{ total_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Tickets</h5>
+                        <p class="card-text">{{ pending_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Open Tickets</h5>
+                        <p class="card-text">{{ open_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Closed Tickets</h5>
+                        <p class="card-text">{{ closed_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <label for="searchInput"></label><input
         type="text"
         id="searchInput"
         onkeyup="searchTable()"

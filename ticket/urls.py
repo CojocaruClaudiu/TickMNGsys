@@ -12,4 +12,5 @@ urlpatterns = [
     path('workspace/', views.workspace, name='workspace'),
     path('all-closed-tickets/', views.all_closed_tickets, name='all-closed-tickets'),
     path('delete-ticket/<int:pk>/', views.delete_ticket, name='delete-ticket'),
+
 ]
