@@ -1,24 +1,11 @@
-.badge.active {
-  background-color: #28a745; /* Bootstrap success color */
-  color: white;
-}
 
-.badge.pending {
-  background-color: #ffc107; /* Bootstrap warning color */
-  color: black;
-}
-
-.badge.bg-danger {
-  background-color: blue; /* Bootstrap danger color */
-  color: white;
-}
 
 .logo {
   width: 100px; /* Adjust width as necessary */
   height: 50px; /* Maintain aspect ratio */
 }
 .profile-image {
-  width: 34px;  /* or any size you want */
+  width: 34px; /* or any size you want */
   height: 34px; /* should be the same as width to form a perfect circle */
   border-radius: 50%;
   object-fit: cover; /* This keeps the aspect ratio and covers the area */
@@ -26,73 +13,73 @@
 
 /* Cards styling */
 .card {
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow */
-    border: none; /* Remove borders */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  border: none; /* Remove borders */
 }
 
 .card-body {
-    padding: 20px; /* Consistent padding */
-    font-size: 16px; /* Larger font for visibility */
+  padding: 20px; /* Consistent padding */
+  font-size: 16px; /* Larger font for visibility */
 }
 
 .card-number {
-    font-size: 28px; /* Larger number font */
-    font-weight: bold; /* Bold for numbers */
+  font-size: 28px; /* Larger number font */
+  font-weight: bold; /* Bold for numbers */
 }
 
 /* Table styling */
 .table {
-    border-collapse: separate;
-    border-spacing: 0 15px; /* Space between rows */
-    width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px; /* Space between rows */
+  width: 100%;
 }
 
 .table thead th {
-    background-color: #f8f9fa; /* Light header background */
-    color: #495057; /* Dark grey text */
+  background-color: #f8f9fa; /* Light header background */
+  color: #495057; /* Dark grey text */
 }
 
-.table td, .table th {
-    vertical-align: middle; /* Align cell content */
-    border-top: none; /* Hide top border */
+.table td,
+.table th {
+  vertical-align: middle; /* Align cell content */
+  border-top: none; /* Hide top border */
 }
 
 .table td {
-    background-color: white; /* White row backgrounds */
-    border: none;
+  background-color: white; /* White row backgrounds */
+  border: none;
 }
 
 /* Search input styling */
 #searchInput {
-    background-color: #f8f9fa; /* Light background for input */
-    border: 1px solid #ccc; /* Subtle border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 20px; /* Padding inside search box */
+  background-color: #f8f9fa; /* Light background for input */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside search box */
 }
 
 /* Badge styling for status */
 .badge {
-    font-size: 0.8rem; /* Smaller font size */
-    padding: 0.5em 0.75em; /* Padding around text */
+  font-size: 0.8rem; /* Smaller font size */
+  padding: 0.5em 0.75em; /* Padding around text */
 }
 
 /* Icons and action buttons */
 .btn {
-    font-size: 0.8rem; /* Smaller button texts */
-    padding: 5px 8px; /* Smaller buttons */
+  font-size: 0.8rem; /* Smaller button texts */
+  padding: 5px 8px; /* Smaller buttons */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .card-body {
-        padding: 15px; /* Smaller padding on smaller screens */
-    }
-    .card-number {
-        font-size: 24px; /* Smaller number font on mobile */
-    }
+  .card-body {
+    padding: 15px; /* Smaller padding on smaller screens */
+  }
+  .card-number {
+    font-size: 24px; /* Smaller number font on mobile */
+  }
 }
-
 
 /* culoare cards */
 
@@ -100,46 +87,257 @@
 .bg-total-tickets {
   background-color: #ecf2ff; /* Light blue */
   color: #5e87ff; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-total-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 .bg-pending-tickets {
   background-color: #fef5e5; /* Light yellow */
   color: #ffae1f; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-pending-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 .bg-open-tickets {
   background-color: #e6fffa; /* Light teal */
   color: #13deb9; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-open-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 .bg-closed-tickets {
   background-color: #fdede8; /* Light coral */
   color: #fa896b; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-closed-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 /* Applying additional styling for the cards for uniformity */
 /* Specific card styling for ticket stats */
 .ticket-card {
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
-    border: none; /* Remove any default borders */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: none; /* Remove any default borders */
 }
 
 .ticket-card-body {
-    padding: 20px; /* Consistent padding within the card */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Setting a fixed height for uniformity */
+  padding: 20px; /* Consistent padding within the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Setting a fixed height for uniformity */
 }
 
 .ticket-card-title {
-    margin-top: 5px; /* Slight space between number and title */
-    font-size: 1rem; /* Suitable font size for titles */
+  margin-top: 5px; /* Slight space between number and title */
+  font-size: 1rem; /* Suitable font size for titles */
 }
 
 .ticket-card-number {
-    font-weight: bold; /* Bold for the number to stand out */
-    font-size: 1.5rem; /* Larger font size for visibility */
+  font-weight: bold; /* Bold for the number to stand out */
+  font-size: 1.5rem; /* Larger font size for visibility */
+}
+
+
+
+
+
+
+
+
+/* Custom badge styles */
+.badge {
+  display: inline-block;
+  padding: 0.5em 0.9em;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 1em; /* Rounded corners for pill effect */
+  color: #fff; /* White text */
+  box-shadow: 0 1px 1px rgba(0,0,0,0.075); /* Soft shadow for depth */
+  border: none; /* Remove any borders */
+}
+
+/* Colors for each status */
+.badge-closed {
+  background-color: #fdede8; /* Light coral */
+  color: #721c24; /* Dark text for contrast */
+}
+
+.badge-pending {
+  background-color: #fef5e5; /* Light yellow */
+  color: #856404; /* Dark text for contrast */
+}
+
+.badge-open {
+  background-color: #e6fffa; /* Light teal */
+  color: #155724; /* Dark text for contrast */
+}
+
+
+
+/* Priority Badge Styles */
+.badge-very-low {
+  background-color: #d4edda; /* Light green for 'Very Low', which is less urgent */
+  color: #155724; /* Dark green text for contrast */
+}
+
+.badge-low {
+  background-color: #f0f4c3; /* Lighter green for 'Low' */
+  color: #666; /* Dark gray text for contrast */
+}
+
+.badge-medium {
+  background-color: #fff3cd; /* Light yellow for 'Medium' */
+  color: #856404; /* Dark yellow text for contrast */
+}
+
+.badge-high {
+  background-color: #f9e0a2; /* Light orange for 'High' */
+  color: #994f00; /* Dark orange text for contrast */
+}
+
+.badge-very-high {
+  background-color: #f8d7da; /* Light red for 'Very High', which is most urgent */
+  color: #721c24; /* Dark red text for contrast */
+}
+
+/* pagination */
+/* Container to center pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center; /* Centers pagination in the middle of the container */
+  margin-top: 20px; /* Space above the pagination */
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination .page-item .page-link {
+  color: #007bff; /* Blue color for links */
+  background-color: #fff; /* White background for non-active links */
+  border: none; /* Remove border for non-active links */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 5px 10px; /* Padding for non-active links */
+  margin: 0 5px; /* Space between buttons */
+  border-radius: 5px; /* Slightly rounded corners for non-active links */
+}
+
+.pagination .page-item.active .page-link {
+  width: 36px; /* Width and height are the same for a circle */
+  height: 36px; /* Ensures the element is as wide as it is high */
+  line-height: 36px; /* Centers the text vertically */
+  padding: 0; /* Removes padding to use width/height for size */
+  margin: 0 5px; /* Space between buttons */
+  border-radius: 50%; /* Fully rounded corners for a circle */
+  background-color: #5d87ff; /* Active link background color */
+  color: white;
+  border: none; /* Remove border for active link */
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #ccc;
+  pointer-events: none;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #e9ecef; /* Light gray on hover */
+  color: #007bff; /* Blue color for links on hover */
+  border-radius: 50%; /* Slightly rounded corners on hover */
+}
+
+/* aciton butons*/
+
+/* Action buttons */
+
+/* Action buttons */
+.btn-view, .btn-edit, .btn-delete {
+  background: none; /* Remove background */
+  color: #000; /* Black icon color */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  margin: 0 5px; /* Space between buttons */
+  font-size: 18px; /* Increase icon size if needed */
+}
+
+.btn-view:hover, .btn-edit:hover, .btn-delete:hover {
+  color: lightgray; /* Change color on hover */
+
+}
+
+/* Ensure icons are centered vertically */
+.btn i {
+  vertical-align: middle;
+}
+
+.content-box {
+  border: 1px solid #ddd; /* Border color */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  background-color: #fff; /* White background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header-box {
+  background-color: #f0f4ff; /* Light blue background */
+  padding: 20px; /* Padding inside the header */
+  border-radius: 10px; /* Rounded corners */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Space below the header */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header-title {
+  margin: 0; /* Remove default margin */
+  font-size: 24px; /* Font size for the title */
+  font-weight: bold; /* Bold font */
+  color: #333; /* Dark color for the title */
+}
+
+.breadcrumb {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background: none; /* Remove background */
+  list-style: none; /* Remove list style */
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item {
+  color: #007bff; /* Blue color for links */
+  text-decoration: none; /* Remove underline */
+  margin-right: 5px; /* Space between items */
+}
+
+.breadcrumb-item.active {
+  color: #333; /* Dark color for active item */
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '•'; /* Bullet separator */
+  margin: 0 5px; /* Space around the separator */
+  color: #333; /* Dark color for the separator */
 }

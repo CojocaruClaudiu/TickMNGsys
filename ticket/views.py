@@ -5,7 +5,9 @@ from .models import Ticket
 from .form import CreateTicketForm, UpdateTicketForm
 from users.models import User
 from django.db.models import Count
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+
 
 # vizualizarea detaliilor unui bilet
 
@@ -66,21 +68,34 @@ def update_ticket(request, pk):
 @login_required
 def all_tickets(request):
     if request.user.is_superuser:  # Admin users see all tickets
-        tickets = Ticket.objects.all()
+        tickets_list = Ticket.objects.all()
     else:  # Non-admin users see only their tickets
-        tickets = Ticket.objects.filter(created_by=request.user)
+        tickets_list = Ticket.objects.filter(created_by=request.user)
 
-    total_tickets = tickets.count()
-    pending_tickets = tickets.filter(ticket_status='Pending').count()
-    open_tickets = tickets.filter(ticket_status='Active').count()
-    closed_tickets = tickets.filter(ticket_status='Completed').count()
+    # Setup pagination
+    paginator = Paginator(tickets_list, 8)  # Show 8 tickets per page
+    page = request.GET.get('page')
+    try:
+        tickets = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        tickets = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        tickets = paginator.page(paginator.num_pages)
+
+    total_tickets = tickets_list.count()
+    pending_tickets = tickets_list.filter(ticket_status='Pending').count()
+    open_tickets = tickets_list.filter(ticket_status='Active').count()
+    closed_tickets = tickets_list.filter(ticket_status='Completed').count()
 
     context = {
         'tickets': tickets,
         'total_tickets': total_tickets,
         'pending_tickets': pending_tickets,
         'open_tickets': open_tickets,
-        'closed_tickets': closed_tickets
+        'closed_tickets': closed_tickets,
+        'page': page
     }
     return render(request, 'ticket/all_tickets.html', context)
 
