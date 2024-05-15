@@ -1,114 +1,67 @@
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
-  rel="stylesheet"
-/>
-
-<div class="container-fluid">
-  <section>
-    <div class="row">
-      <div class="col-12 mt-3 mb-1">
-        <h5 class="text-uppercase">Statistics With Subtitle</h5>
-        <p>Statistics on minimal cards with Title &amp; Sub Title.</p>
-      </div>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}?v=1">
+</head>
+<body>
+    <div class="navbar">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="path_to_logo.png" alt="Logo">
+                <h1>Modernize</h1>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active">Home</a>
+                <a href="#" class="menu-item">Create Ticket</a>
+                <a href="#" class="menu-item">View Tickets</a>
+                <h2>Apps</h2>
+                <a href="#" class="menu-item">Contacts</a>
+                <a href="#" class="menu-item">Blog</a>
+                <a href="#" class="menu-item">Ecommerce</a>
+                <a href="#" class="menu-item">Chats</a>
+                <a href="#" class="menu-item">Users</a>
+                <a href="#" class="menu-item">Notes</a>
+                <a href="#" class="menu-item">Calendar</a>
+                <a href="#" class="menu-item">Email</a>
+                <a href="#" class="menu-item">Tickets</a>
+                <h2>Pages</h2>
+                <a href="#" class="menu-item">Roll Base Access</a>
+                <a href="#" class="menu-item">Treeview</a>
+                <a href="#" class="menu-item">Pricing</a>
+                <a href="#" class="menu-item">Account Setting</a>
+                <a href="#" class="menu-item">FAQ</a>
+                <a href="#" class="menu-item">Landingpage</a>
+                <a href="#" class="menu-item">Widgets</a>
+                <h2>Forms</h2>
+                <a href="#" class="menu-item">Form Elements</a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <i class="fas fa-bars"></i>
+                    <span>Apps</span>
+                    <span>Chat</span>
+                    <span>Calendar</span>
+                    <span>Email</span>
+                </div>
+                <div class="topbar-right">
+                    <span><i class="fas fa-globe"></i> EN</span>
+                    <span><i class="fas fa-bell"></i></span>
+                    <span><i class="fas fa-user"></i></span>
+                </div>
+            </div>
+            <div class="content">
+                {% block content %}
+                <!-- Your existing content here -->
+                {% endblock content %}
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-xl-6 col-md-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between p-md-1">
-              <div class="d-flex flex-row">
-                <div class="align-self-center">
-                  <i class="fas fa-pencil-alt text-info fa-3x me-4"></i>
-                </div>
-                <div>
-                  <h4>Total Posts</h4>
-                  <p class="mb-0">Monthly blog posts</p>
-                </div>
-              </div>
-              <div class="align-self-center">
-                <h2 class="h1 mb-0">18,000</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between p-md-1">
-              <div class="d-flex flex-row">
-                <div class="align-self-center">
-                  <i class="far fa-comment-alt text-warning fa-3x me-4"></i>
-                </div>
-                <div>
-                  <h4>Total Comments</h4>
-                  <p class="mb-0">Monthly blog posts</p>
-                </div>
-              </div>
-              <div class="align-self-center">
-                <h2 class="h1 mb-0">84,695</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xl-6 col-md-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between p-md-1">
-              <div class="d-flex flex-row">
-                <div class="align-self-center">
-                  <h2 class="h1 mb-0 me-4">$76,456.00</h2>
-                </div>
-                <div>
-                  <h4>Total Sales</h4>
-                  <p class="mb-0">Monthly Sales Amount</p>
-                </div>
-              </div>
-              <div class="align-self-center">
-                <i class="far fa-heart text-danger fa-3x"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between p-md-1">
-              <div class="d-flex flex-row">
-                <div class="align-self-center">
-                  <h2 class="h1 mb-0 me-4">$36,000.00</h2>
-                </div>
-                <div>
-                  <h4>Total Cost</h4>
-                  <p class="mb-0">Monthly Cost</p>
-                </div>
-              </div>
-              <div class="align-self-center">
-                <i class="fas fa-wallet text-success fa-3x"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
-></script>
+</body>
+</html>

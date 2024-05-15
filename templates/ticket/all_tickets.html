@@ -1,21 +1,19 @@
-{% extends 'base.html' %}
+f{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-
-    <div class="container mt-5">
-  <div class="header-box"> <!-- New header section -->
-    <h1 class="header-title">Tickets app</h1>
-    <nav class="breadcrumb">
-      <a class="breadcrumb-item" href="#">Home</a>
-      <span class="breadcrumb-item active">Tickets</span>
-        <img src="{% static 'images/breadcrumb.png' %}" alt="Ticket Icon" class="header-icon" style="height: 165px" >
-    </nav>
-  </div>
-    
 <div class="container mt-5">
-  <div class="content-box"> <!-- New div for the box -->
+  <div class="header-box"> <!-- New header section -->
+    <div class="header-content">
+      <h1 class="header-title">Tickets app</h1>
+      <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-item active">Tickets</span>
+      </nav>
+    </div>
+  </div>
 
+  <div class="content-box"> <!-- New div for the box -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -78,12 +76,14 @@
           </div>
         </div>
       </div>
-      
-      <label for="searchInput"></label>
-      <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Caută după titlu.." class="form-control mb-2" />
+
+       <div class="col-12 d-flex justify-content-end mb-3">
+        <label for="searchInput" class="sr-only">Search</label>
+        <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Caută după titlu.." class="form-control search-bar-small" />
+      </div>
 
       <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="ticketTable">
+        <table class="table table-hover" id="ticketTable">
           <thead class="thead-light">
             <tr>
               <th scope="col">ID Ticket</th>
@@ -99,13 +99,13 @@
           <tbody>
             {% for ticket in tickets %}
             <tr>
-              <td><small>{{ ticket.ticket_number }}</small></td>
+              <td><small>{{ ticket.id }}</small></td>
               <td><small>{{ ticket.title }}</small></td>
               <td><small>{{ ticket.date_created }}</small></td>
               <td>
                 {% if ticket.assigned_to %}
                 <img src="{{ ticket.assigned_to.profile_image.url }}" alt="Profile Image of {{ ticket.assigned_to.username }}" class="profile-image">
-                <small>{{ ticket.assigned_to.username }}</small>
+                <span class="assigned-username">{{ ticket.assigned_to.username }}</span>
                 {% else %}
                 <small>Not Assigned</small>
                 {% endif %}
@@ -146,10 +146,13 @@
                 </a>
               </td>
             </tr>
+            <tr>
+              <td colspan="8"><hr></td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
-        
+
         <div class="pagination-container">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -181,5 +184,4 @@
     </div>
   </div>
 </div>
-
 {% endblock content %}

@@ -28,7 +28,7 @@ class Ticket(models.Model):
         ('Pending', 'În așteptare'),
     )
 
-    ticket_number = models.UUIDField(default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
     priority = models.CharField(max_length=9, choices=PRIORITY_CHOICES, default='Low')

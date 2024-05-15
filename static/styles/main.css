@@ -36,8 +36,7 @@
 }
 
 .table thead th {
-  background-color: #f8f9fa; /* Light header background */
-  color: #495057; /* Dark grey text */
+  color: #475060; /* Dark grey text */
 }
 
 .table td,
@@ -55,9 +54,14 @@
 #searchInput {
   background-color: #f8f9fa; /* Light background for input */
   border: 1px solid #ccc; /* Subtle border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 20px; /* Padding inside search box */
+  border-radius: 10px; /* Rounded corners */
+  padding: 8px 14px; /* Padding inside search box */
+  width: 260px;
+  height: 36px;
 }
+
+
+
 
 /* Badge styling for status */
 .badge {
@@ -274,7 +278,7 @@
 /* Action buttons */
 .btn-view, .btn-edit, .btn-delete {
   background: none; /* Remove background */
-  color: #000; /* Black icon color */
+  color: #5e5f60; /* Black icon color */
   border: none; /* Remove border */
   padding: 0; /* Remove padding */
   margin: 0 5px; /* Space between buttons */
@@ -299,6 +303,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* Header box */
 .header-box {
   background-color: #f0f4ff; /* Light blue background */
   padding: 20px; /* Padding inside the header */
@@ -308,6 +313,11 @@
   align-items: center;
   margin-bottom: 20px; /* Space below the header */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .header-title {
@@ -341,3 +351,125 @@
   margin: 0 5px; /* Space around the separator */
   color: #333; /* Dark color for the separator */
 }
+
+/*  navbar*/
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+.navbar {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-header img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.sidebar-menu {
+    padding: 20px;
+}
+
+.sidebar-menu h2 {
+    font-size: 14px;
+    color: #777;
+    margin: 15px 0 5px;
+    text-transform: uppercase;
+}
+
+.sidebar-menu .menu-item {
+    display: block;
+    color: #333;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sidebar-menu .menu-item.active,
+.sidebar-menu .menu-item:hover {
+    color: #007bff;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.topbar-left span,
+.topbar-right span {
+    margin-left: 15px;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.topbar-left span:hover,
+.topbar-right span:hover {
+    color: #007bff;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.content {
+    padding: 20px;
+}
+
+
+.assigned-username {
+  color: #2A3547;
+  font-size: 16px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  margin-left: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Custom styles for profile image */
+.profile-image {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+
+
