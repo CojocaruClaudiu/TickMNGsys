@@ -6,6 +6,7 @@ from .form import CreateTicketForm, UpdateTicketForm
 from users.models import User
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.contrib.auth.decorators import login_required
 
 
@@ -67,10 +68,26 @@ def update_ticket(request, pk):
 # vizualizarea tuturor biletelor create
 @login_required
 def all_tickets(request):
+    # Get the status filter from the request
+    status_filter = request.GET.get('status', 'all')
+
+    # Determine the base queryset based on the user's role
     if request.user.is_superuser:  # Admin users see all tickets
-        tickets_list = Ticket.objects.all()
+        base_queryset = Ticket.objects.all()
     else:  # Non-admin users see only their tickets
-        tickets_list = Ticket.objects.filter(created_by=request.user)
+        base_queryset = Ticket.objects.filter(created_by=request.user)
+
+    # Calculate the counts for each ticket type
+    total_tickets = base_queryset.count()
+    pending_tickets = base_queryset.filter(ticket_status='Pending').count()
+    open_tickets = base_queryset.filter(ticket_status='Active').count()
+    closed_tickets = base_queryset.filter(ticket_status='Completed').count()
+
+    # Apply status filter to the base queryset
+    if status_filter != 'all':
+        tickets_list = base_queryset.filter(ticket_status=status_filter.capitalize())
+    else:
+        tickets_list = base_queryset
 
     # Setup pagination
     paginator = Paginator(tickets_list, 8)  # Show 8 tickets per page
@@ -84,18 +101,14 @@ def all_tickets(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         tickets = paginator.page(paginator.num_pages)
 
-    total_tickets = tickets_list.count()
-    pending_tickets = tickets_list.filter(ticket_status='Pending').count()
-    open_tickets = tickets_list.filter(ticket_status='Active').count()
-    closed_tickets = tickets_list.filter(ticket_status='Completed').count()
-
     context = {
         'tickets': tickets,
         'total_tickets': total_tickets,
         'pending_tickets': pending_tickets,
         'open_tickets': open_tickets,
         'closed_tickets': closed_tickets,
-        'page': page
+        'page': page,
+        'status_filter': status_filter,
     }
     return render(request, 'ticket/all_tickets.html', context)
 
@@ -182,3 +195,5 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard/dashboard.html', context)
+
+
