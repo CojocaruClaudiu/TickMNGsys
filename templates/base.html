@@ -38,15 +38,15 @@
   <body>
     {% if request.user.is_customer %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img class="logo" src="{% static 'images/logo.png' %}" alt="Tick MNGsys" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="/"><i class="bi bi-house"></i> Home</a>
@@ -60,15 +60,15 @@
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ request.user.profile_image.url }}" alt="Profile Image" class="profile-image">
                 {{ request.user.username }}
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person"></i> My Account</a></li>
                 <li><a class="dropdown-item" href="{% url 'settings' %}"><i class="bi bi-gear"></i> Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'logout' %}"><b><i class="bi bi-box-arrow-in-left"></i> Logout</b></a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -76,78 +76,46 @@
       </div>
     </nav>
     {% elif request.user.is_engineer %}
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">Tick MNGsys</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportContent"
-          aria-controls="navbarSupportContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportContent">
+        <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'ticket-queue'%}"
-                >Ticket Queue</a
-              >
+              <a class="nav-link" href="{% url 'ticket-queue' %}">Ticket Queue</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'workspace'%}">Workspace</a>
+              <a class="nav-link" href="{% url 'workspace' %}">Workspace</a>
             </li>
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Manage Tickets
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="{% url 'all-closed-tickets' %}"
-                    >Closed Tickets</a
-                  >
-                </li>
-                {% comment %}
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-                {% endcomment %}
+                <li><a class="dropdown-item" href="{% url 'all-closed-tickets' %}">Closed Tickets</a></li>
               </ul>
             </li>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{ request.user.profile_image_admin.url }}" alt="Profile Image" class="profile-image" >
-                  {{ request.user.username }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="{% url 'profile' %}">My Account</a></li>
-                  <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                </ul>
-              </li>
-            </ul>
           </ul>
-          <a href="{% url 'logout' %}" class="btn btn-outline-success"
-            ><i class="bi bi-box-arrow-in-left"></i> Logout</a
-          >
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ request.user.profile_image.url }}" alt="Profile Image" class="profile-image">
+                {{ request.user.username }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" href="{% url 'profile' %}">My Account</a></li>
+                <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
