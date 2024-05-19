@@ -38,3 +38,38 @@ function filterTickets(status) {
         }
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var deleteButtons = document.querySelectorAll('.btn-delete');
+    var deleteModal = document.getElementById('deleteModal');
+    var deleteForm = document.getElementById('deleteForm');
+    var deleteTicketId = document.getElementById('deleteTicketId');
+
+    deleteButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        var ticketId = this.getAttribute('data-ticket-id');
+        deleteTicketId.value = ticketId;
+        deleteForm.action = `/ticket/delete-ticket/${ticketId}/`; // Set the correct URL for the form action
+      });
+    });
+  });
+
+//assign modal
+document.addEventListener('DOMContentLoaded', function() {
+        var assignModal = document.getElementById('assignModal');
+        var baseUrl = assignModal.getAttribute('data-accept-url');
+        
+        assignModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var ticketId = button.getAttribute('data-ticket-id');
+            var form = document.getElementById('assignForm');
+            var action = baseUrl.replace("0", ticketId);
+            form.action = action;
+            var modalTitle = assignModal.querySelector('.modal-title');
+            var modalBodyInput = assignModal.querySelector('.modal-body input#assignTicketId');
+
+            modalTitle.textContent = 'Assign Ticket ' + ticketId;
+        });
+    });
+      modalBodyInput.value = ticketId;
+

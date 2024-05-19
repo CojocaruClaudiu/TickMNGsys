@@ -115,8 +115,27 @@ def all_tickets(request):
 # Pentru ingineri
 @login_required
 def ticket_queue(request):
+    # Filter tickets to only include pending ones
     tickets = Ticket.objects.filter(ticket_status='Pending')
-    context = {'tickets': tickets}
+    pending_tickets_count = tickets.count()
+    
+    engineers = User.objects.filter(is_engineer=True)  # Fetch all users who are engineers
+
+    paginator = Paginator(tickets, 8)  # Show 8 tickets per page
+    page = request.GET.get('page')
+    try:
+        tickets = paginator.page(page)
+    except PageNotAnInteger:
+        tickets = paginator.page(1)
+    except EmptyPage:
+        tickets = paginator.page(paginator.num_pages)
+
+    context = {
+        'tickets': tickets,
+        'pending_tickets': pending_tickets_count,
+        'page': page,
+        'engineers': engineers,  # Add engineers to context
+    }
     return render(request, 'ticket/ticket_queue.html', context)
 
 
@@ -146,7 +165,21 @@ def close_ticket(request, pk):
 @login_required
 def workspace(request):
     tickets = Ticket.objects.filter(assigned_to=request.user, is_resolved=False)
-    context = {'tickets': tickets}
+    open_tickets = tickets.count()
+
+    paginator = Paginator(tickets, 8)  # Show 8 tickets per page
+    page = request.GET.get('page')
+    try:
+        tickets = paginator.page(page)
+    except PageNotAnInteger:
+        tickets = paginator.page(1)
+    except EmptyPage:
+        tickets = paginator.page(paginator.num_pages)
+    context = {
+        'tickets': tickets,
+        'open_tickets': open_tickets,
+        'page': page,
+    }
     return render(request, 'ticket/workspace.html', context)
 
 
@@ -195,5 +228,4 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard/dashboard.html', context)
-
 

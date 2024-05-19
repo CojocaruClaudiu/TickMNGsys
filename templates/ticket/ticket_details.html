@@ -1,96 +1,149 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load custom_filters %}
 
 {% block content %}
-<div class="row"> // Add class attribute to the opening div tag
-    <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem;">
-            <div class="card-body">
-                <h5 class="card-title mb-3">{{ticket.title}}</h5>
-                <p><b>Ticket Number: </b> <small>{{ticket.ticket_number}}</small></p>
-                <p class="card-text"><b>Ticket Description: </b>{{ticket.description}}</p>
-
-            <div class="row">
-                <div class="col">
-                    <b>Date created! </b> {{ticket.date_created}}
-                </div>
-                <div class="col">
-                    <b>Assigned To: </b> {{ticket.assigned_to}}
-
-                </div>
-            </div> <br>
-            <div class="row">
-                <div class="col">
-                    {% if ticket.is_resolved %} 
-                    <b>Resolved? </b>  <span class="badge bg-danger">Yes, resolved</span>
-                    {% else %}
-                    <b>Resolved? </b>  <span class="badge bg-success">Not Yet</span>
-                    {% endif %}
-                </div>
-                <div class="col">
-                    <b>Accepted Date</b> <small>{{ticket.accepted_date}} </small>
-                </div>
-            </div> <br>
-
-            <div class="row">
-                <div class="col">
-                    <b>Created By: </b> <small>{{ticket.created_by}} </small>
-                </div>
-                <div class="col">
-                    <b>Ticket Status: </b> <small>{{ticket.ticket_status}} </small>
-
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-   
-    
-    <br><br>
-    <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem;">
-            <div class="card-body">
-                <h5 class="card-title mb-3"> All Tickets created by {{ticket.created_by}}</h5>
-                {% for ticket in tickets_per_user %}
-                <p class="card-text">{{ticket.ticket_number}} <a href="{% url 'ticket-details' ticket.pk %}">(view)</a></p>
-                {% endfor %}
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<br>
-{% if request.user.is_engineer and not ticket.is_resolved %}
-<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Confirm Resolution</a>
-{% endif %}
-
-{% if request.user.is_customer and not ticket.is_resolved %}
-<a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-primary"> Update Ticket</a>
-{% endif %}
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      Do you want to close the ticket?
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-primary">Save changes</a>
+<div class="container mt-5">
+  <div class="header-box">
+    <div class="header-content">
+      <h1 class="header-title">Tickets app</h1>
+      <nav class="breadcrumb">
+        {% comment %} <a href="{% url ' ' %}" class="breadcrumb-item">Home</a> {% endcomment %}
+        <span class="breadcrumb-item active">Ticket Details</span>
+      </nav>
     </div>
   </div>
-</div>
-</div>
+
+  <div class="content-box">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-0">{{ ticket.title }}</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td><b>Ticket Number:</b></td>
+                  <td>{{ ticket.id }}</td>
+                </tr>
+                <tr>
+                  <td><b>Description:</b></td>
+                  <td>{{ ticket.description }}</td>
+                </tr>
+                <tr>
+                  <td><b>Date Created:</b></td>
+                  <td>{{ ticket.date_created}}</td>
+                </tr>
+                <tr>
+                  <td><b>Assigned To:</b></td>
+                  <td>
+                    {% if ticket.assigned_to %}
+                      <img src="{{ ticket.assigned_to.profile_image.url }}" alt="Profile Image of {{ ticket.assigned_to.username }}" class="profile-image">
+                      <span class="assigned-username">{{ ticket.assigned_to.username }}</span>
+                    {% else %}
+                      <small>Not Assigned</small>
+                    {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Accepted Date:</b></td>
+                  <td>{{ ticket.accepted_date}}</td>
+                </tr>
+                <tr>
+                  <td><b>Priority:</b></td>
+                  <td>
+                    {% if ticket.priority == 'Very Low' %}
+                    <span class="badge badge-very-low">Very Low</span>
+                    {% elif ticket.priority == 'Low' %}
+                    <span class="badge badge-low">Low</span>
+                    {% elif ticket.priority == 'Medium' %}
+                    <span class="badge badge-medium">Medium</span>
+                    {% elif ticket.priority == 'High' %}
+                    <span class="badge badge-high">High</span>
+                    {% elif ticket.priority == 'Very High' %}
+                    <span class="badge badge-very-high">Very High</span>
+                    {% endif %}
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Category:</b></td>
+                  <td><span class="badge badge-info">{{ ticket.get_category_display }}</span></td>
+                </tr>
+                <tr>
+                  <td><b>Created By:</b></td>
+                  <td>{{ ticket.created_by }}</td>
+                </tr>
+                <tr>
+                  <td><b>Status:</b></td>
+                  <td>
+                    {% if ticket.ticket_status == 'Active' %}
+                  <span class="badge badge-open">Open</span>
+                {% elif ticket.ticket_status == 'Pending' %}
+                  <span class="badge badge-pending">Pending</span>
+                {% elif ticket.ticket_status == 'Completed' %}
+                  <span class="badge badge-closed">Closed</span>
+                {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">All Tickets Created by {{ ticket.created_by }}</h5>
+            <div class="list-group">
+              {% for user_ticket in tickets_per_user %}
+                <a href="{% url 'ticket-details' user_ticket.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between
+                   {% if user_ticket.ticket_status == 'Active' %}ticket-status-active
+                   {% elif user_ticket.ticket_status == 'Pending' %}ticket-status-pending
+                   {% elif user_ticket.ticket_status == 'Completed' %}ticket-status-completed
+                   {% endif %}">
+                  <span>{{ user_ticket.id }} - {{ user_ticket.title }}</span>
+                  <span class="badge badge-{{ user_ticket.priority|hyphenate }} ml-auto">
+  {{ user_ticket.priority }}
+</span>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    {% if request.user.is_engineer and not ticket.is_resolved %}
+      <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirm Resolution</a>
+    {% endif %}
+
+    {% if request.user.is_customer and not ticket.is_resolved %}
+      <a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-primary">Update Ticket</a>
+    {% endif %}
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirm Resolution</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you want to close the ticket?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-primary">Save changes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

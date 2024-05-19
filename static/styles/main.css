@@ -134,6 +134,7 @@
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   border: none; /* Remove any default borders */
+  cursor: pointer;
 }
 
 .ticket-card-body {
@@ -271,12 +272,12 @@
   border-radius: 50%; /* Slightly rounded corners on hover */
 }
 
-/* aciton butons*/
+
 
 /* Action buttons */
 
 /* Action buttons */
-.btn-view, .btn-edit, .btn-delete {
+.btn-view, .btn-edit, .btn-delete , .btn-accept, .btn-assign {
   background: none; /* Remove background */
   color: #5e5f60; /* Black icon color */
   border: none; /* Remove border */
@@ -285,7 +286,7 @@
   font-size: 18px; /* Increase icon size if needed */
 }
 
-.btn-view:hover, .btn-edit:hover, .btn-delete:hover {
+.btn-view:hover, .btn-edit:hover, .btn-delete:hover, .btn-accept:hover, .btn-assign:hover {
   color: lightgray; /* Change color on hover */
 
 }
@@ -418,10 +419,7 @@
 }
 
 /* Content styles */
-.header-box {
-  padding: 1rem 0;
-  border-bottom: 1px solid #ddd;
-}
+
 
 .header-title {
   font-size: 1.75rem;
@@ -454,3 +452,119 @@
 .page-link {
   color: #007bff;
 }
+/* create ticket */
+
+
+
+/* Button styles */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-delete-ticket {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styles */
+.form-control {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  font-size: 16px;
+  color: #495057;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Form select styles */
+.form-select {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  font-size: 16px;
+  color: #495057;
+
+}
+
+.form-select:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Card styles */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.card-body {
+  padding: 20px;
+  font-size: 16px;
+}
+
+
+
+
+
+.btn-primary {
+  background-color: #5d87ff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #4570ea;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:focus {
+  background-color: #7d9bf0;
+  box-shadow: none;
+}
+
+
+
+.ticket-status-active {
+  background-color: #d4edda;
+}
+
+.ticket-status-pending {
+  background-color: #fff3cd;
+}
+
+.ticket-status-completed {
+  background-color: #f8d7da;
+}
+

@@ -157,4 +157,5 @@ LOGGING = {
         },
     },
 }
-
+TIME_ZONE = 'Europe/Athens'
+USE_TZ = True

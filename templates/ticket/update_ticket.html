@@ -2,33 +2,44 @@
 {% load widget_tweaks %}
 
 {% block content %}
+<div class="container mt-5">
+  <div class="header-box">
+    <div class="header-content">
+      <h1 class="header-title">Tickets app</h1>
+      <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-item active">Update Ticket</span>
+      </nav>
+    </div>
+  </div>
 
-<div class ="row">
-    <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem;">
-            <div class="card-body">
-                <h5 class="card-title mb-3">Update ticket</h5>
+  <div class="content-box">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Update Ticket</h5>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3 input-group">
+                  <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                  {% render_field form.title class="form-control" placeholder="Rezumați problema" %}
+                </div>
+                <div class="mb-3 input-group">
+                  <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                  {% render_field form.description class="form-control" placeholder="Detaliați problema" %}
+                </div>
+                <div class="mb-3 input-group">
+                  <span class="input-group-text"><i class="bi bi-flag"></i></span>
+                  {% render_field form.priority class="form-select" %}
+                </div>
+                <div class="mb-3 input-group">
+                  <span class="input-group-text"><i class="bi bi-list-task"></i></span>
+                  {% render_field form.category class="form-select" %}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Trimite Tichet  <i class="bi bi-send-fill"></i>
+                </button>
+                  <a href="{% url 'all-tickets' %}" class="btn btn-delete-ticket btn-block">Cancel</a>
+              </form>
 
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Issue Title</label>
-                        {% render_field form.title class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Description</label>
-                        {% render_field form.description class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Priority</label>
-                        {% render_field form.priority class="form-control" %}
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label" >Category</label>
-                        {% render_field form.category class="form-control" %}
-                    </div>
-                    <button class="btn btn-primary btn-block">Submit</button>
-                </form>
-            </div>
-        </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
