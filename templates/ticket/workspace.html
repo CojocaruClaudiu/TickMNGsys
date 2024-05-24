@@ -117,6 +117,9 @@
               <a href="#" class="btn btn-delete btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-ticket-id="{{ ticket.pk }}" title="Delete">
                 <i class="bi bi-trash-fill"></i>
               </a>
+             <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-accept btn-sm" title="Resolve">
+    <i class="bi bi-check-circle-fill"></i>
+  </a>
             </td>
           </tr>
           {% endfor %}
@@ -155,3 +158,4 @@
 </div>
 </div>
 {% endblock content %}
+

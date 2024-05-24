@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%load static%}
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,47 +7,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-    <canvas id="myChart" width="400" height="400"></canvas>
+<div class="container mt-5">
+  <div class="header-box">
+    <div class="header-content">
+      <h1 class="header-title">Tickets app</h1>
+      <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-item active">Closed Tickets</span>
+      </nav>
+    </div>
+  </div>
+    <div class="dashboard">
+        <div class="stats">
+            <div class="stat">
+                <h3>{{ followers }}</h3>
+                <p>Followers</p>
+                <span class="percentage">+1.20%</span>
+            </div>
+            <div class="stat">
+                <h3>{{ views }}</h3>
+                <p>Views</p>
+                <span class="percentage negative">-4.150%</span>
+            </div>
+            <div class="stat">
+                <h3>{{ earned }}</h3>
+                <p>Earned</p>
+                <span class="percentage">+1.20%</span>
+            </div>
+            <div class="stat">
+                <h3>{{ sales|floatformat:1 }}k</h3>
+                <p>Sales</p>
+                <span class="percentage positive">+2.5%</span>
+            </div>
+        </div>
+        <div class="charts">
+            <div class="chart">
+                <h4>Income</h4>
+                <p>${{ income }}</p>
+                <span class="percentage">+1.25%</span>
+            </div>
+            <div class="chart">
+                <h4>Expense</h4>
+                <p>${{ expense }}</p>
+                <span class="percentage positive">+4.25%</span>
+            </div>
+            <div class="chart">
+                <h4>Current Year</h4>
+                <p>${{ current_year }}</p>
+                <span class="percentage positive">+2.5%</span>
+            </div>
+        </div>
+        <div class="breakdown">
+            <div class="yearly-breakup">
+                <h4>Yearly Breakup</h4>
+                <p>${{ yearly_breakup }}</p>
+                <span class="percentage positive">+9% last year</span>
+            </div>
+            <div class="yearly-sales">
+                <h4>Yearly Sales</h4>
+                <canvas id="yearlySalesChart"></canvas>
+            </div>
+            <div class="revenue-updates">
+                <h4>Revenue Updates</h4>
+                <canvas id="revenueUpdatesChart"></canvas>
+            </div>
+        </div>
+        <canvas id="ticketStatusChart" width="400" height="400"></canvas>
+    </div>
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        var ticketCtx = document.getElementById('ticketStatusChart').getContext('2d');
+        var ticketStatusChart = new Chart(ticketCtx, {
             type: 'pie',
             data: {
-                labels: {{ labels|safe }} || ['Default Label'],
+                labels: {{ labels|safe }},
                 datasets: [{
-                    data: {{ data|safe }} || [0],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
+                    data: {{ data|safe }},
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Ticket Status Distribution'
-                    }
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Ticket Status Distribution' }
+                }
+            }
+        });
+
+        var yearlySalesCtx = document.getElementById('yearlySalesChart').getContext('2d');
+        var yearlySalesChart = new Chart(yearlySalesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Total Sales',
+                    data: {{ total_sales|safe }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Yearly Sales' }
+                }
+            }
+        });
+
+        var revenueUpdatesCtx = document.getElementById('revenueUpdatesChart').getContext('2d');
+        var revenueUpdatesChart = new Chart(revenueUpdatesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Footware', 'Fashionware'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [{{ revenue_updates.footware }}, {{ revenue_updates.fashionware }}],
+                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Revenue Updates' }
                 }
             }
         });
     </script>
+    
 </body>
 </html>
-
 {% endblock %}

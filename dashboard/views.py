@@ -22,3 +22,21 @@ def dashboard(request):
 
 
     return render(request, 'dashboard/dashboard.html', context)
+
+
+def dashboard_view(request):
+    context = {
+        'labels': ['Open', 'Closed', 'In Progress'],
+        'data': [10, 5, 7],
+        'followers': 2545,
+        'views': 15480,
+        'earned': 2545,
+        'sales': 16500,
+        'income': 25260,
+        'expense': 12260,
+        'current_year': 98260,
+        'yearly_breakup': 36358,
+        'total_sales': [1000, 2000, 3000, 4000],
+        'revenue_updates': {'footware': 5, 'fashionware': 3}
+    }
+    return render(request, 'dashboard/dashboard.html', context)
