@@ -21,11 +21,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('dashboard.urls')),  # Only correct if 'dashboard' is a separate app with 'urls.py'
+    path('', include('dashboard.urls')),
     path('admin/', admin.site.urls),
     path('ticket/', include('ticket.urls')),
     path('accounts/', include('users.urls')),
-    path('dashboard/', views.dashboard, name='dashboard'),  # Correct path to 'dashboard' view
+    path('accounts/', include('django.contrib.auth.urls')),  # for built-in auth views
+
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

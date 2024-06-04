@@ -305,15 +305,21 @@
 }
 
 /* Header box */
+
 .header-box {
-  background-color: #f0f4ff; /* Light blue background */
-  padding: 20px; /* Padding inside the header */
-  border-radius: 10px; /* Rounded corners */
+  height: 115px;
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px; /* Space below the header */
+  flex-flow:wrap;
+  width: 100%;
+  background-color: rgb(236, 242,255);
+  border-radius: 12px;
+  padding: 30px 25px 20px;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
 }
 
 .header-content {
@@ -352,6 +358,21 @@
   margin: 0 5px; /* Space around the separator */
   color: #333; /* Dark color for the separator */
 }
+
+
+
+.breadcrumb img.breadcrumb-icon {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 1055px; /* Adjust spacing as needed */
+  width: 165px; /* Set desired width */
+  height: 165px; /* Set desired height */
+  object-fit: contain; /* Ensure the image maintains its aspect ratio */
+  border-radius: 5px; /* Optional: if you want rounded corners */
+
+}
+
+
 /* lines table */
 #ticketTable tbody tr {
   border-bottom: 1px solid #dee2e6;
@@ -393,9 +414,13 @@
 /*jeg*/
 /* Navbar styles */
 .navbar {
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+
+  background-color: #FAFAFC;
   padding: 0.75rem 1rem;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar .navbar-brand {
@@ -422,9 +447,9 @@
 
 
 .header-title {
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: #333;
+
+  font-weight: 600;
+  color: #2A3547;
 }
 
 
@@ -624,3 +649,17 @@
 canvas {
     margin-top: 20px;
 }
+
+
+
+/* font */
+
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+

@@ -1,7 +1,8 @@
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from .form import RegisterCustomerForm, RegisterEngineerForm, RegisterAdminForm, ProfileImageForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from .form import RegisterCustomerForm, RegisterEngineerForm, RegisterAdminForm, ProfileImageForm, CustomPasswordChangeForm
 
 def register_customer(request):
     if request.method == 'POST':
@@ -82,7 +83,22 @@ def profile(request):
         form = ProfileImageForm(instance=request.user)
     return render(request, 'users/profile.html', {'form': form})
 
+
 def settings(request):
     return render(request, 'users/settings.html')
 
 
+def change_password(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important to keep the user logged in
+            messages.success(request, 'Parola a fost schimbată cu succes!')
+            return redirect('profile')
+        else:
+            messages.warning(request, 'Formularul nu este valid!')
+            return redirect('change_password')
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, 'users/change_password.html', {'form': form})

@@ -10,14 +10,15 @@ from django.db.models.functions import TruncDay, TruncWeek, TruncMonth
 from django.contrib.auth.decorators import login_required
 
 
+
 # vizualizarea detaliilor unui bilet
 
 
 @login_required
 def ticket_details(request, pk):
     ticket = Ticket.objects.get(pk=pk)
-    t = User.objects.get(pk=ticket.created_by.id)
-    tickets_per_user = t.created_by.all()
+    t = ticket.created_by
+    tickets_per_user = t.tickets_created.all()
     context = {'ticket': ticket, 'tickets_per_user': tickets_per_user}
     return render(request, 'ticket/ticket_details.html', context)
 
@@ -213,70 +214,6 @@ def delete_ticket(request, pk):
     messages.info(request, "Biletul dumneavoastră a fost șters cu succes.")
     return redirect('all-tickets')
 
-# dashboard
 
 
-# @login_required
-# def dashboard(request):
-#     if request.user.is_superuser:  # Check if user is an admin
-#         tickets_query = Ticket.objects.all()
-#     else:
-#         tickets_query = Ticket.objects.filter(created_by=request.user)
-#
-#     total_tickets = tickets_query.count()
-#     pending_tickets = tickets_query.filter(ticket_status='Pending').count()
-#     open_tickets = tickets_query.filter(ticket_status='Active').count()
-#     closed_tickets = tickets_query.filter(ticket_status='Completed').count()
-#
-#     # Prepare chart data for ticket statuses
-#     ticket_status_counts = tickets_query.values('ticket_status').annotate(total=Count('id')).order_by('ticket_status')
-#     labels = [status['ticket_status'] for status in ticket_status_counts]
-#     data = [status['total'] for status in ticket_status_counts]
-#
-#     context = {
-#         'total_tickets': total_tickets,
-#         'pending_tickets': pending_tickets,
-#         'open_tickets': open_tickets,
-#         'closed_tickets': closed_tickets,
-#         'labels': labels,
-#         'data': data,
-#     }
-#
-#     return render(request, 'dashboard/dashboard.html', context)
 
-@login_required
-def dashboard(request):
-    if request.user.is_superuser:
-        tickets_query = Ticket.objects.all()
-    else:
-        tickets_query = Ticket.objects.filter(created_by=request.user)
-
-    total_tickets = tickets_query.count()
-    pending_tickets = tickets_query.filter(ticket_status='Pending').count()
-    open_tickets = tickets_query.filter(ticket_status='Active').count()
-    closed_tickets = tickets_query.filter(ticket_status='Completed').count()
-
-    # Default time unit
-    time_unit = request.GET.get('time_unit', 'day')
-
-    if time_unit == 'week':
-        closed_tickets_data = tickets_query.filter(ticket_status='Completed').annotate(period=TruncWeek('closed_date')).values('period').annotate(count=Count('id')).order_by('period')
-    elif time_unit == 'month':
-        closed_tickets_data = tickets_query.filter(ticket_status='Completed').annotate(period=TruncMonth('closed_date')).values('period').annotate(count=Count('id')).order_by('period')
-    else:  # day
-        closed_tickets_data = tickets_query.filter(ticket_status='Completed').annotate(period=TruncDay('closed_date')).values('period').annotate(count=Count('id')).order_by('period')
-
-    labels = [data['period'].strftime('%Y-%m-%d') for data in closed_tickets_data]
-    data = [data['count'] for data in closed_tickets_data]
-
-    context = {
-        'total_tickets': total_tickets,
-        'pending_tickets': pending_tickets,
-        'open_tickets': open_tickets,
-        'closed_tickets': closed_tickets,
-        'labels': labels,
-        'data': data,
-        'time_unit': time_unit,
-    }
-
-    return render(request, 'dashboard/dashboard.html', context)

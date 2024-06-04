@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
-
+{% load static %}
 {% block content %}
 <div class="container mt-5">
   <div class="header-box">
     <div class="header-content">
       <h1 class="header-title">Creează un tichet</h1>
       <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="#">Acasă</a>
+        <a href="{% url 'home' %}" class="breadcrumb-item">Home</a> 
         <span class="breadcrumb-item active">Creează Tichet</span>
+        
       </nav>
     </div>
   </div>

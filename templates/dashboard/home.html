@@ -1,0 +1,66 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
+  </head>
+
+  <body class="index-page">
+    <main class="main">
+      <section id="hero" class="hero section">
+        <div class="hero-bg">
+          <img
+            src="{% static 'images/hero-bg-light.webp' %}"
+            alt="fotografie fundal"
+          />
+        </div>
+        <div class="container text-center">
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <h1 data-aos="fade-up" >
+              Bine ați venit la <span>Tick MNGsys</span>
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="100" >
+              Soluția perfectă pentru toate problemele de gestionare și rezolvarea solicitărilor de suport<br/>
+            </p>
+            <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+              
+              <a href="{% url 'create-ticket' %}" class="btn-get-started"><i class="bi bi-plus-circle"> </i>Crează un Tichet  </a>
+              
+            </div>
+            <img
+              src="{% static 'images/hero-services-img.webp' %}"
+              class="img-fluid hero-img"
+              alt=""
+              data-aos="zoom-out"
+              data-aos-delay="300"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+      integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+
+{% endblock %}

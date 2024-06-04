@@ -8,8 +8,9 @@
     <div class="header-content">
       <h1 class="header-title">Tickets app</h1>
       <nav class="breadcrumb">
-        {% comment %} <a href="{% url ' ' %}" class="breadcrumb-item">Home</a> {% endcomment %}
+         <a href="{% url 'home' %}" class="breadcrumb-item">Home</a> 
         <span class="breadcrumb-item active">Ticket Details</span>
+        <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
       </nav>
     </div>
   </div>
@@ -36,6 +37,10 @@
                   <td><b>Date Created:</b></td>
                   <td>{{ ticket.date_created}}</td>
                 </tr>
+               
+
+                  
+
                 <tr>
                   <td><b>Assigned To:</b></td>
                   <td>
@@ -74,7 +79,9 @@
                 </tr>
                 <tr>
                   <td><b>Created By:</b></td>
-                  <td>{{ ticket.created_by }}</td>
+                   
+                  <td><img src="{{ ticket.created_by.profile_image.url }}" alt="Profile Image of {{ ticket.created_by.username }}" class="profile-image">{{ ticket.created_by }}</td>
+                  
                 </tr>
                 <tr>
                   <td><b>Status:</b></td>
@@ -87,6 +94,12 @@
                   <span class="badge badge-closed">Closed</span>
                 {% endif %}
                   </td>
+                  <tr>
+                    {% if ticket.ticket_status == 'Completed' %}
+                    <td><b>Date Closed:</b></td>
+                  <td>{{ ticket.closed_date}}</td>
+                  {% endif %}
+                  </tr>
                 </tr>
               </tbody>
             </table>

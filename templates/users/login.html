@@ -1,13 +1,13 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-    
+
 <div class ="card mx-auto" style="width: 40rem;">
     <div class="card-body">
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4">Login to continue!</h3> <!-- Larger title, centered -->
                     <form method="POST" action="{% url 'login' %}">
-                  
+
                     <form method="POST" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-floating mb-3">
@@ -20,10 +20,11 @@
                         </div>
                         <div class="d-grid gap-2">
                         <button class="btn btn-primary btn-block">  Login </button>
-                        
-                        
+
+
                         </div>
                     </form>
+                        
                 </div>
             </div>
         </div>

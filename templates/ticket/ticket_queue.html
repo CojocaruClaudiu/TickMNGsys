@@ -7,8 +7,9 @@
     <div class="header-content">
       <h1 class="header-title">Tickets app</h1>
       <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="#">Home</a>
+        <a href="{% url 'home' %}" class="breadcrumb-item">Home</a> 
         <span class="breadcrumb-item active">Pending Tickets</span>
+        <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
       </nav>
     </div>
   </div>
@@ -110,7 +111,7 @@
               {% elif ticket.priority == 'Low' %}
               <span class="badge badge-low">Low</span>
               {% elif ticket.priority == 'Medium' %}
-              <span class="badge badge-medium">Medium</span>
+              <span class="badge badge-medium">Medie</span>
               {% elif ticket.priority == 'High' %}
               <span class="badge badge-high">High</span>
               {% elif ticket.priority == 'Very High' %}
