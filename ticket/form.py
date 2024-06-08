@@ -12,3 +12,4 @@ class UpdateTicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ['title', 'description', 'priority', 'category']
+

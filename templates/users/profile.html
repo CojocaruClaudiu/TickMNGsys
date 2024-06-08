@@ -3,44 +3,49 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="header-box">
+    <div class="header-box mb-4">
         <div class="header-content">
-            <h1 class="header-title">User Profile</h1>
+            <h1 class="header-title">Profilul Meu</h1>
             <nav class="breadcrumb">
-                <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
-                <span class="breadcrumb-item active">Profile</span>
+                <a class="breadcrumb-item" href="{% url 'home' %}">Acasă</a>
+                <span class="breadcrumb-item active">Profil</span>
+                <img src="{% static 'images/breadcrumb.png' %}" alt="Icon Breadcrumb" class="breadcrumb-icon">
             </nav>
         </div>
     </div>
 
     <div class="content-box">
         <div class="row">
-            <!-- Profile Section -->
+            <!-- Secțiunea Profil -->
             <div class="col-md-4 mb-4">
                 <div class="card text-center">
                     <div class="card-body">
                         {% if user.profile_image %}
-                            <img src="{{ user.profile_image.url }}" alt="Profile Image" class="img-thumbnail mb-3">
+                            <img src="{{ user.profile_image.url }}" alt="Imagine Profil" class="img-thumbnail mb-3">
                         {% else %}
-                            <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Image" class="img-thumbnail mb-3">
+                            <img src="{% static 'images/default_profile.png' %}" alt="Imagine Profil Implicită" class="img-thumbnail mb-3">
                         {% endif %}
                         <h4>{{ user.username }}</h4>
                         <p>{{ user.email }}</p>
-                        <p>Joined: {{ user.date_joined|date:"F j, Y" }}</p>
+                        <p>Membru din: {{ user.date_joined|date:"F j, Y" }}</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Forms Section -->
+            <!-- Secțiunea Formulare -->
             <div class="col-md-8 mb-4">
-                <!-- Update Profile Form -->
+                <!-- Formular Actualizare Profil -->
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title mb-3">Update Profile</h5>
+                        <h5 class="card-title mb-3">Actualizare Imaginea de Profil</h5>
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ profile_form.as_p }}
-                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <div class="mb-3">
+                                <label for="profile_image" class="form-label">Imagine Profil</label>
+                                <input type="file" class="form-control" id="profile_image" name="profile_image">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Actualizează Imaginea</button>
                         </form>
                         {% if profile_form.errors %}
                         <div class="alert alert-danger mt-3">
@@ -58,19 +63,18 @@
                         {% endif %}
                     </div>
                 </div>
+                
 
-                <!-- Change Password Form -->
+                <!-- Formular Schimbare Parolă -->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title mb-3">Change Password</h5>
-                            <a href="{% url 'change_password' %}" >
-                            <button type="submit" class="btn btn-primary">Change Password</button></a>
-                             
-
+                        <h5 class="card-title mb-3">Schimbare Parolă</h5>
+                        <a href="{% url 'change_password' %}" class="btn btn-primary">Schimbă Parola</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

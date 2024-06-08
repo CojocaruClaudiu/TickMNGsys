@@ -14,7 +14,7 @@ def register_customer(request):
             messages.info(request, 'Contul tau a fost inregistrat cu succes!')
             return redirect('login')
         else:
-            messages.warning(request, 'Form is not valid!')
+            messages.warning(request, 'Formularul nu este valid!')
             return redirect('register-customer')
     else:
         form = RegisterCustomerForm()
@@ -27,10 +27,10 @@ def register_engineer(request):
             user = form.save(commit=False)
             user.is_engineer = True
             user.save()
-            messages.info(request, 'Engineer account registered successfully!')
+            messages.info(request, 'Contul de inginer a fost înregistrat cu succes!')
             return redirect('login')
         else:
-            messages.warning(request, 'Form is not valid!')
+            messages.warning(request, 'Formularul nu este valid!')
             return redirect('register-engineer')
     else:
         form = RegisterEngineerForm()
@@ -43,10 +43,10 @@ def register_admin(request):
             user = form.save(commit=False)
             user.is_admin = True
             user.save()
-            messages.info(request, 'Admin account registered successfully!')
+            messages.info(request, 'Contul de administrator a fost înregistrat cu succes!')
             return redirect('login')
         else:
-            messages.warning(request, 'Form is not valid!')
+            messages.warning(request, 'Formularul nu este valid!')
             return redirect('register-admin')
     else:
         form = RegisterAdminForm()
@@ -60,17 +60,17 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            messages.info(request, 'Login successful!')
+            messages.info(request, 'Autentificare reușită!')
             return redirect('dashboard')
         else:
-            messages.warning(request, 'Username or password incorrect!')
+            messages.warning(request, 'Nume de utilizator sau parolă incorectă!')
             return redirect('login')
     else:
         return render(request, 'users/login.html')
 
 def logout_user(request):
     logout(request)
-    messages.info(request, 'Logout successful!')
+    messages.info(request, 'Deconectare reușită!')
     return redirect('login')
 
 def profile(request):
@@ -78,7 +78,7 @@ def profile(request):
         form = ProfileImageForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirect to a success page or the same profile page
+            return redirect('profile')
     else:
         form = ProfileImageForm(instance=request.user)
     return render(request, 'users/profile.html', {'form': form})
@@ -93,7 +93,7 @@ def change_password(request):
         form = CustomPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important to keep the user logged in
+            update_session_auth_hash(request, user)
             messages.success(request, 'Parola a fost schimbată cu succes!')
             return redirect('profile')
         else:
@@ -102,3 +102,6 @@ def change_password(request):
     else:
         form = CustomPasswordChangeForm(request.user)
     return render(request, 'users/change_password.html', {'form': form})
+
+def forgot_password(request):
+    return render(request, 'users/forgot_password.html')
