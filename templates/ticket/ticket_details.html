@@ -35,12 +35,8 @@
                 </tr>
                 <tr>
                   <td><b>Data Creat:</b></td>
-                  <td>{{ ticket.date_created}}</td>
+                  <td>{{ ticket.date_created }}</td>
                 </tr>
-
-
-
-
                 <tr>
                   <td><b>Atribuit către:</b></td>
                   <td>
@@ -54,15 +50,15 @@
                 </tr>
                 <tr>
                   <td><b>Data Acceptat:</b></td>
-                  <td>{{ ticket.accepted_date}}</td>
+                  <td>{{ ticket.accepted_date }}</td>
                 </tr>
                 <tr>
                   <td><b>Prioritate:</b></td>
                   <td>
                     {% if ticket.priority == 'Very Low' %}
-                    <span class="badge badge-very-low">Foarte Scazută</span>
+                    <span class="badge badge-very-low">Foarte Scăzută</span>
                     {% elif ticket.priority == 'Low' %}
-                    <span class="badge badge-low">Scazută</span>
+                    <span class="badge badge-low">Scăzută</span>
                     {% elif ticket.priority == 'Medium' %}
                     <span class="badge badge-medium">Medie</span>
                     {% elif ticket.priority == 'High' %}
@@ -70,7 +66,6 @@
                     {% elif ticket.priority == 'Very High' %}
                     <span class="badge badge-very-high">Foarte Ridicată</span>
                     {% endif %}
-
                   </td>
                 </tr>
                 <tr>
@@ -79,28 +74,26 @@
                 </tr>
                 <tr>
                   <td><b>Creat de:</b></td>
-
                   <td><img src="{{ ticket.created_by.profile_image.url }}" alt="Profile Image of {{ ticket.created_by.username }}" class="profile-image">{{ ticket.created_by }}</td>
-
                 </tr>
                 <tr>
                   <td><b>Status:</b></td>
                   <td>
-           {% if ticket.ticket_status == 'Active' %}
-              <span class="badge badge-open">Deschis</span>
-              {% elif ticket.ticket_status == 'Pending' %}
-              <span class="badge badge-pending">În așteptare</span>
-              {% elif ticket.ticket_status == 'Completed' %}
-              <span class="badge badge-closed">Închis</span>
-              {% endif %}
+                    {% if ticket.ticket_status == 'Active' %}
+                      <span class="badge badge-open">Deschis</span>
+                    {% elif ticket.ticket_status == 'Pending' %}
+                      <span class="badge badge-pending">În așteptare</span>
+                    {% elif ticket.ticket_status == 'Completed' %}
+                      <span class="badge badge-closed">Închis</span>
+                    {% endif %}
                   </td>
-                  <tr>
-                    {% if ticket.ticket_status == 'Completed' %}
-                    <td><b>Data Rezolvat:</b></td>
-                  <td>{{ ticket.closed_date}}</td>
-                  {% endif %}
-                  </tr>
                 </tr>
+                {% if ticket.ticket_status == 'Completed' %}
+                <tr>
+                  <td><b>Data Rezolvat:</b></td>
+                  <td>{{ ticket.closed_date }}</td>
+                </tr>
+                {% endif %}
               </tbody>
             </table>
           </div>
@@ -121,47 +114,46 @@
                   <span>{{ user_ticket.id }} - {{ user_ticket.title }}</span>
                   <span class="badge badge-{{ user_ticket.priority|hyphenate }} ml-auto">
                     {% if user_ticket.priority == 'Very Low' %}
-                    Foarte Scăzută
-                  {% elif user_ticket.priority == 'Low' %}
-                    Scăzută
-                  {% elif user_ticket.priority == 'Medium' %}
-                    Medie
-                  {% elif user_ticket.priority == 'High' %}
-                    Ridicată
-                  {% elif user_ticket.priority == 'Very High' %}
-                    Foarte Ridicată
-                  {% endif %}
-                </span>
-              </a>
-            {% endfor %}
+                      Foarte Scăzută
+                    {% elif user_ticket.priority == 'Low' %}
+                      Scăzută
+                    {% elif user_ticket.priority == 'Medium' %}
+                      Medie
+                    {% elif user_ticket.priority == 'High' %}
+                      Ridicată
+                    {% elif user_ticket.priority == 'Very High' %}
+                      Foarte Ridicată
+                    {% endif %}
+                  </span>
+                </a>
+              {% endfor %}
             </div>
           </div>
         </div>
       </div>
 
+      {% if request.user.is_engineer and not ticket.is_resolved %}
+      <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmă Rezolvarea</a>
+      {% endif %}
 
-    {% if request.user.is_engineer and not ticket.is_resolved %}
-      <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirm Resolution</a>
-    {% endif %}
+      {% if request.user.is_customer and not ticket.is_resolved %}
+      <a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-primary">Actualizează Tichet</a>
+      {% endif %}
 
-    {% if request.user.is_customer and not ticket.is_resolved %}
-      <a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-primary">Update Ticket</a>
-    {% endif %}
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Confirm Resolution</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title" id="exampleModalLabel">Confirmă Rezolvarea</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Închide"></button>
             </div>
             <div class="modal-body">
-              Do you want to close the ticket?
+              Dorești să închizi tichetul?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-primary">Save changes</a>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Închide</button>
+              <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-primary">Salvează Modificările</a>
             </div>
           </div>
         </div>

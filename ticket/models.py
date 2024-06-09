@@ -1,10 +1,9 @@
-from django.db import models
-from users.models import User
-from django.urls import reverse
-from django.core.validators import MaxLengthValidator
-from django.utils.text import slugify
 from django.core.exceptions import ValidationError
-import uuid
+from django.core.validators import MaxLengthValidator
+from django.db import models
+from django.urls import reverse
+from users.models import User
+
 
 class Ticket(models.Model):
     PRIORITY_CHOICES = (
@@ -37,7 +36,8 @@ class Ticket(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='Other')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tickets_created', editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
-    assigned_to = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='tickets_assigned')
+    assigned_to = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True,
+                                    related_name='tickets_assigned')
     is_resolved = models.BooleanField(default=False)
     accepted_date = models.DateTimeField(null=True, blank=True)
     closed_date = models.DateTimeField(null=True, blank=True)
@@ -49,7 +49,6 @@ class Ticket(models.Model):
 
     def get_absolute_url(self):
         return reverse('ticket-detail', kwargs={'pk': self.pk})
-
 
     def change_status(self, new_status):
         if new_status not in dict(self.STATUS_CHOICES):

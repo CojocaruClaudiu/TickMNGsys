@@ -20,11 +20,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card text-center">
                     <div class="card-body">
-                        {% if user.profile_image %}
                             <img src="{{ user.profile_image.url }}" alt="Imagine Profil" class="img-thumbnail mb-3">
-                        {% else %}
-                            <img src="{% static 'images/default_profile.png' %}" alt="Imagine Profil Implicită" class="img-thumbnail mb-3">
-                        {% endif %}
                         <h4>{{ user.username }}</h4>
                         <p>{{ user.email }}</p>
                         <p>Membru din: {{ user.date_joined|date:"F j, Y" }}</p>

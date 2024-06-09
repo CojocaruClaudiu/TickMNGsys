@@ -1,8 +1,9 @@
-from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from .form import RegisterCustomerForm, RegisterEngineerForm, RegisterAdminForm, ProfileImageForm, CustomPasswordChangeForm
+from .form import RegisterCustomerForm, RegisterEngineerForm, RegisterAdminForm, ProfileImageForm, \
+    CustomPasswordChangeForm
+
 
 def register_customer(request):
     if request.method == 'POST':
@@ -20,6 +21,7 @@ def register_customer(request):
         form = RegisterCustomerForm()
     return render(request, 'users/register_customer.html', {'form': form})
 
+
 def register_engineer(request):
     if request.method == 'POST':
         form = RegisterEngineerForm(request.POST)
@@ -35,6 +37,7 @@ def register_engineer(request):
     else:
         form = RegisterEngineerForm()
     return render(request, 'users/register_engineer.html', {'form': form})
+
 
 def register_admin(request):
     if request.method == 'POST':
@@ -52,6 +55,7 @@ def register_admin(request):
         form = RegisterAdminForm()
     return render(request, 'users/register_admin.html', {'form': form})
 
+
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -68,10 +72,12 @@ def login_user(request):
     else:
         return render(request, 'users/login.html')
 
+
 def logout_user(request):
     logout(request)
     messages.info(request, 'Deconectare reușită!')
     return redirect('login')
+
 
 def profile(request):
     if request.method == 'POST':
@@ -102,6 +108,7 @@ def change_password(request):
     else:
         form = CustomPasswordChangeForm(request.user)
     return render(request, 'users/change_password.html', {'form': form})
+
 
 def forgot_password(request):
     return render(request, 'users/forgot_password.html')
