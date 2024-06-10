@@ -94,6 +94,12 @@
                   <td>{{ ticket.closed_date }}</td>
                 </tr>
                 {% endif %}
+                {% if ticket.updated_at != ticket.closed_date and ticket.updated_at != ticket.date_created and ticket.updated_at != ticket.accepted_date %}
+                                <tr>
+                  <td><b>Ultima Actualizare la:</b></td>
+                  <td>{{ ticket.updated_at }}</td>
+                </tr>
+                {% endif %}
               </tbody>
             </table>
           </div>

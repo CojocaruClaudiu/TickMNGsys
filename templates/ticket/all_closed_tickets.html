@@ -54,15 +54,15 @@
         <table class="table table-hover" id="ticketTable">
           <thead class="thead-light">
             <tr>
-              <th scope="col">ID Tichet</th>
-              <th scope="col">Titlu</th>
-              <th scope="col">Închis la</th>
-              <th scope="col">Atribuit către</th>
-              <th scope="col">Prioritate</th>
-              <th scope="col">Categorie</th>
-              <th scope="col">Stare</th>
-              <th scope="col">Acțiune</th>
-            </tr>
+            <th scope="col"><i class="bi bi-hash"></i> ID Tichet</th>
+            <th scope="col"><i class="bi bi-file-earmark-text"></i> Titlu</th>
+            <th scope="col"><i class="bi bi-calendar"></i> Închis la</th>
+            <th scope="col"><i class="bi bi-person"></i> Atribuit către</th>
+            <th scope="col"><i class="bi bi-exclamation-triangle"></i> Prioritate</th>
+            <th scope="col"><i class="bi bi-tags"></i> Categorie</th>
+             <th scope="col"><i class="bi bi-clipboard-data"></i> Stare</th>
+             <th scope="col"><i class="bi bi-gear"></i> Acțiune</th>
+             
           </thead>
           <tbody>
             {% for ticket in tickets %}
@@ -84,7 +84,7 @@
                 {% elif ticket.priority == 'Low' %}
                 <span class="badge badge-low">Scăzută</span>
                 {% elif ticket.priority == 'Medium' %}
-                <span class="badge badge-medium">Mediu</span>
+                <span class="badge badge-medium">Medie</span>
                 {% elif ticket.priority == 'High' %}
                 <span class="badge badge-high">Ridicată</span>
                 {% elif ticket.priority == 'Very High' %}
