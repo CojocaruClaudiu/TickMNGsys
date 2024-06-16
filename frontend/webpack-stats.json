@@ -1,0 +1,57 @@
+{
+  "status": "done",
+  "assets": {
+    "asset-manifest.json": {
+      "name": "asset-manifest.json",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\asset-manifest.json",
+      "publicPath": "/asset-manifest.json"
+    },
+    "index.html": {
+      "name": "index.html",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\index.html",
+      "publicPath": "/index.html"
+    },
+    "static/css/main.10c8889f.css": {
+      "name": "static/css/main.10c8889f.css",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\css\\main.10c8889f.css",
+      "publicPath": "/static/css/main.10c8889f.css"
+    },
+    "static/css/main.10c8889f.css.map": {
+      "name": "static/css/main.10c8889f.css.map",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\css\\main.10c8889f.css.map",
+      "publicPath": "/static/css/main.10c8889f.css.map"
+    },
+    "static/js/453.d855a71b.chunk.js": {
+      "name": "static/js/453.d855a71b.chunk.js",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\453.d855a71b.chunk.js",
+      "publicPath": "/static/js/453.d855a71b.chunk.js"
+    },
+    "static/js/453.d855a71b.chunk.js.map": {
+      "name": "static/js/453.d855a71b.chunk.js.map",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\453.d855a71b.chunk.js.map",
+      "publicPath": "/static/js/453.d855a71b.chunk.js.map"
+    },
+    "static/js/main.83fb8ecd.js": {
+      "name": "static/js/main.83fb8ecd.js",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.83fb8ecd.js",
+      "publicPath": "/static/js/main.83fb8ecd.js"
+    },
+    "static/js/main.83fb8ecd.js.LICENSE.txt": {
+      "name": "static/js/main.83fb8ecd.js.LICENSE.txt",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.83fb8ecd.js.LICENSE.txt",
+      "publicPath": "/static/js/main.83fb8ecd.js.LICENSE.txt"
+    },
+    "static/js/main.83fb8ecd.js.map": {
+      "name": "static/js/main.83fb8ecd.js.map",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.83fb8ecd.js.map",
+      "publicPath": "/static/js/main.83fb8ecd.js.map"
+    }
+  },
+  "chunks": {
+    "main": [
+      "static/css/main.10c8889f.css",
+      "static/js/main.83fb8ecd.js"
+    ]
+  },
+  "publicPath": "/"
+}

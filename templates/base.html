@@ -72,6 +72,14 @@
                 ><i class="bi bi-house"></i> Acasă</a
               >
             </li>
+           <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                href="{% url 'dashboard' %}"
+                ><i class="bi bi-graph-up"></i> Dashboard</a
+              >
+            </li>
+
             <li class="nav-item">
               <a
                 class="nav-link {% if request.resolver_match.url_name == 'create-ticket' %}active{% endif %}"
@@ -128,95 +136,111 @@
       </div>
     </nav>
     {% elif request.user.is_engineer or request.user.is_admin %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Tick MNGsys</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-          aria-controls="navbarContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Acasă</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'ticket-queue' %}"
-                >Tichete în Așteptare</a
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Tick MNGsys</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+            href="/"
+            ><i class="bi bi-house"></i> Acasă</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+            href="{% url 'dashboard' %}"
+            ><i class="bi bi-graph-up"></i> Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.resolver_match.url_name == 'ticket-queue' %}active{% endif %}"
+            href="{% url 'ticket-queue' %}"
+            ><i class="bi bi-hourglass-split"></i> Tichete în Așteptare</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.resolver_match.url_name == 'workspace' %}active{% endif %}"
+            href="{% url 'workspace' %}"
+            ><i class="bi bi-kanban"></i> Spațiu de Lucru</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-folder"></i> Gestionează Tichete
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'all-closed-tickets' %}"
+                ><i class="bi bi-folder2-open"></i> Tichete Închise</a
               >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'workspace' %}"
-                >Spațiu de Lucru</a
-              >
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Gestionează Tichete
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" href="{% url 'all-closed-tickets' %}"
-                    >Tichete Închise</a
-                  >
-                </li>
-              </ul>
             </li>
           </ul>
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="profileDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="profileDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="{{ request.user.profile_image.url }}"
+              alt="Profile Image"
+              class="profile-image"
+            />
+            {{ request.user.username }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'profile' %}"
+                ><i class="bi bi-person"></i> Contul meu</a
               >
-                <img
-                  src="{{ request.user.profile_image.url }}"
-                  alt="Profile Image"
-                  class="profile-image"
-                />
-                {{ request.user.username }}
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                <li>
-                  <a class="dropdown-item" href="{% url 'profile' %}"
-                    >Contul meu</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'settings' %}"
-                    >Setari</a
-                  >
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'logout' %}">Logare</a>
-                </li>
-              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'settings' %}"
+                ><i class="bi bi-gear"></i> Setari</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}"
+                ><i class="bi bi-box-arrow-in-left"></i> Delogare</a
+              >
             </li>
           </ul>
-        </div>
-      </div>
-    </nav>
-
-    {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}
 
     <div class="container mt-5">
       {% if messages %} {% for message in messages %}

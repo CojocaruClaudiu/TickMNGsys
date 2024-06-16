@@ -4,11 +4,9 @@ from django.contrib import messages
 from .models import Ticket
 from .form import CreateTicketForm, UpdateTicketForm
 from users.models import User
-from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models.functions import TruncDay, TruncWeek, TruncMonth
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-
 
 
 # vizualizarea detaliilor unui tichet
@@ -33,7 +31,8 @@ def create_ticket(request):
             var.created_by = request.user
             var.ticket_status = 'Pending'
             var.save()
-            messages.info(request, "Tichetul dumneavoastră a fost trimis cu succes. Un inginer va fi asignat în curând!")
+            messages.info(request,
+                          "Tichetul dumneavoastră a fost trimis cu succes. Un inginer va fi asignat în curând!")
             return redirect('dashboard')
         else:
             messages.warning(request, 'Ceva nu a mers bine. Vă rugăm să încercați din nou!')
@@ -53,7 +52,8 @@ def update_ticket(request, pk):
             form = UpdateTicketForm(request.POST, instance=ticket)
             if form.is_valid():
                 form.save()
-                messages.info(request, "Modificările la tichetul dumneavoastră au fost actualizate cu succes. Modificările au fost salvate!")
+                messages.info(request,
+                              "Modificările la tichetul dumneavoastră au fost actualizate cu succes. Modificările au fost salvate!")
                 return redirect('dashboard')
             else:
                 messages.warning(request, 'Ceva nu a mers bine. Vă rugăm să încercați din nou!')
@@ -120,7 +120,7 @@ def ticket_queue(request):
     # Filter tickets to only include pending ones
     tickets = Ticket.objects.filter(ticket_status='Pending')
     pending_tickets_count = tickets.count()
-    
+
     engineers = User.objects.filter(is_engineer=True)  # Fetch all users who are engineers
 
     paginator = Paginator(tickets, 8)  # Show 8 tickets per page
@@ -139,6 +139,7 @@ def ticket_queue(request):
         'engineers': engineers,  # Add engineers to context
     }
     return render(request, 'ticket/ticket_queue.html', context)
+
 
 @login_required
 def assign_ticket(request, pk):
@@ -160,13 +161,12 @@ def assign_ticket(request, pk):
         return redirect('ticket-queue')
 
 
-
 @login_required
 def accept_ticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.assigned_to = request.user
     ticket.ticket_status = 'Active'
-    ticket.accepted_date = datetime. datetime.now()
+    ticket.accepted_date = datetime.datetime.now()
     ticket.save()
     messages.info(request, "Tichetul dumneavoastră a fost acceptat cu succes.")
     return redirect('workspace')
@@ -177,7 +177,7 @@ def close_ticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.ticket_status = 'Completed'
     ticket.is_resolved = True
-    ticket.closed_date = datetime. datetime.now()
+    ticket.closed_date = datetime.datetime.now()
     ticket.save()
     messages.info(request, "Tichetul dumneavoastră a fost rezolvat cu succes.")
     return redirect('ticket-queue')
@@ -206,6 +206,7 @@ def workspace(request):
 
 
 # toate tichetelor închise/rezolvate
+@login_required
 def all_closed_tickets(request):
     tickets = Ticket.objects.filter(is_resolved=True).order_by('closed_date')
     closed_tickets = tickets.count()
@@ -233,7 +234,5 @@ def delete_ticket(request, pk):
     ticket.delete()
     messages.info(request, "Tichetul dumneavoastră a fost șters cu succes.")
     return redirect('all-tickets')
-
-
 
 
