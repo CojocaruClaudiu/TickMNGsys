@@ -34,7 +34,7 @@ const SimpleRadarChart = () => {
             </div>
             <div className="chart-container">
                 <ResponsiveContainer width="100%" height={400}>
-                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={chartData}>
+                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData} >
                         <PolarGrid />
                         <PolarAngleAxis dataKey="priority" />
                         <PolarRadiusAxis angle={30} domain={[0, Math.max(...chartData.map(item => item.count))]}/>

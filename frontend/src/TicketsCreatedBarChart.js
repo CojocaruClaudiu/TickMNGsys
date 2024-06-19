@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, YAxis } from 'recharts';
 import './dashboard.css';
 
 const TicketsCreatedBarChart = () => {
@@ -30,7 +30,6 @@ const TicketsCreatedBarChart = () => {
             });
     };
 
-    // Funcție utilitară pentru a obține ziua săptămânii dintr-o dată
     const getDayOfWeek = (date) => {
         const days = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
         return days[new Date(date).getDay()];
@@ -69,47 +68,45 @@ const TicketsCreatedBarChart = () => {
     };
 
     return (
-        <div className="card small-card" role="region" aria-label="Diagrama barelor de bilete create">
+        <div className="full-width-chart" role="region" aria-label="Diagrama barelor de bilete create">
             <div className="header">
-                <div>
-                    <h2>Tichete create:</h2>
-                    <span className="total-tichete"> {totalTickets}</span>
+                <div className="header-left">
+                    <h2>{totalTickets}</h2>
+                    <span className="total-tichete">Tichete Create în:</span>
                 </div>
-                <span className="percentage-change" style={{color: percentageChange < 0 ? 'red' : 'green'}}>
-                    {percentageChange}%
-                </span>
+                <div className="percentage-change-container">
+                    <span className="percentage-change" style={{ color: percentageChange < 0 ? 'red' : 'green' }}>
+                        {percentageChange}%
+                    </span>
+                    <div className="selector">
+                        <select id="time-interval" className="styled-select" value={timeInterval} onChange={handleTimeIntervalChange}>
+                            <option value="3_days">Ultimele 3 zile</option>
+                            <option value="7_days">Ultimele 7 zile</option>
+                            <option value="1_month">Ultima lună</option>
+                            <option value="6_months">Ultimele 6 luni</option>
+                            <option value="1_year">Ultimul an</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div className="selector">
-                <label htmlFor="time-interval">Alege intervalul de timp: </label>
-                <select id="time-interval" className="styled-select" value={timeInterval}
-                        onChange={handleTimeIntervalChange}>
-                    <option value="3_days">Ultimele 3 zile</option>
-                    <option value="7_days">Ultimele 7 zile</option>
-                    <option value="1_month">Ultima lună</option>
-                    <option value="6_months">Ultimele 6 luni</option>
-                    <option value="1_year">Ultimul an</option>
-                </select>
-            </div>
-            <div className="chart-container" style={{height: '300px'}}>
+            <div className="chart-container" style={{ height: '200px' }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="date" tick={false}/>
-                        <Tooltip content={<CustomTooltip/>}/>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Tooltip content={<CustomTooltip />} />
                         <Bar
                             dataKey="tickets"
                             fill="#00C3FF"
-                            radius={10}
+                            radius={[10, 10, 0, 0]} // Correct radius format
                             animationDuration={1500}
                             animationBegin={0}
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                         >
                             {chartData.map((entry, index) => (
-                                <Cell
-                                    key={`cell-${index}`}
-                                    fill={index === activeIndex ? '#13deb9' : '#e6fffa'}
-                                />
+                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#13deb9' : '#e6fffa'} />
                             ))}
                         </Bar>
                     </BarChart>

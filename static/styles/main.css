@@ -414,13 +414,13 @@
 /*jeg*/
 /* Navbar styles */
 .navbar {
-
   background-color: #FAFAFC;
   padding: 0.75rem 1rem;
   z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .navbar .navbar-brand {

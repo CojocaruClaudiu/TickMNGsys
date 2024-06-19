@@ -1,4 +1,3 @@
-// src/TicketChart.js
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
@@ -6,35 +5,112 @@ import './dashboard.css';
 
 const TicketChart = () => {
     const [chartData, setChartData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch('/api/ticket_data/')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Răspunsul rețelei nu a fost ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 setChartData({
                     labels: data.dates,
                     datasets: [
                         {
                             label: 'Tichete Create',
-                            data: data.counts,
-                            fill: false,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
-                        }
+                            data: data.total_counts,
+                            fill: true,
+                            stacked: true,
+                            borderColor: '#5e87ff',
+                            backgroundColor: 'rgba(94, 135, 255, 0.1)',
+                            tension: 0.1,
+                            pointBackgroundColor: '#ecf2ff',
+                            pointBorderColor: '#5e87ff',
+                            pointHoverBackgroundColor: '#5e87ff',
+                            pointHoverBorderColor: '#ecf2ff',
+                        },
+                        {
+                            label: 'Tichete Rezolvate',
+                            data: data.completed_counts,
+                            fill: true,
+                            stacked: true,
+                            borderColor: '#fa896b',
+                            backgroundColor: 'rgba(250, 137, 107, 0.1)',
+                            tension: 0.1,
+                            pointBackgroundColor: '#fdede8',
+                            pointBorderColor: '#fa896b',
+                            pointHoverBackgroundColor: '#fa896b',
+                            pointHoverBorderColor: '#fdede8',
+                        },
+                        {
+                            label: 'Tichete Active',
+                            data: data.active_counts,
+                            fill: true,
+                            stacked: true,
+                            borderColor: '#13deb9',
+                            backgroundColor: 'rgba(19, 222, 185, 0.1)',
+                            tension: 0.1,
+                            pointBackgroundColor: '#e6fffa',
+                            pointBorderColor: '#13deb9',
+                            pointHoverBackgroundColor: '#13deb9',
+                            pointHoverBorderColor: '#e6fffa',
+                        },
+
                     ]
                 });
+                setLoading(false);
+            })
+            .catch(error => {
+                setError(error);
+                setLoading(false);
             });
     }, []);
 
-    if (!chartData) {
-        return <div className="loader">Loading...</div>;
+    if (loading) {
+        return <div className="loader">Încărcare...</div>;
+    }
+
+    if (error) {
+        return <div className="error">Eroare: {error.message}</div>;
     }
 
     return (
-        <div className="card">
-            <h2>Number of Tickets</h2>
+        <div className="full-width-chart">
+            <h2>Statusul Tichetelor în ultima lună:</h2>
             <div className="chart-container">
-                <Line data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
+                <Line
+                    data={chartData}
+                    options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    color: 'rgba(200, 200, 200, 0.2)'
+                                }
+                            }
+                        }
+                    }}
+                />
             </div>
         </div>
     );
