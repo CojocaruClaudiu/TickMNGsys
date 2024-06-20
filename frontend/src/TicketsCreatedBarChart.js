@@ -21,7 +21,8 @@ const TicketsCreatedBarChart = () => {
                 setPercentageChange(change.toFixed(2));
 
                 setChartData(data.map(day => ({
-                    date: getDayOfWeek(day.date),
+                    date: new Date(day.date).toLocaleDateString(),
+                    day: getDayOfWeek(day.date),
                     tickets: day.tickets
                 })));
             })
@@ -58,8 +59,9 @@ const TicketsCreatedBarChart = () => {
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             return (
-                <div className="custom-tooltip" style={{ backgroundColor: '#fff', padding: '5px', border: '1px solid #ccc' }}>
-                    <p className="label">{`${label} : ${payload[0].value}`}</p>
+                <div className="custom-tooltip">
+                    <p className="label">{`Data: ${payload[0].payload.date}`}</p>
+                    <p className="value">{`${label}: ${payload[0].value}`}</p>
                 </div>
             );
         }
@@ -89,24 +91,23 @@ const TicketsCreatedBarChart = () => {
                     </div>
                 </div>
             </div>
-            <div className="chart-container" style={{ height: '200px' }}>
+            <div className="chart-container" style={{ height: '300px' }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                        <XAxis dataKey="day" />
                         <YAxis />
                         <Tooltip content={<CustomTooltip />} />
                         <Bar
                             dataKey="tickets"
-                            fill="#00C3FF"
-                            radius={[10, 10, 0, 0]} // Correct radius format
+                            fill="#8884d8"
+                            radius={[10, 10, 0, 0]}
                             animationDuration={1500}
-                            animationBegin={0}
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                         >
                             {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#13deb9' : '#e6fffa'} />
+                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#e6fffa' : '#13deb9'} />
                             ))}
                         </Bar>
                     </BarChart>

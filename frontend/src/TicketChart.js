@@ -80,7 +80,7 @@ const TicketChart = () => {
 
     return (
         <div className="full-width-chart">
-            <h2>Statusul Tichetelor în ultima lună:</h2>
+            <h3>Statusul Tichetelor în ultima lună:</h3>
             <div className="chart-container">
                 <Line
                     data={chartData}

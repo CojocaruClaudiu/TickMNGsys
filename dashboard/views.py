@@ -4,6 +4,8 @@ from django.db.models import Count, Q
 from django.utils import timezone
 from datetime import timedelta, datetime
 
+from django.views import View
+
 from ticket.models import Ticket
 from users.models import User
 
@@ -117,11 +119,11 @@ def tickets_by_category(request):
 
 def tickets_by_priority(request):
     priority_choices = [
-        ('Very Low', 'Foarte Scăzut'),
+        ('Very Low', 'F. Scăzut'),
         ('Low', 'Scăzut'),
         ('Medium', 'Mediu'),
         ('High', 'Ridicat'),
-        ('Very High', 'Foarte Ridicat'),
+        ('Very High', 'F. Ridicat'),
     ]
 
     data = []
@@ -135,31 +137,19 @@ def tickets_by_priority(request):
     return JsonResponse(data, safe=False)
 
 
-# def ticket_status_trends(request):
-#     start_date = request.GET.get('start_date', (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'))
-#     end_date = request.GET.get('end_date', datetime.now().strftime('%Y-%m-%d'))
-#
-#     start_date = parse_date(start_date)
-#     end_date = parse_date(end_date)
-#
-#     print(f"Start Date: {start_date}, End Date: {end_date}")
-#
-#     try:
-#         status_changes = Ticket.objects.filter(date_created__range=[start_date, end_date])\
-#             .extra({'day': 'date(date_created)'}).values('day')\
-#             .annotate(active=Count('id', filter=Q(ticket_status='Active')),
-#                       pending=Count('id', filter=Q(ticket_status='Pending')),
-#                       completed=Count('id', filter=Q(ticket_status='Completed')))\
-#             .order_by('day')
-#
-#         data = list(status_changes)
-#         print(f"Status Changes: {data}")
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         data = []
-#
-#     # Ensure we always return a JSON response
-#     return JsonResponse(data if data else [], safe=False)
+def ticket_status_trends(request):
+    end_date = timezone.now()
+    start_date = end_date - timedelta(days=30)
+
+    # Sample data with non-zero counts for testing
+    response_data = [
+        {"date_created": "2024-05-28T15:43:27.178Z", "active": 3, "pending": 1, "completed": 0},
+        {"date_created": "2024-06-09T11:31:01.402Z", "active": 2, "pending": 0, "completed": 1},
+        {"date_created": "2024-06-16T10:00:35.027Z", "active": 0, "pending": 1, "completed": 3},
+        # Add more sample data as needed
+    ]
+
+    return JsonResponse(response_data, safe=False)
 
 
 def tickets_assigned_to_users(request):
@@ -202,3 +192,34 @@ def ticket_resolution_times(request):
         })
 
     return JsonResponse(data, safe=False)
+
+
+def ticket_summary(request, metric):
+    if metric == 'totalTickets':
+        count = Ticket.objects.count()
+    elif metric == 'resolvedTickets':
+        count = Ticket.objects.filter(is_resolved=True).count()
+    elif metric == 'pendingTickets':
+        count = Ticket.objects.filter(ticket_status='Pending').count()
+    elif metric == 'activeTickets':
+        count = Ticket.objects.filter(ticket_status='Active').count()
+    else:
+        return JsonResponse({'error': 'Invalid metric'}, status=400)
+
+    return JsonResponse(count, safe=False)
+
+
+def tickets_calendar_data(request):
+    today = timezone.now().date()
+    start_date = today - timezone.timedelta(days=365)  # Last 1 year
+    tickets = Ticket.objects.filter(date_created__date__gte=start_date)
+
+    data = {}
+    for ticket in tickets:
+        date_str = ticket.date_created.strftime('%Y-%m-%d')
+        if date_str in data:
+            data[date_str] += 1
+        else:
+            data[date_str] = 1
+
+    return JsonResponse(data)

@@ -19,8 +19,8 @@ const SimpleScatterChart = () => {
                             x: ticket.title,
                             y: ticket.resolution_time
                         })),
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(253, 237, 232, 1)',
+                        borderColor: 'rgb(250,137,107)',
                         borderWidth: 1,
                         pointRadius: 5,
                     }]

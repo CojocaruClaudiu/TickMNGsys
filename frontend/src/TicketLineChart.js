@@ -4,6 +4,8 @@ import './dashboard.css';
 
 const LineChartWithReferenceLines = () => {
     const [chartData, setChartData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [referenceLines, setReferenceLines] = useState([
         { date: '2023-05-01', label: 'Milestone 1' },
         { date: '2023-06-01', label: 'Milestone 2' },
@@ -18,26 +20,34 @@ const LineChartWithReferenceLines = () => {
                 return response.json();
             })
             .then(data => {
-                if (data.length === 0) {
+                if (!data || data.length === 0) {
                     console.warn('No data returned from API');
                 }
 
                 const processedData = data.map(item => ({
-                    date: item.day,
+                    date: new Date(item.date_created).toLocaleDateString(), // Format the date for better readability
                     active: item.active,
                     pending: item.pending,
                     completed: item.completed,
                 }));
 
+                console.log("Processed Data: ", processedData);  // Log the processed data to verify
                 setChartData(processedData);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching ticket status trends:', error);
+                setError(error);
+                setLoading(false);
             });
-    }, []);
+    }, []); // No dependencies needed here
 
-    if (!chartData) {
+    if (loading) {
         return <div className="loader">Încărcare...</div>;
+    }
+
+    if (error) {
+        return <div className="error">Eroare: {error.message}</div>;
     }
 
     return (
@@ -50,7 +60,7 @@ const LineChartWithReferenceLines = () => {
                     <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="date" />
-                        <YAxis />
+                        <YAxis domain={[0, 'auto']} /> {/* Adjust the Y-axis scale */}
                         <Tooltip />
                         <Legend />
                         <Line type="monotone" dataKey="active" stroke="#8884d8" />

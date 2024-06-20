@@ -1,3 +1,13 @@
+body {
+    margin: 0;
+    color: rgb(42, 53, 71);
+    font-weight: 400;
+    line-height: 1.334rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+
+
 .full-width-chart {
     width: 100%;
     background: #ffffff;
@@ -11,7 +21,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
 }
 
 .card {
@@ -20,6 +29,9 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card h2 {
@@ -29,8 +41,9 @@
 
 .card .chart-container {
     position: relative;
-    height: 400px; /* Increased height */
-    padding: 20px; /* Added padding */
+    flex-grow: 1; /* Allow it to grow and take available space */
+    padding: 0; /* Remove padding */
+    height: 100%; /* Ensure it takes full height */
 }
 
 .chart-container canvas {
@@ -77,9 +90,10 @@
 }
 
 .loader {
-    font-size: 18px;
-    text-align: center;
-    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 
 .error {
@@ -125,3 +139,158 @@
     margin-right: 10px;
     font-size: 16px;
 }
+
+
+/* jeg*/
+.bigger-card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.bigger-card .charts-container {
+    display: flex;
+    flex-direction: row; /* Align children in a row */
+    gap: 20px; /* Add some space between the charts */
+}
+
+
+
+.custom-tooltip {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-tooltip p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.custom-tooltip .label {
+    color: #5e87ff; /* Change this to your desired color */
+}
+
+.custom-tooltip .value {
+    color: #13deb9; /* Change this to your desired color */
+}
+
+/*oke*/
+
+.number-card {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 8px;
+    flex: 1; /* Make cards grow to fit the container */
+}
+
+.number-card h3 {
+    font-size: 18px;
+}
+
+
+
+.bg-total-tickets {
+  background-color: #ecf2ff; /* Light blue */
+  color: #5e87ff; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-total-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.bg-pending-tickets {
+  background-color: #fef5e5; /* Light yellow */
+  color: #ffae1f; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-pending-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.bg-open-tickets {
+  background-color: #e6fffa; /* Light teal */
+  color: #13deb9; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-open-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.bg-closed-tickets {
+  background-color: #fdede8; /* Light coral */
+  color: #fa896b; /* Dark text color for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-closed-tickets:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+/* Applying additional styling for the cards for uniformity */
+/* Specific card styling for ticket stats */
+.ticket-card {
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: none; /* Remove any default borders */
+  cursor: pointer;
+}
+
+.ticket-card-body {
+  padding: 20px; /* Consistent padding within the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Setting a fixed height for uniformity */
+}
+
+.ticket-card-title {
+  margin-top: 5px; /* Slight space between number and title */
+  font-size: 1rem; /* Suitable font size for titles */
+}
+
+.ticket-card-number {
+  font-weight: bold; /* Bold for the number to stand out */
+  font-size: 1.5rem; /* Larger font size for visibility */
+}
+/* */
+.calendar-heatmap-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.color-github-1 {
+    fill: #13DEB9 !important;
+}
+
+.color-github-2 {
+    fill: #00B18F !important;
+}
+
+.color-github-3 {
+    fill: #008666 !important;
+}
+
+.react-calendar-heatmap .color-github-4 {
+    fill: #005C41 !important;
+}
+
