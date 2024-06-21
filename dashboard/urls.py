@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 from .views import ticket_status_data, tickets_by_category, tickets_by_priority, tickets_assigned_to_users, \
-    tickets_created_by_users, ticket_resolution_times, ticket_summary, tickets_calendar_data
+    tickets_created_by_users, ticket_resolution_times, ticket_summary, tickets_calendar_data, user_stats, \
+    user_stats_trends, ticket_table_data, tickets_progress
 
 urlpatterns = [
     path('', views.home, name='home'),  # Home page
@@ -17,8 +18,9 @@ urlpatterns = [
     path('api/ticket_status_trends/', views.ticket_status_trends, name='ticket_status_trends'),
     path('api/ticket_summary/<str:metric>/', ticket_summary, name='ticket_summary'),  # Update this line
     path('api/tickets_calendar_data/', tickets_calendar_data, name='tickets_calendar_data'),  # Corrected line
+    path('api/user_stats/', user_stats, name='user_stats'),
+    path('api/user_stats_trends/', user_stats_trends, name='user_stats_trends'),
+    path('api/ticket_table_data/', ticket_table_data, name='ticket_table_data'),
+    path('api/tickets_progress/', tickets_progress, name='tickets_progress'),
 
 ]
-
-
-

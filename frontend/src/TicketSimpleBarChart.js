@@ -23,8 +23,8 @@ const SimpleBarChart = () => {
                         {
                             label: 'Tichete Alocate',
                             data: data.map(item => item.tickets),
-                            backgroundColor: '#8884d8',
-                            borderColor: '#8884d8',
+                            backgroundColor: '#8cc63f',
+                            borderColor: '#8cc63f',
                             borderWidth: 1,
                             borderRadius: Number.MAX_VALUE,
                             borderSkipped: false

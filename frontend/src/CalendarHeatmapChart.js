@@ -11,6 +11,9 @@ import { subDays } from 'date-fns';
 const CalendarHeatmapChart = () => {
     const [heatmapData, setHeatmapData] = useState([]);
 
+    const monthNames = ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'];
+    const dayNames = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+
     useEffect(() => {
         fetch('/api/tickets_calendar_data/')
             .then(response => response.json())
@@ -48,6 +51,8 @@ const CalendarHeatmapChart = () => {
                     };
                 }}
                 showWeekdayLabels
+                monthLabels={monthNames}
+                weekdayLabels={dayNames}
             />
             <ReactTooltip id="heatmap-tooltip" />
         </div>

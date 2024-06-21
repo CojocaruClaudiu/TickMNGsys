@@ -82,9 +82,9 @@ const TicketsCreatedBarChart = () => {
                     </span>
                     <div className="selector">
                         <select id="time-interval" className="styled-select" value={timeInterval} onChange={handleTimeIntervalChange}>
-                            <option value="3_days">Ultimele 3 zile</option>
                             <option value="7_days">Ultimele 7 zile</option>
-                            <option value="1_month">Ultima lună</option>
+                            <option value="1_month">Ultimele 30 de zile</option>
+                            <option value="3_month">Ultimele 90 de zile</option>
                             <option value="6_months">Ultimele 6 luni</option>
                             <option value="1_year">Ultimul an</option>
                         </select>

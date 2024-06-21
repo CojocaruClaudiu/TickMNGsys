@@ -205,44 +205,38 @@ body {
 
 
 .bg-total-tickets {
+  border-left: 5px solid #5e87ff !important;
   background-color: #ecf2ff; /* Light blue */
   color: #5e87ff; /* Dark text color for better readability */
   transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
-.bg-total-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
-}
 
 .bg-pending-tickets {
+  border-left: 5px solid #ffae1f !important;
   background-color: #fef5e5; /* Light yellow */
   color: #ffae1f; /* Dark text color for better readability */
   transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
-.bg-pending-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
-}
+
 
 .bg-open-tickets {
+  border-left: 5px solid #13deb9 !important;
   background-color: #e6fffa; /* Light teal */
   color: #13deb9; /* Dark text color for better readability */
   transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
-.bg-open-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
-}
 
 .bg-closed-tickets {
+  border-left: 5px solid #fa896b !important;
   background-color: #fdede8; /* Light coral */
   color: #fa896b; /* Dark text color for better readability */
   transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
-.bg-closed-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
-}
+
 
 /* Applying additional styling for the cards for uniformity */
 /* Specific card styling for ticket stats */
@@ -268,14 +262,21 @@ body {
 }
 
 .ticket-card-number {
-  font-weight: bold; /* Bold for the number to stand out */
-  font-size: 1.5rem; /* Larger font size for visibility */
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
 }
 /* */
 .calendar-heatmap-container {
     max-width: 1000px;
+    max-height: 600px;
     margin: 0 auto;
     padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+
 }
 
 .color-github-1 {
@@ -293,4 +294,193 @@ body {
 .react-calendar-heatmap .color-github-4 {
     fill: #005C41 !important;
 }
+/* */
+.bg-customers {
+  background-color: #e6f7ff; /* Light cyan */
+  color: #33c3f0; /* Dark cyan for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
 
+.bg-customers:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.bg-engineers {
+  background-color: #f4f9ec; /* Light green */
+  color: #8cc63f; /* Dark green for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+}
+
+.bg-engineers:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.bg-admins {
+
+  background-color: #f9e6f7; /* Light pink */
+  color: #e83e8c; /* Dark pink for better readability */
+  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+
+}
+.bg-total {
+    background-color: #e6e6ff; /* Light purple */
+    color: #6666ff; /* Dark purple for better readability */
+    transition: transform 0.5s ease-in-out;
+}
+
+.bg-total:hover {
+    transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.bg-admins:hover {
+  transform: scale(1.1); /* Increase size by 10% on hover */
+}
+
+.custom-legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.custom-legend span {
+    margin: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.custom-legend span:hover {
+    text-decoration: underline;
+}
+.custom-legend i {
+    margin-right: 5px;
+}
+
+
+.number-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+
+.ticket-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.number-card:hover {
+    transform: translateY(-10px);
+}
+
+.number-card::before,
+.number-card::after {
+    content: '';
+    position: absolute;
+    border-radius: 10px;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    background-size: 200% 200%;
+    background-position: 0 0;
+    transition: background-position 0.5s, opacity 0.3s;
+    opacity: 0;
+
+}
+
+.number-card:hover::before,
+.number-card:hover::after {
+    opacity: 1;
+    background-position: 100% 100%;
+}
+
+.bg-customers {
+    border-left: 5px solid #33c3f0;
+}
+
+.bg-engineers {
+    border-left: 5px solid #8cc63f;
+}
+
+.bg-admins {
+    border-left: 5px solid #e83e8c;
+}
+.bg-total{
+    border-left: 5px solid #6666ff;
+}
+
+.progress-bar-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff ;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.progress {
+    height: 30px !important;
+    font-size: 1rem !important;
+    overflow: hidden;
+    margin-bottom: 5px !important; /* Adding separation between progress bars */
+    position: relative;
+
+}
+
+
+
+
+.progress-details {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+}
+.progress-bar {
+    margin-bottom: 20px;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-size: 200% 100%;
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: progress-animation 1.4s ease-in-out infinite;
+    transition: background-color 0.3s ease;
+}
+.progress-bar-completed .progress-bar {
+   background-color: #fdede8; /* Blue for active */
+    border-radius: 10px;
+    border: 2px solid #fa896b; /* Adding the border */
+    color: #fa896b;
+}
+
+.progress-bar-active .progress-bar {
+   background-color: #e6fffa; /* Green for completed */
+    border-radius: 10px;
+    border: 2px solid #13deb9; /* Adding the border */
+    color: #13deb9;
+}
+
+.progress-bar-pending .progress-bar {
+    background-color: #fef5e5; /* Orange for pending */
+    border-radius: 10px;
+    border: 2px solid #ffae1f; /* Adding the border */
+    color: #ffae1f;
+}
+
+@keyframes progress-animation {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

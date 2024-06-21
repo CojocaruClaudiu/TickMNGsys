@@ -1,11 +1,14 @@
+from django.core.paginator import Paginator
+from django.db.models.functions import TruncMonth
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.db.models import Count, Q
 from django.utils import timezone
 from datetime import timedelta, datetime
 
-from django.views import View
+from django.views.decorators.http import require_GET
 
+from dashboard import models
 from ticket.models import Ticket
 from users.models import User
 
@@ -68,6 +71,8 @@ def tickets_created(request):
         start_date = end_date - timedelta(days=6)  # Including today
     elif interval == '1_month':
         start_date = end_date - timedelta(days=29)  # Including today
+    elif interval == '3_month':
+        start_date = end_date - timedelta(days=89)  # Including today
     elif interval == '6_months':
         start_date = end_date - timedelta(days=182)  # Including today
     elif interval == '1_year':
@@ -96,11 +101,12 @@ def tickets_created(request):
 
     return JsonResponse(response_data, safe=False)
 
+
 def tickets_by_category(request):
     categories = [
         ('Bug', 'Bug'),
-        ('Feature Request', 'Cerere Funcționalitate'),
-        ('Customer Support', 'Suport Client'),
+        ('Feature Request', 'Cer. Funcț.'),
+        ('Customer Support', 'Sup.Clienți'),
         ('Sales', 'Vânzări'),
         ('Feedback', 'Feedback'),
         ('Other', 'Altele'),
@@ -221,5 +227,97 @@ def tickets_calendar_data(request):
             data[date_str] += 1
         else:
             data[date_str] = 1
+
+    return JsonResponse(data)
+
+
+def user_stats(request):
+    customers_count = User.objects.filter(is_customer=True).count()
+    engineers_count = User.objects.filter(is_engineer=True).count()
+    admins_count = User.objects.filter(is_admin=True).count()
+
+    data = {
+        'customers': customers_count,
+        'engineers': engineers_count,
+        'admins': admins_count,
+    }
+
+    return JsonResponse(data, safe=False)
+
+
+@require_GET
+def user_stats_trends(request):
+    days = int(request.GET.get('days', 30))  # Default to last 30 days if not provided
+
+    # Get the current date
+    today = timezone.now().date()
+
+    # Get data for the specified number of days
+    data = []
+    for i in range(days):
+        date = today - timezone.timedelta(days=i)
+
+        customers_count = User.objects.filter(is_customer=True, date_joined__date=date).count()
+        engineers_count = User.objects.filter(is_engineer=True, date_joined__date=date).count()
+        admins_count = User.objects.filter(is_admin=True, date_joined__date=date).count()
+
+        data.append({
+            'date': date.strftime('%Y-%m-%d'),  # Ensure the date is in YYYY-MM-DD format
+            'customers': customers_count,
+            'engineers': engineers_count,
+            'admins': admins_count,
+        })
+
+    # Ensure the data is sorted by date
+    data.sort(key=lambda x: x['date'])
+
+    return JsonResponse(data, safe=False)
+
+
+def ticket_table_data(request):
+    tickets = Ticket.objects.all().order_by('-date_created')
+    paginator = Paginator(tickets, 3)  # Show 3 tickets per page
+
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    tickets_list = list(page_obj.object_list.values(
+        'id', 'title', 'description', 'priority', 'category',
+        'created_by__username', 'date_created', 'assigned_to__username',
+        'is_resolved', 'accepted_date', 'closed_date', 'ticket_status', 'updated_at'
+    ))
+
+    response = {
+        'tickets': tickets_list,
+        'num_pages': paginator.num_pages,
+        'current_page': page_obj.number
+    }
+
+    return JsonResponse(response)
+
+
+@require_GET
+def tickets_progress(request):
+    total_tickets = Ticket.objects.exclude(ticket_status='Completed').count()
+    completed_tickets = Ticket.objects.filter(ticket_status='Completed').count()
+    active_tickets = Ticket.objects.filter(ticket_status='Active').count()
+    pending_tickets = Ticket.objects.filter(ticket_status='Pending').count()
+
+    if total_tickets + completed_tickets > 0:
+        completed_percentage = (completed_tickets / (total_tickets + completed_tickets)) * 100
+        pending_percentage = (pending_tickets / (total_tickets + completed_tickets)) * 100
+        active_percentage = (active_tickets / (total_tickets + completed_tickets)) * 100
+    else:
+        completed_percentage = 0
+        pending_percentage = 0
+        active_percentage = 0
+
+    data = {
+        'total_tickets': total_tickets + completed_tickets,
+        'completed_tickets': completed_tickets,
+        'completed_percentage': completed_percentage,
+        'pending_percentage': pending_percentage,
+        'active_percentage': active_percentage
+    }
 
     return JsonResponse(data)
