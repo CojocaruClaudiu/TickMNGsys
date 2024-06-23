@@ -15,7 +15,6 @@ urlpatterns = [
     path('api/tickets_assigned_to_users/', tickets_assigned_to_users, name='tickets_assigned_to_users'),
     path('api/tickets_created_by_users/', tickets_created_by_users, name='tickets_created_by_users'),
     path('api/ticket_resolution_times/', ticket_resolution_times, name='ticket_resolution_times'),
-    path('api/ticket_status_trends/', views.ticket_status_trends, name='ticket_status_trends'),
     path('api/ticket_summary/<str:metric>/', ticket_summary, name='ticket_summary'),  # Update this line
     path('api/tickets_calendar_data/', tickets_calendar_data, name='tickets_calendar_data'),  # Corrected line
     path('api/user_stats/', user_stats, name='user_stats'),

@@ -38,7 +38,7 @@ const SpecifiedDomainRadarChart = () => {
                         <PolarAngleAxis dataKey="category" tick={{ textAnchor: 'middle', fontSize: 14 }} />
                         <PolarRadiusAxis />
                         <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc' }} />
-                        <Radar name="Tichete" dataKey="count" stroke="#13deb9" fill="#13deb9" fillOpacity={0.6} />
+                        <Radar name="Tichete" dataKey="count" stroke="#5e87ff" fill="#49beff" fillOpacity={0.6} />
                     </RadarChart>
                 </ResponsiveContainer>
             </div>

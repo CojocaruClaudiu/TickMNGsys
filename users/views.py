@@ -60,10 +60,17 @@ def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        remember_me = request.POST.get('remember_me')  # Get the remember me value
 
         user = authenticate(request, username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
+
+            if remember_me:
+                request.session.set_expiry(1209600)  # 2 weeks
+            else:
+                request.session.set_expiry(0)  # Browser session
+
             messages.info(request, 'Autentificare reușită!')
             return redirect('dashboard')
         else:

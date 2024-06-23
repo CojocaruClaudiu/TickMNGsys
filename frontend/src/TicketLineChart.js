@@ -101,7 +101,7 @@ const LineChartWithReferenceLines = () => {
                         <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey="date" tick={{fill: '#8884d8'}}/>
                         <YAxis domain={[0, 'auto']} tick={{fill: '#8884d8'}}/>
-                        <Tooltip contentStyle={{backgroundColor: '#f5f5f5', border: '1px solid #ccc'}}/>
+                        <Tooltip contentStyle={{backgroundColor: 'white', border: '1px solid #ccc'}}/>
                         {lineVisibility.customers &&
                             <Line type="monotone" dataKey="customers" stroke="#33c3f0" strokeWidth={2} dot={{r: 3}}/>}
                         {lineVisibility.engineers &&

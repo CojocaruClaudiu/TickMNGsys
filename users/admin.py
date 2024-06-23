@@ -3,8 +3,8 @@ from .models import User
 from django.contrib.auth.admin import UserAdmin
 
 
-class CustomerUserAdmin(UserAdmin):
-    fieldsets= (
+class CustomUserAdmin(UserAdmin):
+    fieldsets = (
         *UserAdmin.fieldsets,
         (
             'Custom Field Heading',
@@ -12,11 +12,14 @@ class CustomerUserAdmin(UserAdmin):
                 'fields': (
                     'is_customer',
                     'is_engineer',
-                    
+                    'is_admin',  # Add the is_admin field here
                 ),
             },
-        )
+        ),
     )
 
+    list_display = ('username', 'email', 'is_admin', 'is_customer', 'is_engineer', 'is_staff', 'is_active')
+    list_filter = ('is_admin', 'is_customer', 'is_engineer', 'is_staff', 'is_active')
 
-admin.site.register(User, CustomerUserAdmin)
+
+admin.site.register(User, CustomUserAdmin)

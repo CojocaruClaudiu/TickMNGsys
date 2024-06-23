@@ -96,6 +96,17 @@ const SimpleScatterChart = () => {
                         },
                         plugins: {
                             tooltip: {
+                                backgroundColor: 'white',
+                                borderColor: '#ccc',
+                                borderWidth: 1,
+                                padding: 10,
+                                cornerRadius: 3,
+                                titleColor: '#333',  // Set the title color here
+                                bodyColor: '#333',   // Set the body color here
+                                titleFont: {
+                                    weight: 400,
+                                    size: 16,          // Set the title font size here
+                                },
                                 callbacks: {
                                     label: function (context) {
                                         const time = context.raw.y;

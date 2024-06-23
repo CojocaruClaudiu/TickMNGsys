@@ -5,7 +5,6 @@ import './dashboard.css';
 const TicketsCreatedBarChart = () => {
     const [chartData, setChartData] = useState(null);
     const [totalTickets, setTotalTickets] = useState(0);
-    const [percentageChange, setPercentageChange] = useState(null);
     const [timeInterval, setTimeInterval] = useState('7_days');
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -14,11 +13,8 @@ const TicketsCreatedBarChart = () => {
             .then(response => response.json())
             .then(data => {
                 const total = data.reduce((acc, day) => acc + day.tickets, 0);
-                const prevTotal = data.slice(1).reduce((acc, day) => acc + day.tickets, 0);
-                const change = prevTotal !== 0 ? ((total - prevTotal) / prevTotal) * 100 : 0;
 
                 setTotalTickets(total);
-                setPercentageChange(change.toFixed(2));
 
                 setChartData(data.map(day => ({
                     date: new Date(day.date).toLocaleDateString(),
@@ -76,19 +72,14 @@ const TicketsCreatedBarChart = () => {
                     <h2>{totalTickets}</h2>
                     <span className="total-tichete">Tichete Create în:</span>
                 </div>
-                <div className="percentage-change-container">
-                    <span className="percentage-change" style={{ color: percentageChange < 0 ? 'red' : 'green' }}>
-                        {percentageChange}%
-                    </span>
-                    <div className="selector">
-                        <select id="time-interval" className="styled-select" value={timeInterval} onChange={handleTimeIntervalChange}>
-                            <option value="7_days">Ultimele 7 zile</option>
-                            <option value="1_month">Ultimele 30 de zile</option>
-                            <option value="3_month">Ultimele 90 de zile</option>
-                            <option value="6_months">Ultimele 6 luni</option>
-                            <option value="1_year">Ultimul an</option>
-                        </select>
-                    </div>
+                <div className="selector">
+                    <select id="time-interval" className="styled-select" value={timeInterval} onChange={handleTimeIntervalChange}>
+                        <option value="7_days">Ultimele 7 zile</option>
+                        <option value="1_month">Ultimele 30 de zile</option>
+                        <option value="3_month">Ultimele 90 de zile</option>
+                        <option value="6_months">Ultimele 6 luni</option>
+                        <option value="1_year">Ultimul an</option>
+                    </select>
                 </div>
             </div>
             <div className="chart-container" style={{ height: '300px' }}>
@@ -107,7 +98,7 @@ const TicketsCreatedBarChart = () => {
                             onMouseLeave={handleMouseLeave}
                         >
                             {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#e6fffa' : '#13deb9'} />
+                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#5e87ff' : '#49beff'} />
                             ))}
                         </Bar>
                     </BarChart>

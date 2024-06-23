@@ -19,21 +19,17 @@ const TicketStatusPieChart = () => {
                         {
                             label: 'Nr Tichete',
                             data: [data.active, data.pending, data.completed],
-
-
                             backgroundColor: [
                                 '#e6fffa',
                                 '#fef5e5',
                                 '#fdede8',
                             ],
-
                             hoverBorderColor: [
                                 '#13deb9',
                                 '#ffae1f',
                                 '#fa896b',
                             ],
                             borderWidth: 2,
-
                         }
                     ]
                 });
@@ -51,8 +47,9 @@ const TicketStatusPieChart = () => {
         <div className="card" role="region" aria-label="Ticket Status Pie Chart">
             <div className="header">
                 <h2>Status Tichete:</h2>
-                <span
-                    className="total-tichete">Total Tichete: {chartData.datasets[0].data.reduce((a, b) => a + b, 0)}</span>
+                <span className="total-tichete">
+                    Total Tichete: {chartData.datasets[0].data.reduce((a, b) => a + b, 0)}
+                </span>
             </div>
             <div className="chart-container">
                 <Pie
@@ -71,14 +68,26 @@ const TicketStatusPieChart = () => {
                                 },
                             },
                             tooltip: {
+                                enabled: true,
+                                backgroundColor: 'white',
+                                borderColor: '#ccc',
+                                borderWidth: 1,
+                                padding: 10,
+                                cornerRadius: 3,
+                                titleColor: '#333',  // Set the title color here
+                                bodyColor: '#333',   // Set the body color here
+                                titleFont: {
+                                    weight: 400,
+                                    size: 16,          // Set the title font size here
+                                },
                                 callbacks: {
                                     label: function (context) {
                                         let label = context.label || '';
                                         if (label) {
                                             label += ': ';
                                         }
-                                        label += context.raw;
-                                        return label;
+                                        const percentage = ((context.raw / totalTickets) * 100).toFixed(2);
+                                        return `${label}${context.raw} (${percentage}%)`;
                                     }
                                 }
                             },
@@ -86,9 +95,7 @@ const TicketStatusPieChart = () => {
                         animation: {
                             animateScale: true,
                             animateRotate: true,
-                            duration:1500,
-
-
+                            duration: 1500,
                         },
                     }}
                 />

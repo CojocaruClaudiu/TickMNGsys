@@ -5,7 +5,6 @@ from .models import Ticket
 from .form import CreateTicketForm, UpdateTicketForm
 from users.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 
@@ -53,7 +52,8 @@ def update_ticket(request, pk):
             if form.is_valid():
                 form.save()
                 messages.info(request,
-                              "Modificările la tichetul dumneavoastră au fost actualizate cu succes. Modificările au fost salvate!")
+                              "Modificările la tichetul dumneavoastră au fost actualizate cu succes. Modificările au "
+                              "fost salvate!")
                 return redirect('dashboard')
             else:
                 messages.warning(request, 'Ceva nu a mers bine. Vă rugăm să încercați din nou!')
@@ -132,11 +132,15 @@ def ticket_queue(request):
     except EmptyPage:
         tickets = paginator.page(paginator.num_pages)
 
+    # Check if the user is a superuser or an admin
+    is_admin = request.user.is_superuser or request.user.is_admin
+
     context = {
         'tickets': tickets,
         'pending_tickets': pending_tickets_count,
         'page': page,
         'engineers': engineers,  # Add engineers to context
+        'is_admin': is_admin,  # Add admin status to context
     }
     return render(request, 'ticket/ticket_queue.html', context)
 
@@ -186,7 +190,16 @@ def close_ticket(request, pk):
 # tichetul la care lucrează inginerul
 @login_required
 def workspace(request):
-    tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active').order_by('date_created')
+    if request.user.is_superuser or request.user.is_admin:
+        # Admins and superusers see all active unresolved tickets
+        tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active').order_by('date_created')
+    elif request.user.is_engineer:
+        # Engineers see only the tickets assigned to them
+        tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active', assigned_to=request.user).order_by('date_created')
+    else:
+        # Other users might not see any tickets, adjust according to your requirements
+        tickets = Ticket.objects.none()
+
     open_tickets = tickets.count()
 
     paginator = Paginator(tickets, 8)  # Show 8 tickets per page
@@ -197,6 +210,7 @@ def workspace(request):
         tickets = paginator.page(1)
     except EmptyPage:
         tickets = paginator.page(paginator.num_pages)
+
     context = {
         'tickets': tickets,
         'open_tickets': open_tickets,
@@ -234,5 +248,4 @@ def delete_ticket(request, pk):
     ticket.delete()
     messages.info(request, "Tichetul dumneavoastră a fost șters cu succes.")
     return redirect('all-tickets')
-
 

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-
+import { format, parseISO, subDays } from 'date-fns';
 import 'react-calendar-heatmap/dist/styles.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import './dashboard.css';
-
-import { subDays } from 'date-fns';
 
 const CalendarHeatmapChart = () => {
     const [heatmapData, setHeatmapData] = useState([]);
@@ -31,7 +29,7 @@ const CalendarHeatmapChart = () => {
 
     return (
         <div className="calendar-heatmap-container">
-            <h3>Harta Termografică a Tichetelor în ultimul an</h3>
+            <h5>Harta Termografică a Tichetelor în ultimul an</h5>
             <CalendarHeatmap
                 startDate={subDays(new Date(), 365)}
                 endDate={new Date()}
@@ -46,7 +44,7 @@ const CalendarHeatmapChart = () => {
                     return {
                         'data-tooltip-id': 'heatmap-tooltip',
                         'data-tooltip-content': value.date
-                            ? `${value.date}: ${value.count} Tichete`
+                            ? `${format(parseISO(value.date), 'dd.MM.yyyy')}: ${value.count} Tichete`
                             : 'Niciun Tichet'
                     };
                 }}
@@ -54,7 +52,7 @@ const CalendarHeatmapChart = () => {
                 monthLabels={monthNames}
                 weekdayLabels={dayNames}
             />
-            <ReactTooltip id="heatmap-tooltip" />
+            <ReactTooltip id="heatmap-tooltip" className="white-tooltip" />
         </div>
     );
 };

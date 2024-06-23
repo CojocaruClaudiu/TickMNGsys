@@ -91,6 +91,17 @@ const TicketChart = () => {
                             tooltip: {
                                 mode: 'index',
                                 intersect: false,
+                                backgroundColor: 'white',
+                                borderColor: '#ccc',
+                                borderWidth: 1,
+                                padding: 10,
+                                cornerRadius: 3,
+                                titleColor: '#333',  // Set the title color here
+                                bodyColor: '#333',   // Set the body color here
+                                titleFont: {
+                                    weight: 400,
+                                    size: 16,          // Set the title font size here
+                                },
                             },
                             legend: {
                                 display: true,

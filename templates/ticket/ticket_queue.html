@@ -140,9 +140,11 @@
               <a href="#" class="btn btn-delete btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-ticket-id="{{ ticket.pk }}" title="Șterge">
                 <i class="bi bi-trash-fill"></i>
               </a>
+              {% if is_admin or superuser%}
               <a href="#" class="btn btn-assign btn-sm" data-bs-toggle="modal" data-bs-target="#assignModal" data-ticket-id="{{ ticket.pk }}" title="Asignează">
                 <i class="bi bi-person-check-fill"></i>
               </a>
+              {% endif %}
             </td>
           </tr>
           {% endfor %}

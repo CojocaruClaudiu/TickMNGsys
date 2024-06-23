@@ -40,20 +40,19 @@ const TicketsProgress = () => {
             <h5>Bara Progres Tichete</h5>
             <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip id="tooltip-pending">{`${data.pending_percentage.toFixed(2)}% În Așteptare`}</Tooltip>}
+                overlay={<Tooltip id="tooltip-pending" className="white-tooltip">{`${data.pending_percentage.toFixed(2)}% În Așteptare`}</Tooltip>}
             >
                 <ProgressBar now={data.pending_percentage} label={`${data.pending_percentage.toFixed(2)}% În Așteptare`} className="progress-bar-pending" />
             </OverlayTrigger>
             <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip id="tooltip-active">{`${data.active_percentage.toFixed(2)}% Active`}</Tooltip>}
+                overlay={<Tooltip id="tooltip-active" className="white-tooltip">{`${data.active_percentage.toFixed(2)}% Deschise`}</Tooltip>}
             >
                 <ProgressBar now={data.active_percentage} label={`${data.active_percentage.toFixed(2)}% Deschise`} className="progress-bar-active" />
             </OverlayTrigger>
-
             <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip id="tooltip-completed">{`${data.completed_percentage.toFixed(2)}% Completed`}</Tooltip>}
+                overlay={<Tooltip id="tooltip-completed" className="white-tooltip">{`${data.completed_percentage.toFixed(2)}% Închise`}</Tooltip>}
             >
                 <ProgressBar now={data.completed_percentage} label={`${data.completed_percentage.toFixed(2)}% Închise`} className="progress-bar-completed" />
             </OverlayTrigger>

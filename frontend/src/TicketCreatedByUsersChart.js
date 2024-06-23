@@ -28,13 +28,13 @@ const TicketsCreatedByUsersChart = () => {
 
 
 
-                                return '#13DEB9';
+                                return '#49beff';
                             }),
                             borderColor: data.map(() => {
 
 
 
-                                return '#13DEB9';
+                                return '#49beff';
                             }),
                             borderWidth: 1,
                             borderRadius: Number.MAX_VALUE,
@@ -75,6 +75,17 @@ const TicketsCreatedByUsersChart = () => {
                             tooltip: {
                                 mode: 'index',
                                 intersect: false,
+                                backgroundColor: 'white',
+                                borderColor: '#ccc',
+                                borderWidth: 1,
+                                padding: 10,
+                                cornerRadius: 3,
+                                titleColor: '#333',  // Set the title color here
+                                bodyColor: '#333',   // Set the body color here
+                                titleFont: {
+                                    weight: 400,
+                                    size: 16,          // Set the title font size here
+                                },
                             },
                             legend: {
                                 display: true,

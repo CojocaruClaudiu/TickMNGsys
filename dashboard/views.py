@@ -65,9 +65,7 @@ def tickets_created(request):
     interval = request.GET.get('interval', '7_days')  # Default to '7_days' if not provided
     end_date = datetime.now().date()
 
-    if interval == '3_days':
-        start_date = end_date - timedelta(days=2)  # Including today
-    elif interval == '7_days':
+    if interval == '7_days':
         start_date = end_date - timedelta(days=6)  # Including today
     elif interval == '1_month':
         start_date = end_date - timedelta(days=29)  # Including today
@@ -127,7 +125,7 @@ def tickets_by_priority(request):
     priority_choices = [
         ('Very Low', 'F. Scăzut'),
         ('Low', 'Scăzut'),
-        ('Medium', 'Mediu'),
+        ('Medium', 'Medie'),
         ('High', 'Ridicat'),
         ('Very High', 'F. Ridicat'),
     ]
@@ -141,21 +139,6 @@ def tickets_by_priority(request):
         })
 
     return JsonResponse(data, safe=False)
-
-
-def ticket_status_trends(request):
-    end_date = timezone.now()
-    start_date = end_date - timedelta(days=30)
-
-    # Sample data with non-zero counts for testing
-    response_data = [
-        {"date_created": "2024-05-28T15:43:27.178Z", "active": 3, "pending": 1, "completed": 0},
-        {"date_created": "2024-06-09T11:31:01.402Z", "active": 2, "pending": 0, "completed": 1},
-        {"date_created": "2024-06-16T10:00:35.027Z", "active": 0, "pending": 1, "completed": 3},
-        # Add more sample data as needed
-    ]
-
-    return JsonResponse(response_data, safe=False)
 
 
 def tickets_assigned_to_users(request):
