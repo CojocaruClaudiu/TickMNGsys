@@ -1,446 +1,450 @@
 
-
 .logo {
-  width: 100px; /* Adjust width as necessary */
-  height: 50px; /* Maintain aspect ratio */
+    width: 100px; /* Adjust width as necessary */
+    height: 50px; /* Maintain aspect ratio */
 }
+
 .profile-image {
-  width: 34px; /* or any size you want */
-  height: 34px; /* should be the same as width to form a perfect circle */
-  border-radius: 50%;
-  object-fit: cover; /* This keeps the aspect ratio and covers the area */
+    width: 34px; /* or any size you want */
+    height: 34px; /* should be the same as width to form a perfect circle */
+    border-radius: 50%;
+    object-fit: cover; /* This keeps the aspect ratio and covers the area */
 }
 
 /* Cards styling */
 .card {
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-  border: none; /* Remove borders */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    border: none; /* Remove borders */
 }
 
 .card-body {
-  padding: 20px; /* Consistent padding */
-  font-size: 16px; /* Larger font for visibility */
+    padding: 20px; /* Consistent padding */
+    font-size: 16px; /* Larger font for visibility */
 }
 
 .card-number {
-  font-size: 28px; /* Larger number font */
-  font-weight: bold; /* Bold for numbers */
+    font-size: 28px; /* Larger number font */
+    font-weight: bold; /* Bold for numbers */
 }
 
 /* Table styling */
 .table {
-  border-collapse: separate;
-  border-spacing: 0 15px; /* Space between rows */
-  width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px; /* Space between rows */
+    width: 100%;
 }
 
 .table thead th {
-  color: #475060; /* Dark grey text */
+    color: #475060; /* Dark grey text */
 }
 
 .table td,
 .table th {
-  vertical-align: middle; /* Align cell content */
-  border-top: none; /* Hide top border */
+    vertical-align: middle; /* Align cell content */
+    border-top: none; /* Hide top border */
+
 }
 
 .table td {
-  background-color: white; /* White row backgrounds */
-  border: none;
+    background-color: white; /* White row backgrounds */
+    border: none;
+}
+
+.truncate {
+    max-width: 150px; /* Adjust this value as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.truncate-date {
+    max-width: 170px; /* Adjust this value as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Search input styling */
 #searchInput {
-  background-color: #f8f9fa; /* Light background for input */
-  border: 1px solid #ccc; /* Subtle border */
-  border-radius: 10px; /* Rounded corners */
-  padding: 8px 14px; /* Padding inside search box */
-  width: 260px;
-  height: 36px;
+    background-color: #f8f9fa; /* Light background for input */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 8px 14px; /* Padding inside search box */
+    width: 260px;
+    height: 36px;
 }
-
-
 
 
 /* Badge styling for status */
 .badge {
-  font-size: 0.8rem; /* Smaller font size */
-  padding: 0.5em 0.75em; /* Padding around text */
+    font-size: 0.8rem; /* Smaller font size */
+    padding: 0.5em 0.75em; /* Padding around text */
 }
 
 /* Icons and action buttons */
 .btn {
-  font-size: 0.8rem; /* Smaller button texts */
-  padding: 5px 8px; /* Smaller buttons */
+    font-size: 0.8rem; /* Smaller button texts */
+    padding: 5px 8px; /* Smaller buttons */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .card-body {
-    padding: 15px; /* Smaller padding on smaller screens */
-  }
-  .card-number {
-    font-size: 24px; /* Smaller number font on mobile */
-  }
+    .card-body {
+        padding: 15px; /* Smaller padding on smaller screens */
+    }
+
+    .card-number {
+        font-size: 24px; /* Smaller number font on mobile */
+    }
 }
 
 /* culoare cards */
 
 /* Custom background colors for cards */
 .bg-total-tickets {
-  background-color: #ecf2ff; /* Light blue */
-  color: #5e87ff; /* Dark text color for better readability */
-  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+    background-color: #ecf2ff; /* Light blue */
+    color: #5e87ff; /* Dark text color for better readability */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
 .bg-total-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
+    transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 .bg-pending-tickets {
-  background-color: #fef5e5; /* Light yellow */
-  color: #ffae1f; /* Dark text color for better readability */
-  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+    background-color: #fef5e5; /* Light yellow */
+    color: #ffae1f; /* Dark text color for better readability */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
 .bg-pending-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
+    transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 .bg-open-tickets {
-  background-color: #e6fffa; /* Light teal */
-  color: #13deb9; /* Dark text color for better readability */
-  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+    background-color: #e6fffa; /* Light teal */
+    color: #13deb9; /* Dark text color for better readability */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
 .bg-open-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
+    transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 .bg-closed-tickets {
-  background-color: #fdede8; /* Light coral */
-  color: #fa896b; /* Dark text color for better readability */
-  transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
+    background-color: #fdede8; /* Light coral */
+    color: #fa896b; /* Dark text color for better readability */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for both hover and return, with a slower effect */
 }
 
 .bg-closed-tickets:hover {
-  transform: scale(1.1); /* Increase size by 10% on hover */
+    transform: scale(1.1); /* Increase size by 10% on hover */
 }
 
 /* Applying additional styling for the cards for uniformity */
 /* Specific card styling for ticket stats */
 .ticket-card {
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border: none; /* Remove any default borders */
-  cursor: pointer;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border: none; /* Remove any default borders */
+    cursor: pointer;
 }
 
 .ticket-card-body {
-  padding: 20px; /* Consistent padding within the card */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100px; /* Setting a fixed height for uniformity */
+    padding: 20px; /* Consistent padding within the card */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Setting a fixed height for uniformity */
 }
 
 .ticket-card-title {
-  margin-top: 5px; /* Slight space between number and title */
-  font-size: 1rem; /* Suitable font size for titles */
+    margin-top: 5px; /* Slight space between number and title */
+    font-size: 1rem; /* Suitable font size for titles */
 }
 
 .ticket-card-number {
-  font-weight: bold; /* Bold for the number to stand out */
-  font-size: 1.5rem; /* Larger font size for visibility */
+    font-weight: bold; /* Bold for the number to stand out */
+    font-size: 1.5rem; /* Larger font size for visibility */
 }
-
-
-
-
-
-
 
 
 /* Custom badge styles */
 .badge {
-  display: inline-block;
-  padding: 0.5em 0.9em;
-  font-size: 0.9em;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 1em; /* Rounded corners for pill effect */
-  color: #fff; /* White text */
-  box-shadow: 0 1px 1px rgba(0,0,0,0.075); /* Soft shadow for depth */
-  border: none; /* Remove any borders */
+    display: inline-block;
+    padding: 0.5em 0.9em;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 1em; /* Rounded corners for pill effect */
+    color: #fff; /* White text */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); /* Soft shadow for depth */
+    border: none; /* Remove any borders */
 }
 
 /* Colors for each status */
 .badge-closed {
-  background-color: #fdede8; /* Light coral */
-  color: #721c24; /* Dark text for contrast */
+    background-color: #fdede8; /* Light coral */
+    color: #721c24; /* Dark text for contrast */
 }
 
 .badge-pending {
-  background-color: #fef5e5; /* Light yellow */
-  color: #856404; /* Dark text for contrast */
+    background-color: #fef5e5; /* Light yellow */
+    color: #856404; /* Dark text for contrast */
 }
 
 .badge-open {
-  background-color: #e6fffa; /* Light teal */
-  color: #155724; /* Dark text for contrast */
+    background-color: #e6fffa; /* Light teal */
+    color: #155724; /* Dark text for contrast */
 }
-
 
 
 /* Priority Badge Styles */
 .badge-very-low {
-  background-color: #d4edda; /* Light green for 'Very Low', which is less urgent */
-  color: #155724; /* Dark green text for contrast */
+    background-color: #d4edda; /* Light green for 'Very Low', which is less urgent */
+    color: #155724; /* Dark green text for contrast */
 }
 
 .badge-low {
-  background-color: #f0f4c3; /* Lighter green for 'Low' */
-  color: #666; /* Dark gray text for contrast */
+    background-color: #f0f4c3; /* Lighter green for 'Low' */
+    color: #666; /* Dark gray text for contrast */
 }
 
 .badge-medium {
-  background-color: #fff3cd; /* Light yellow for 'Medium' */
-  color: #856404; /* Dark yellow text for contrast */
+    background-color: #fff3cd; /* Light yellow for 'Medium' */
+    color: #856404; /* Dark yellow text for contrast */
 }
 
 .badge-high {
-  background-color: #f9e0a2; /* Light orange for 'High' */
-  color: #994f00; /* Dark orange text for contrast */
+    background-color: #f9e0a2; /* Light orange for 'High' */
+    color: #994f00; /* Dark orange text for contrast */
 }
 
 .badge-very-high {
-  background-color: #f8d7da; /* Light red for 'Very High', which is most urgent */
-  color: #721c24; /* Dark red text for contrast */
+    background-color: #f8d7da; /* Light red for 'Very High', which is most urgent */
+    color: #721c24; /* Dark red text for contrast */
 }
 
 /* pagination */
 /* Container to center pagination */
 .pagination-container {
-  display: flex;
-  justify-content: center; /* Centers pagination in the middle of the container */
-  margin-top: 20px; /* Space above the pagination */
+    display: flex;
+    justify-content: center; /* Centers pagination in the middle of the container */
+    margin-top: 20px; /* Space above the pagination */
 }
 
 .pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
+    display: flex;
+    list-style: none;
+    padding: 0;
 }
 
 .pagination .page-item .page-link {
-  color: #007bff; /* Blue color for links */
-  background-color: #fff; /* White background for non-active links */
-  border: none; /* Remove border for non-active links */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  padding: 5px 10px; /* Padding for non-active links */
-  margin: 0 5px; /* Space between buttons */
-  border-radius: 5px; /* Slightly rounded corners for non-active links */
+    color: #007bff; /* Blue color for links */
+    background-color: #fff; /* White background for non-active links */
+    border: none; /* Remove border for non-active links */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 5px 10px; /* Padding for non-active links */
+    margin: 0 5px; /* Space between buttons */
+    border-radius: 5px; /* Slightly rounded corners for non-active links */
 }
 
 .pagination .page-item.active .page-link {
-  width: 36px; /* Width and height are the same for a circle */
-  height: 36px; /* Ensures the element is as wide as it is high */
-  line-height: 36px; /* Centers the text vertically */
-  padding: 0; /* Removes padding to use width/height for size */
-  margin: 0 5px; /* Space between buttons */
-  border-radius: 50%; /* Fully rounded corners for a circle */
-  background-color: #5d87ff; /* Active link background color */
-  color: white;
-  border: none; /* Remove border for active link */
+    width: 36px; /* Width and height are the same for a circle */
+    height: 36px; /* Ensures the element is as wide as it is high */
+    line-height: 36px; /* Centers the text vertically */
+    padding: 0; /* Removes padding to use width/height for size */
+    margin: 0 5px; /* Space between buttons */
+    border-radius: 50%; /* Fully rounded corners for a circle */
+    background-color: #5d87ff; /* Active link background color */
+    color: white;
+    border: none; /* Remove border for active link */
 }
 
 .pagination .page-item.disabled .page-link {
-  color: #ccc;
-  pointer-events: none;
+    color: #ccc;
+    pointer-events: none;
 }
 
 .pagination .page-item .page-link:hover {
-  background-color: #e9ecef; /* Light gray on hover */
-  color: #007bff; /* Blue color for links on hover */
-  border-radius: 50%; /* Slightly rounded corners on hover */
+    background-color: #e9ecef; /* Light gray on hover */
+    color: #007bff; /* Blue color for links on hover */
+    border-radius: 50%; /* Slightly rounded corners on hover */
 }
 
 
-
 /* Action buttons */
 
 /* Action buttons */
-.btn-view, .btn-edit, .btn-delete , .btn-accept, .btn-assign {
-  background: none; /* Remove background */
-  color: #5e5f60; /* Black icon color */
-  border: none; /* Remove border */
-  padding: 0; /* Remove padding */
-  margin: 0 5px; /* Space between buttons */
-  font-size: 18px; /* Increase icon size if needed */
+.btn-view, .btn-edit, .btn-delete, .btn-accept, .btn-assign {
+    background: none; /* Remove background */
+    color: #5e5f60; /* Black icon color */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    margin: 0 5px; /* Space between buttons */
+    font-size: 18px; /* Increase icon size if needed */
 }
 
 .btn-view:hover, .btn-edit:hover, .btn-delete:hover, .btn-accept:hover, .btn-assign:hover {
-  color: lightgray; /* Change color on hover */
+    color: lightgray; /* Change color on hover */
 
 }
 
 /* Ensure icons are centered vertically */
 .btn i {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 .content-box {
-  border: 1px solid #ddd; /* Border color */
-  border-radius: 10px; /* Rounded corners */
-  padding: 20px; /* Padding inside the box */
-  background-color: #fff; /* White background */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border: 1px solid #ddd; /* Border color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the box */
+    background-color: #fff; /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Header box */
 
 .header-box {
-  height: 115px;
-  box-sizing: border-box;
-  display: flex;
-  flex-flow:wrap;
-  width: 100%;
-  background-color: rgb(236, 242,255);
-  border-radius: 12px;
-  padding: 30px 25px 20px;
-  margin-bottom: 30px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    height: 115px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+    background-color: rgb(236, 242, 255);
+    border-radius: 12px;
+    padding: 30px 25px 20px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 
 }
 
 .header-content {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .header-title {
-  margin: 0; /* Remove default margin */
-  font-size: 24px; /* Font size for the title */
-  font-weight: bold; /* Bold font */
-  color: #333; /* Dark color for the title */
+    margin: 0; /* Remove default margin */
+    font-size: 24px; /* Font size for the title */
+    font-weight: bold; /* Bold font */
+    color: #333; /* Dark color for the title */
 }
 
 .breadcrumb {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  background: none; /* Remove background */
-  list-style: none; /* Remove list style */
-  display: flex;
-  align-items: center;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background: none; /* Remove background */
+    list-style: none; /* Remove list style */
+    display: flex;
+    align-items: center;
 }
 
 .breadcrumb-item {
-  color: #007bff; /* Blue color for links */
-  text-decoration: none; /* Remove underline */
-  margin-right: 5px; /* Space between items */
+    color: #007bff; /* Blue color for links */
+    text-decoration: none; /* Remove underline */
+    margin-right: 5px; /* Space between items */
 }
 
 .breadcrumb-item.active {
-  color: #333; /* Dark color for active item */
+    color: #333; /* Dark color for active item */
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-  content: '•'; /* Bullet separator */
-  margin: 0 5px; /* Space around the separator */
-  color: #333; /* Dark color for the separator */
+    content: '•'; /* Bullet separator */
+    margin: 0 5px; /* Space around the separator */
+    color: #333; /* Dark color for the separator */
 }
 
 
-
 .breadcrumb img.breadcrumb-icon {
-  position: absolute;
-  margin-top: 15px;
-  margin-left: 1055px; /* Adjust spacing as needed */
-  width: 165px; /* Set desired width */
-  height: 165px; /* Set desired height */
-  object-fit: contain; /* Ensure the image maintains its aspect ratio */
-  border-radius: 5px; /* Optional: if you want rounded corners */
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 1055px; /* Adjust spacing as needed */
+    width: 165px; /* Set desired width */
+    height: 165px; /* Set desired height */
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+    border-radius: 5px; /* Optional: if you want rounded corners */
 
 }
 
 
 /* lines table */
 #ticketTable tbody tr {
-  border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
 }
 
 /* Optionally, remove the border for the last row if not needed */
 
 /* Additional styling for table to match the provided design */
 .table {
-  border-collapse: separate;
-  border-spacing: 0 0.5em;
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
 }
 
 .table-hover tbody tr:hover {
-  background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
 /* Add some padding for table cells */
 .table td, .table th {
-  padding: 16px;
-  vertical-align: middle;
+    padding: 16px;
+    vertical-align: middle;
 }
 
 /* Profile image styling */
 .profile-image {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-  vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .assigned-username {
-  vertical-align: middle;
-  color: #475060;
-  font-weight: 500;
+    vertical-align: middle;
+    color: #475060;
+    font-weight: 500;
 }
 
 /*jeg*/
 /* Navbar styles */
 .navbar {
-  background-color: #FAFAFC;
-  padding: 0.75rem 1rem;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: #FAFAFC;
+    padding: 0.75rem 1rem;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
 .navbar .navbar-brand {
-  font-size: 1.5rem;
-  color: #333;
+    font-size: 1.5rem;
+    color: #333;
 }
 
 .navbar .navbar-nav .nav-link {
-  color: #555;
-  padding: 0.5rem 1rem;
+    color: #555;
+    padding: 0.5rem 1rem;
 }
 
 .navbar .navbar-nav .nav-link.active {
-  color: #007bff;
+    color: #007bff;
 }
 
 .navbar .profile-image {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 
 /* Content styles */
@@ -448,165 +452,145 @@
 
 .header-title {
 
-  font-weight: 600;
-  color: #2A3547;
+    font-weight: 600;
+    color: #2A3547;
 }
 
 
 /* Table styles */
 .table-hover tbody tr:hover {
-  background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 
 .table thead th {
-  font-weight: bold;
-  color: #555;
+    font-weight: bold;
+    color: #555;
 }
 
 .pagination-container {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
 }
 
 .page-item.active .page-link {
-  background-color: #007bff;
-  border-color: #007bff;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
 .page-link {
-  color: #007bff;
+    color: #007bff;
 }
-/* create ticket */
 
+/* create ticket */
 
 
 /* Button styles */
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .btn-delete-ticket {
-  background-color: #dc3545;
-  border-color: #dc3545;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
-
 
 
 .btn-primary:hover {
-  background-color: #0056b3;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #0056b3;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-delete:hover {
-  background-color: #c82333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #c82333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Input field styles */
 .form-control {
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  font-size: 16px;
-  color: #495057;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+    color: #495057;
 }
 
 .form-control:focus {
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* Form select styles */
 .form-select {
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  font-size: 16px;
-  color: #495057;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+    color: #495057;
 
 }
 
 .form-select:focus {
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* Card styles */
 .card {
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: none;
 }
 
 .card-body {
-  padding: 20px;
-  font-size: 16px;
+    padding: 20px;
+    font-size: 16px;
 }
-
-
-
 
 
 .btn-primary {
-  background-color: #5d87ff;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: #5d87ff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .btn-primary:hover {
-  background-color: #4570ea;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #4570ea;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary:focus {
-  background-color: #7d9bf0;
-  box-shadow: none;
+    background-color: #7d9bf0;
+    box-shadow: none;
 }
-
 
 
 .ticket-status-active {
-  background-color: #d4edda;
+    background-color: #d4edda;
 }
 
 .ticket-status-pending {
-  background-color: #fff3cd;
+    background-color: #fff3cd;
 }
 
 .ticket-status-completed {
-  background-color: #f8d7da;
+    background-color: #f8d7da;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .stats, .charts, .breakdown {
@@ -651,15 +635,56 @@ canvas {
 }
 
 
-
 /* font */
 
 
 body {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
+
 /* spinner */
 
+.filter-header {
+    display: flex;
+    margin-right: 5px;
+    align-items: center;
+}
+
+.filter-arrow {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.filter-input {
+    display: none;
+    margin-top: 5px;
+}
+
+.filter-arrow {
+    cursor: pointer;
+}
+
+.btn-filter {
+    background-color: #5d87ff;
+!important;
+    max-height: 24px;
+    color: white;
+    border: none;
+
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-filter:hover {
+    background-color: #ff0000;
+}
+
+.btn-filter:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}

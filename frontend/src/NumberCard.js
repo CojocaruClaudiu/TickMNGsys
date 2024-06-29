@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './dashboard.css';
 
-const NumberCard = ({ title, fetchUrl, cardType }) => {
+const NumberCard = ({title, fetchUrl, cardType}) => {
     const [number, setNumber] = useState(0);
 
     useEffect(() => {

@@ -22,28 +22,47 @@ def dashboard(request):
 
 
 def ticket_data(request):
-    # Query for total, pending, and active tickets by created date
-    tickets_by_creation_date = Ticket.objects.extra(select={'date': 'DATE(date_created)'}).values('date').annotate(
+    interval = int(request.GET.get('interval', 30))  # Default to 30 days if no interval is provided
+    end_date = datetime.today()
+    start_date = end_date - timedelta(days=interval)
+
+    # Query for total and active tickets by created date within the interval
+    tickets_by_creation_date = Ticket.objects.extra(select={'date_created': 'DATE(date_created)'}).values('date_created').annotate(
         total_count=Count('id'),
         active_count=Count('id', filter=Q(ticket_status='Active'))
-    ).order_by('date')
+    ).filter(date_created__range=[start_date, end_date]).order_by('date_created')
 
-    # Query for completed tickets by closed date
+    # Query for completed tickets by closed date within the interval
     tickets_by_closed_date = Ticket.objects.extra(select={'closed_date': 'DATE(closed_date)'}).values(
         'closed_date').annotate(
         completed_count=Count('id', filter=Q(ticket_status='Completed'))
-    ).order_by('closed_date')
+    ).filter(closed_date__range=[start_date, end_date]).order_by('closed_date')
 
-    # Preparing data
+    # Extract and filter out None dates
+    creation_dates = [ticket['date_created'] for ticket in tickets_by_creation_date if ticket['date_created']]
+    closed_dates = [ticket['closed_date'] for ticket in tickets_by_closed_date if ticket['closed_date']]
+
+    # Combine all dates
+    all_dates = sorted(set(creation_dates + closed_dates))
+
+    # Initialize data dictionary
     data = {
-        "dates": [ticket['date'] for ticket in tickets_by_creation_date],
-        "total_counts": [ticket['total_count'] for ticket in tickets_by_creation_date],
-        "active_counts": [ticket['active_count'] for ticket in tickets_by_creation_date],
+        "dates": all_dates,
+        "total_counts": [],
+        "active_counts": [],
+        "completed_counts": []
     }
 
-    # Adding completed counts by matching dates
-    completed_counts_dict = {ticket['closed_date']: ticket['completed_count'] for ticket in tickets_by_closed_date}
-    data["completed_counts"] = [completed_counts_dict.get(date, 0) for date in data["dates"]]
+    # Populate total_counts and active_counts
+    creation_dict = {ticket['date_created']: ticket for ticket in tickets_by_creation_date}
+    for date in all_dates:
+        data["total_counts"].append(creation_dict.get(date, {}).get('total_count', 0))
+        data["active_counts"].append(creation_dict.get(date, {}).get('active_count', 0))
+
+    # Populate completed_counts
+    completed_dict = {ticket['closed_date']: ticket for ticket in tickets_by_closed_date}
+    for date in all_dates:
+        data["completed_counts"].append(completed_dict.get(date, {}).get('completed_count', 0))
 
     return JsonResponse(data)
 

@@ -2,156 +2,257 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="header-box">
-    <div class="header-content">
-      <h1 class="header-title">Aplicație de Tichete</h1>
-      <nav class="breadcrumb">
-        <a href="{% url 'home' %}" class="breadcrumb-item">Acasă</a> 
-        <span class="breadcrumb-item active">Tichete Închise</span>
-        <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
-      </nav>
-    </div>
-  </div>
+    <div class="container mt-5">
+        <div class="header-box">
+            <div class="header-content">
+                <h1 class="header-title">Aplicație de Tichete</h1>
+                <nav class="breadcrumb">
+                    <a href="{% url 'home' %}" class="breadcrumb-item">Acasă</a>
+                    <span class="breadcrumb-item active">Tichete Închise</span>
+                    <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
+                </nav>
+            </div>
+        </div>
 
-  <div class="content-box">
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Confirmă Ștergerea</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Închide"></button>
-          </div>
-          <div class="modal-body">Ești sigur că vrei să ștergi acest tichet?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
-            <form method="post" id="deleteForm">
-              {% csrf_token %}
-              <input type="hidden" name="ticket_id" id="deleteTicketId">
-              <button type="submit" class="btn btn-danger">Șterge</button>
+        <div class="content-box">
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirmă Ștergerea</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Închide"></button>
+                        </div>
+                        <div class="modal-body">Ești sigur că vrei să ștergi acest tichet?</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+                            <form method="post" id="deleteForm">
+                                {% csrf_token %}
+                                <input type="hidden" name="ticket_id" id="deleteTicketId">
+                                <button type="submit" class="btn btn-danger">Șterge</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+                <div class="card text-center bg-closed-tickets ticket-card"
+                     onclick="window.location.href='?status=Completed'">
+                    <div class="card-body ticket-card-body">
+                        <p class="card-number ticket-card-number mb-0">{{ closed_tickets }}</p>
+                        <h5 class="card-title ticket-card-title mt-0">Tichete Închise</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-end mb-3">
+                <form method="get" action="{% url 'all-closed-tickets' %}">
+                    <label for="searchInput" class="sr-only">Caută</label>
+                    <input type="text" id="searchInput" name="search" placeholder="Caută după titlu.."
+                           class="form-control search-bar-small" value="{{ request.GET.search }}">
+                </form>
+            </div>
+
+            <form method="get" action="{% url 'all-closed-tickets' %}">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="ticketTable">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col"><i class="bi bi-hash"></i> ID Tichet</th>
+                            <th scope="col"><i class="bi bi-file-earmark-text"></i> Titlu</th>
+                            <th scope="col">
+                                <div class="filter-header">
+                                    <i class="bi bi-calendar"></i> Închis la
+                                    <div class="dropdown">
+                                        <i class="bi bi-caret-down-fill filter-arrow" id="dropdownClosedDate"
+                                           data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownClosedDate">
+                                            <li>
+                                                <label for="filterClosedDate">Closed Date:</label>
+                                                <input type="date" name="closed_date" id="filterClosedDate"
+                                                       class="dropdown-item">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="filter-header">
+                                    <i class="bi bi-person"></i> Atribuit către
+                                    <div class="dropdown">
+                                        <i class="bi bi-caret-down-fill filter-arrow" id="dropdownAssignedTo"
+                                           data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownAssignedTo">
+                                            <li>
+                                                <label for="filterAssignedTo"></label><input type="text"
+                                                                                             name="assigned_to"
+                                                                                             id="filterAssignedTo"
+                                                                                             class="dropdown-item"
+                                                                                             placeholder="Filtrează după atribuire">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="filter-header">
+                                    <i class="bi bi-exclamation-triangle"></i> Prioritate
+                                    <div class="dropdown">
+                                        <i class="bi bi-caret-down-fill filter-arrow" id="dropdownPriority"
+                                           data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownPriority">
+                                            <li>
+                                                <label for="filterPriority"></label><select name="priority"
+                                                                                            id="filterPriority"
+                                                                                            class="dropdown-item">
+                                                <option value="">Toate</option>
+                                                <option value="Very Low">Foarte Scăzută</option>
+                                                <option value="Low">Scăzută</option>
+                                                <option value="Medium">Medie</option>
+                                                <option value="High">Ridicată</option>
+                                                <option value="Very High">Foarte Ridicată</option>
+                                            </select>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="filter-header">
+                                    <i class="bi bi-tags"></i> Categorie
+                                    <div class="dropdown">
+                                        <i class="bi bi-caret-down-fill filter-arrow" id="dropdownCategory"
+                                           data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                                            <li>
+                                                <label for="filterCategory"></label><select name="category"
+                                                                                            id="filterCategory"
+                                                                                            class="dropdown-item">
+                                                <option value="">Toate</option>
+                                                <option value="Bug">Bug</option>
+                                                <option value="Feature Request">Cerere Funcționalitate</option>
+                                                <option value="Customer Support">Suport Client</option>
+                                                <option value="Sales">Vânzări</option>
+                                                <option value="Feedback">Feedback</option>
+                                                <option value="Other">Altele</option>
+                                            </select>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="filter-header">
+                                    <i class="bi bi-clipboard-data"></i> Stare
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div id="actionIcon" class="action-icon">
+                                    <i class="bi bi-gear"></i> Acțiune
+                                </div>
+                                <div id="filterButton" class="filter-button" style="display: none;">
+                                    <button type="submit" class="btn btn-filter">Filtrează</button>
+                                </div>
+                            </th>
+
+                        </thead>
+                        <tbody>
+                        {% for ticket in tickets %}
+                            <tr class="ticket-row" data-status="{{ ticket.ticket_status|lower }}">
+                                <td><small>{{ ticket.id }}</small></td>
+                                <td class="truncate"><small>{{ ticket.title }}</small></td>
+                                <td><small>{{ ticket.closed_date }}</small></td>
+                                <td>
+                                    {% if ticket.assigned_to %}
+                                        <img src="{{ ticket.assigned_to.profile_image.url }}"
+                                             alt="Imagine de Profil {{ ticket.assigned_to.username }}"
+                                             class="profile-image">
+                                        <span class="assigned-username">{{ ticket.assigned_to.username }}</span>
+                                    {% else %}
+                                        <small>Neatribuit</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if ticket.priority == 'Very Low' %}
+                                        <span class="badge badge-very-low">Foarte Scăzută</span>
+                                    {% elif ticket.priority == 'Low' %}
+                                        <span class="badge badge-low">Scăzută</span>
+                                    {% elif ticket.priority == 'Medium' %}
+                                        <span class="badge badge-medium">Medie</span>
+                                    {% elif ticket.priority == 'High' %}
+                                        <span class="badge badge-high">Ridicată</span>
+                                    {% elif ticket.priority == 'Very High' %}
+                                        <span class="badge badge-very-high">Foarte Ridicată</span>
+                                    {% endif %}
+                                </td>
+                                <td><small>{{ ticket.get_category_display }}</small></td>
+                                <td>
+                                    {% if ticket.ticket_status == 'Active' %}
+                                        <span class="badge badge-open">Deschis</span>
+                                    {% elif ticket.ticket_status == 'Pending' %}
+                                        <span class="badge badge-pending">În așteptare</span>
+                                    {% elif ticket.ticket_status == 'Completed' %}
+                                        <span class="badge badge-closed">Închis</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'ticket-details' ticket.pk %}" class="btn btn-view btn-sm"
+                                       title="Detalii">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                    <span class="btn btn-edit btn-sm disabled" title="Editează">
+                                        <i class="bi bi-pencil-fill text-muted"></i>
+                                        </span>
+                                    <a href="#" class="btn btn-delete btn-sm" data-bs-toggle="modal"
+                                       data-bs-target="#deleteModal" data-ticket-id="{{ ticket.pk }}"
+                                       title="Șterge">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </form>
-          </div>
+
+            <div class="pagination-container">
+                <nav aria-label="Navigare pagină exemplu">
+                    <ul class="pagination">
+                        {% if tickets.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page=
+                                    {{ tickets.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.date %}&date={{ request.GET.date }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">‹</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">‹</span></li>
+                        {% endif %}
+
+                        {% for num in tickets.paginator.page_range %}
+                            {% if num > tickets.number|add:'-4' and num < tickets.number|add:'4' %}
+                                {% if tickets.number == num %}
+                                    <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page=
+                                            {{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.date %}&date={{ request.GET.date }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if tickets.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page=
+                                    {{ tickets.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.date %}&date={{ request.GET.date }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">›</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">›</span></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
         </div>
-      </div>
     </div>
 
-    <div class="col-md-12 mb-4">
-      <div class="card text-center bg-closed-tickets ticket-card" onclick="window.location.href='?status=completed'">
-        <div class="card-body ticket-card-body">
-          <p class="card-number ticket-card-number mb-0">{{ closed_tickets }}</p>
-          <h5 class="card-title ticket-card-title mt-0">Tichete Închise</h5>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12 d-flex justify-content-end mb-3">
-        <label for="searchInput" class="sr-only">Caută</label>
-        <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Caută după titlu.." class="form-control search-bar-small" />
-      </div>
-
-      <div class="table-responsive">
-        <table class="table table-hover" id="ticketTable">
-          <thead class="thead-light">
-            <tr>
-            <th scope="col"><i class="bi bi-hash"></i> ID Tichet</th>
-            <th scope="col"><i class="bi bi-file-earmark-text"></i> Titlu</th>
-            <th scope="col"><i class="bi bi-calendar"></i> Închis la</th>
-            <th scope="col"><i class="bi bi-person"></i> Atribuit către</th>
-            <th scope="col"><i class="bi bi-exclamation-triangle"></i> Prioritate</th>
-            <th scope="col"><i class="bi bi-tags"></i> Categorie</th>
-             <th scope="col"><i class="bi bi-clipboard-data"></i> Stare</th>
-             <th scope="col"><i class="bi bi-gear"></i> Acțiune</th>
-             
-          </thead>
-          <tbody>
-            {% for ticket in tickets %}
-            <tr class="ticket-row" data-status="{{ ticket.ticket_status|lower }}">
-              <td><small>{{ ticket.id }}</small></td>
-              <td><small>{{ ticket.title }}</small></td>
-              <td><small>{{ ticket.closed_date }}</small></td>
-              <td>
-                {% if ticket.assigned_to %}
-                <img src="{{ ticket.assigned_to.profile_image.url }}" alt="Imagine de Profil {{ ticket.assigned_to.username }}" class="profile-image">
-                <span class="assigned-username">{{ ticket.assigned_to.username }}</span>
-                {% else %}
-                <small>Neatribuit</small>
-                {% endif %}
-              </td>
-              <td>
-                {% if ticket.priority == 'Very Low' %}
-                <span class="badge badge-very-low">Foarte Scăzută</span>
-                {% elif ticket.priority == 'Low' %}
-                <span class="badge badge-low">Scăzută</span>
-                {% elif ticket.priority == 'Medium' %}
-                <span class="badge badge-medium">Medie</span>
-                {% elif ticket.priority == 'High' %}
-                <span class="badge badge-high">Ridicată</span>
-                {% elif ticket.priority == 'Very High' %}
-                <span class="badge badge-very-high">Foarte Ridicată</span>
-                {% endif %}
-              </td>
-              <td><small>{{ ticket.get_category_display }}</small></td>
-              <td>
-                {% if ticket.ticket_status == 'Active' %}
-                <span class="badge badge-open">Deschis</span>
-                {% elif ticket.ticket_status == 'Pending' %}
-                <span class="badge badge-pending">În așteptare</span>
-                {% elif ticket.ticket_status == 'Completed' %}
-                <span class="badge badge-closed">Închis</span>
-                {% endif %}
-              </td>
-              <td>
-                <a href="{% url 'ticket-details' ticket.pk %}" class="btn btn-view btn-sm" title="Detalii">
-                  <i class="bi bi-eye-fill"></i>
-                </a>
-                {% if ticket.ticket_status == 'Completed' %}
-                  <span class="btn btn-edit btn-sm disabled" title="Editează">
-                    <i class="bi bi-pencil-fill text-muted"></i>
-                  </span>
-                {% else %}
-                  <a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-edit btn-sm" title="Editează">
-                    <i class="bi bi-pencil-fill"></i>
-                  </a>
-                {% endif %}
-                <a href="#" class="btn btn-delete btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-ticket-id="{{ ticket.pk }}" title="Șterge">
-                  <i class="bi bi-trash-fill"></i>
-                </a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-
-        <div class="pagination-container">
-          <nav aria-label="Navigare pagină exemplu">
-            <ul class="pagination">
-              {% if tickets.has_previous %}
-              <li class="page-item"><a class="page-link" href="?page={{ tickets.previous_page_number }}&status={{ status_filter }}">‹</a></li>
-              {% else %}
-              <li class="page-item disabled"><span class="page-link">‹</span></li>
-              {% endif %}
-
-              {% for num in tickets.paginator.page_range %}
-              {% if num > tickets.number|add:'-4' and num < tickets.number|add:'4' %}
-              {% if tickets.number == num %}
-              <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
-              {% else %}
-              <li class="page-item"><a class="page-link" href="?page={{ num }}&status={{ status_filter }}">{{ num }}</a></li>
-              {% endif %}
-              {% endif %}
-              {% endfor %}
-
-              {% if tickets.has_next %}
-              <li class="page-item"><a class="page-link" href="?page={{ tickets.next_page_number }}&status={{ status_filter }}">›</a></li>
-              {% else %}
-              <li class="page-item disabled"><span class="page-link">›</span></li>
-              {% endif %}
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock content %}

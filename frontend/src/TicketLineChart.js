@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import React, {useEffect, useState} from 'react';
+import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine} from 'recharts';
 import './dashboard.css';
 
 const LineChartWithReferenceLines = () => {
@@ -7,8 +7,8 @@ const LineChartWithReferenceLines = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [referenceLines, setReferenceLines] = useState([
-        { date: '2023-05-01', label: 'Milestone 1' },
-        { date: '2023-06-01', label: 'Milestone 2' },
+        {date: '2023-05-01', label: 'Milestone 1'},
+        {date: '2023-06-01', label: 'Milestone 2'},
     ]);
 
     const [lineVisibility, setLineVisibility] = useState({
@@ -58,13 +58,16 @@ const LineChartWithReferenceLines = () => {
 
     const CustomLegend = () => (
         <div className="custom-legend">
-            <span onClick={() => handleLegendClick('customers')} style={{ color: lineVisibility.customers ? '#33c3f0' : '#e6f7ff', cursor: 'pointer' }}>
+            <span onClick={() => handleLegendClick('customers')}
+                  style={{color: lineVisibility.customers ? '#33c3f0' : '#e6f7ff', cursor: 'pointer'}}>
                 <i className="bi bi-people-fill"></i> Clienți
             </span>
-            <span onClick={() => handleLegendClick('engineers')} style={{ color: lineVisibility.engineers ? '#8cc63f' : '#f4f9ec', cursor: 'pointer', marginLeft: 10 }}>
+            <span onClick={() => handleLegendClick('engineers')}
+                  style={{color: lineVisibility.engineers ? '#8cc63f' : '#f4f9ec', cursor: 'pointer', marginLeft: 10}}>
                  <i className="bi bi-tools"></i> Ingineri
             </span>
-            <span onClick={() => handleLegendClick('admins')} style={{ color: lineVisibility.admins ? '#e83e8c' : '#f9e6f7', cursor: 'pointer', marginLeft: 10 }}>
+            <span onClick={() => handleLegendClick('admins')}
+                  style={{color: lineVisibility.admins ? '#e83e8c' : '#f9e6f7', cursor: 'pointer', marginLeft: 10}}>
                 <i className="bi bi-person-badge"></i> Admini
             </span>
         </div>
@@ -85,7 +88,8 @@ const LineChartWithReferenceLines = () => {
                     <h2>Tendinta Tipul de Utilizatori:</h2>
                 </div>
                 <div className="selector">
-                    <select id="time-interval" className="styled-select" value={timeInterval} onChange={handleTimeIntervalChange}>
+                    <select id="time-interval" className="styled-select" value={timeInterval}
+                            onChange={handleTimeIntervalChange}>
                         <option value="7">Ultimele 7 zile</option>
                         <option value="30">Ultimele 30 de zile</option>
                         <option value="90">Ultimele 90 de zile</option>
@@ -94,7 +98,7 @@ const LineChartWithReferenceLines = () => {
                     </select>
                 </div>
             </div>
-            <CustomLegend />
+            <CustomLegend/>
             <div className="chart-container">
                 <ResponsiveContainer width="100%" height={400}>
                     <LineChart data={chartData} margin={{top: 20, right: 30, left: 0, bottom: 0}}>

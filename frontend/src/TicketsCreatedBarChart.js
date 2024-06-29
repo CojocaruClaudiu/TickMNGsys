@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, YAxis } from 'recharts';
+import React, {useEffect, useState} from 'react';
+import {BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, YAxis} from 'recharts';
 import './dashboard.css';
 
 const TicketsCreatedBarChart = () => {
@@ -52,7 +52,7 @@ const TicketsCreatedBarChart = () => {
         return <div className="loader">Se încarcă...</div>;
     }
 
-    const CustomTooltip = ({ active, payload, label }) => {
+    const CustomTooltip = ({active, payload, label}) => {
         if (active && payload && payload.length) {
             return (
                 <div className="custom-tooltip">
@@ -73,7 +73,8 @@ const TicketsCreatedBarChart = () => {
                     <span className="total-tichete">Tichete Create în:</span>
                 </div>
                 <div className="selector">
-                    <select id="time-interval" className="styled-select" value={timeInterval} onChange={handleTimeIntervalChange}>
+                    <select id="time-interval" className="styled-select" value={timeInterval}
+                            onChange={handleTimeIntervalChange}>
                         <option value="7_days">Ultimele 7 zile</option>
                         <option value="1_month">Ultimele 30 de zile</option>
                         <option value="3_month">Ultimele 90 de zile</option>
@@ -82,13 +83,13 @@ const TicketsCreatedBarChart = () => {
                     </select>
                 </div>
             </div>
-            <div className="chart-container" style={{ height: '300px' }}>
+            <div className="chart-container" style={{height: '300px'}}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <XAxis dataKey="day" />
-                        <YAxis />
-                        <Tooltip content={<CustomTooltip />} />
+                        <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+                        <XAxis dataKey="day"/>
+                        <YAxis/>
+                        <Tooltip content={<CustomTooltip/>}/>
                         <Bar
                             dataKey="tickets"
                             fill="#8884d8"
@@ -98,7 +99,7 @@ const TicketsCreatedBarChart = () => {
                             onMouseLeave={handleMouseLeave}
                         >
                             {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#5e87ff' : '#49beff'} />
+                                <Cell key={`cell-${index}`} fill={index === activeIndex ? '#5e87ff' : '#49beff'}/>
                             ))}
                         </Bar>
                     </BarChart>

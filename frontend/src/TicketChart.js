@@ -7,12 +7,14 @@ const TicketChart = () => {
     const [chartData, setChartData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [timeInterval, setTimeInterval] = useState(30); // Default to the last 30 days
 
-    useEffect(() => {
-        fetch('/api/ticket_data/')
+    const fetchData = (interval) => {
+        setLoading(true);
+        fetch(`/api/ticket_data/?interval=${interval}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Răspunsul rețelei nu a fost ok');
+                    throw new Error('Network response was not ok');
                 }
                 return response.json();
             })
@@ -59,7 +61,6 @@ const TicketChart = () => {
                             pointHoverBackgroundColor: '#13deb9',
                             pointHoverBorderColor: '#e6fffa',
                         },
-
                     ]
                 });
                 setLoading(false);
@@ -68,7 +69,15 @@ const TicketChart = () => {
                 setError(error);
                 setLoading(false);
             });
-    }, []);
+    };
+
+    useEffect(() => {
+        fetchData(timeInterval);
+    }, [timeInterval]);
+
+    const handleTimeIntervalChange = (event) => {
+        setTimeInterval(event.target.value);
+    };
 
     if (loading) {
         return <div className="loader">Încărcare...</div>;
@@ -80,7 +89,21 @@ const TicketChart = () => {
 
     return (
         <div className="full-width-chart">
-            <h3>Statusul Tichetelor în ultima lună:</h3>
+            <div className="header">
+                <div className="header-left">
+                    <h2>Evoluția Tichetelor</h2>
+                </div>
+                <div className="selector">
+                    <select id="time-interval" className="styled-select" value={timeInterval}
+                            onChange={handleTimeIntervalChange}>
+                        <option value="7">Ultimele 7 zile</option>
+                        <option value="30">Ultimele 30 de zile</option>
+                        <option value="90">Ultimele 90 de zile</option>
+                        <option value="180">Ultimele 6 luni</option>
+                        <option value="365">Ultimul an</option>
+                    </select>
+                </div>
+            </div>
             <div className="chart-container">
                 <Line
                     data={chartData}
@@ -96,11 +119,11 @@ const TicketChart = () => {
                                 borderWidth: 1,
                                 padding: 10,
                                 cornerRadius: 3,
-                                titleColor: '#333',  // Set the title color here
-                                bodyColor: '#333',   // Set the body color here
+                                titleColor: '#333',
+                                bodyColor: '#333',
                                 titleFont: {
                                     weight: 400,
-                                    size: 16,          // Set the title font size here
+                                    size: 16,
                                 },
                             },
                             legend: {

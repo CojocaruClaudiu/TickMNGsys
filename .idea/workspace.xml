@@ -5,8 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7d82676-ac10-4ef5-bb08-847e32032d80" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/20230416_131120.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/20230416_131120_NfYxotq.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/20230416_131120_d7o1ifD.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/20230416_131120_fOAs3H1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/20230416_131120_tXZhR2f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/20240402_163526.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/IMG-20231210-WA0010.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/IMG-20231210-WA0010_JXH7VFW.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/IMG-20231210-WA0010_JcQDZMR.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_0nqdPxY.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_FAu3lLx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_PId00Vg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_Qy6Lu4q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_TNGLkdk.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_ZeLGSBN.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_ayo1eAt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_buUjL4n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_c4BBq7n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_mYVbXij.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_ps7q3il.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_qvZl184.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_qvZl184_ciREo4F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_wnTeU8n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2021-11-01_143543_xck5kwg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Screenshot_2023-08-17_213321.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/Tick_MNGsys_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/WhatsApp_Image_2024-04-09_at_20.25.29_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/logo.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/logo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/profile_images/logo_4f8AEfS.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/all_closed_tickets.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/all_closed_tickets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/all_tickets.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/all_tickets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/create_ticket.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/create_ticket.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/ticket_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/ticket_details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/ticket_queue.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/ticket_queue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/update_ticket.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/update_ticket.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticket/workspace.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticket/workspace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ticket/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +71,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -35,7 +87,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -53,16 +105,25 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/claud/Desktop/LICENTA (10)/LICENTA",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Settings.JavaScript",
+    "settings.editor.selected.configurable": "com.intellij.python.django.customization.DjangoModulesConfigurable",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -115,6 +176,25 @@
       <workItem from="1719140016599" duration="7227000" />
       <workItem from="1719149256536" duration="8049000" />
       <workItem from="1719237439951" duration="1265000" />
+      <workItem from="1719344635999" duration="112000" />
+      <workItem from="1719360682452" duration="7610000" />
+      <workItem from="1719368901436" duration="3498000" />
+      <workItem from="1719459905208" duration="8996000" />
+      <workItem from="1719516963291" duration="6002000" />
+      <workItem from="1719561188686" duration="17299000" />
+      <workItem from="1719593523076" duration="16099000" />
+      <workItem from="1719614965292" duration="103000" />
+      <workItem from="1719615088413" duration="1097000" />
+      <workItem from="1719655494022" duration="2499000" />
+      <workItem from="1719658012832" duration="3000" />
+      <workItem from="1719658038816" duration="193000" />
+      <workItem from="1719658239807" duration="48000" />
+      <workItem from="1719658338968" duration="2007000" />
+      <workItem from="1719660993660" duration="704000" />
+      <workItem from="1719661978550" duration="399000" />
+      <workItem from="1719662422257" duration="5000" />
+      <workItem from="1719662603967" duration="1043000" />
+      <workItem from="1719665125999" duration="2344000" />
     </task>
     <servers />
   </component>

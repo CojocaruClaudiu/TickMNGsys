@@ -2,44 +2,45 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
-<div class="container mt-5">
-  <div class="header-box">
-    <div class="header-content">
-      <h1 class="header-title">Creează un Tichet</h1>
-      <nav class="breadcrumb">
-        <a href="{% url 'home' %}" class="breadcrumb-item">Acasă</a> 
-        <span class="breadcrumb-item active">Creează Tichet</span>
-        <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
-      </nav>
-    </div>
-  </div>
+    <div class="container mt-5">
+        <div class="header-box">
+            <div class="header-content">
+                <h1 class="header-title">Creează un Tichet</h1>
+                <nav class="breadcrumb">
+                    <a href="{% url 'home' %}" class="breadcrumb-item">Acasă</a>
+                    <span class="breadcrumb-item active">Creează Tichet</span>
+                    <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
+                </nav>
+            </div>
+        </div>
 
-  <div class="content-box">
-      <div class="card-body">
-        <h5 class="card-title mb-3">Creează un tichet</h5>
-<form method="POST">
-          {% csrf_token %}
-          <div class="mb-3 input-group">
-            <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-            {% render_field form.title class="form-control" placeholder="Rezumați problema" %}
-          </div>
-          <div class="mb-3 input-group">
-            <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
-            {% render_field form.description class="form-control" placeholder="Detaliați problema" %}
-          </div>
-          <div class="mb-3 input-group">
-            <span class="input-group-text"><i class="bi bi-flag"></i></span>
-            {% render_field form.priority class="form-select" %}
-          </div>
-          <div class="mb-3 input-group">
-            <span class="input-group-text"><i class="bi bi-list-task"></i></span>
-            {% render_field form.category class="form-select" %}
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Trimite Tichet  <i class="bi bi-send-fill"></i>
-          </button>
-        </form>
+        <div class="content-box">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Creează un tichet</h5>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3 input-group">
+                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                        {% render_field form.title class="form-control" placeholder="Rezumați problema" %}
+                    </div>
+                    <div class="mb-3 input-group">
+                        <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                        {% render_field form.description class="form-control" placeholder="Detaliați problema" %}
+                    </div>
+                    <div class="mb-3 input-group">
+                        <span class="input-group-text"><i class="bi bi-flag"></i></span>
+                        {% render_field form.priority class="form-select" %}
+                    </div>
+                    <div class="mb-3 input-group">
+                        <span class="input-group-text"><i class="bi bi-list-task"></i></span>
+                        {% render_field form.category class="form-select" %}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Trimite Tichet <i
+                            class="bi bi-send-fill"></i>
+                    </button>
+                </form>
 
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 {% endblock content %}

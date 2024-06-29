@@ -166,6 +166,13 @@
             ><i class="bi bi-graph-up"></i> Dashboard</a
           >
         </li>
+       <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.url_name == 'all-tickets' %}active{% endif %}"
+                href="{% url 'all-tickets' %}"
+                ><i class="bi bi-eye"></i> Toate Tichetele</a
+              >
+            </li>
         <li class="nav-item">
           <a
             class="nav-link {% if request.resolver_match.url_name == 'ticket-queue' %}active{% endif %}"

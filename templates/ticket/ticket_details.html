@@ -3,168 +3,177 @@
 {% load custom_filters %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="header-box">
-    <div class="header-content">
-      <h1 class="header-title">Detalii Tichet</h1>
-      <nav class="breadcrumb">
-         <a href="{% url 'home' %}" class="breadcrumb-item">Acasă</a> 
-        <span class="breadcrumb-item active">Detalii Tichet</span>
-        <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
-      </nav>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title mb-0">{{ ticket.title }}</h1>
-          </div>
-          <div class="card-body">
-            <table class="table table-borderless">
-              <tbody>
-                <tr>
-                  <td><b>Numărul Tichetului:</b></td>
-                  <td>{{ ticket.id }}</td>
-                </tr>
-                <tr>
-                  <td><b>Descriere:</b></td>
-                  <td>{{ ticket.description }}</td>
-                </tr>
-                <tr>
-                  <td><b>Data Creat:</b></td>
-                  <td>{{ ticket.date_created }}</td>
-                </tr>
-                <tr>
-                  <td><b>Atribuit către:</b></td>
-                  <td>
-                    {% if ticket.assigned_to %}
-                      <img src="{{ ticket.assigned_to.profile_image.url }}" alt="Profile Image of {{ ticket.assigned_to.username }}" class="profile-image">
-                      <span class="assigned-username">{{ ticket.assigned_to.username }}</span>
-                    {% else %}
-                      <small>Neatribuit</small>
-                    {% endif %}
-                  </td>
-                </tr>
-                <tr>
-                  <td><b>Data Acceptat:</b></td>
-                  <td>{{ ticket.accepted_date }}</td>
-                </tr>
-                <tr>
-                  <td><b>Prioritate:</b></td>
-                  <td>
-                    {% if ticket.priority == 'Very Low' %}
-                    <span class="badge badge-very-low">Foarte Scăzută</span>
-                    {% elif ticket.priority == 'Low' %}
-                    <span class="badge badge-low">Scăzută</span>
-                    {% elif ticket.priority == 'Medium' %}
-                    <span class="badge badge-medium">Medie</span>
-                    {% elif ticket.priority == 'High' %}
-                    <span class="badge badge-high">Ridicată</span>
-                    {% elif ticket.priority == 'Very High' %}
-                    <span class="badge badge-very-high">Foarte Ridicată</span>
-                    {% endif %}
-                  </td>
-                </tr>
-                <tr>
-                  <td><b>Categorie:</b></td>
-                  <td>{{ ticket.get_category_display }}</td>
-                </tr>
-                <tr>
-                  <td><b>Creat de:</b></td>
-                  <td><img src="{{ ticket.created_by.profile_image.url }}" alt="Profile Image of {{ ticket.created_by.username }}" class="profile-image">{{ ticket.created_by }}</td>
-                </tr>
-                <tr>
-                  <td><b>Status:</b></td>
-                  <td>
-                    {% if ticket.ticket_status == 'Active' %}
-                      <span class="badge badge-open">Deschis</span>
-                    {% elif ticket.ticket_status == 'Pending' %}
-                      <span class="badge badge-pending">În așteptare</span>
-                    {% elif ticket.ticket_status == 'Completed' %}
-                      <span class="badge badge-closed">Închis</span>
-                    {% endif %}
-                  </td>
-                </tr>
-                {% if ticket.ticket_status == 'Completed' %}
-                <tr>
-                  <td><b>Data Rezolvat:</b></td>
-                  <td>{{ ticket.closed_date }}</td>
-                </tr>
-                {% endif %}
-                {% if ticket.updated_at != ticket.closed_date and ticket.updated_at != ticket.date_created and ticket.updated_at != ticket.accepted_date %}
-                                <tr>
-                  <td><b>Ultima Actualizare la:</b></td>
-                  <td>{{ ticket.updated_at }}</td>
-                </tr>
-                {% endif %}
-              </tbody>
-            </table>
-          </div>
+    <div class="container mt-5">
+        <div class="header-box">
+            <div class="header-content">
+                <h1 class="header-title">Detalii Tichet</h1>
+                <nav class="breadcrumb">
+                    <a href="{% url 'home' %}" class="breadcrumb-item">Acasă</a>
+                    <span class="breadcrumb-item active">Detalii Tichet</span>
+                    <img src="{% static 'images/breadcrumb.png' %}" alt="Breadcrumb Icon" class="breadcrumb-icon">
+                </nav>
+            </div>
         </div>
-      </div>
 
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title mb-3">Toate Tichetele Create De {{ ticket.created_by }}</h5>
-            <div class="list-group">
-              {% for user_ticket in tickets_per_user %}
-                <a href="{% url 'ticket-details' user_ticket.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between
+        <div class="content-box">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="card-title mb-0">{{ ticket.title }}</h1>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr>
+                                    <td><b>Numărul Tichetului:</b></td>
+                                    <td>{{ ticket.id }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Descriere:</b></td>
+                                    <td>{{ ticket.description }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Data Creat:</b></td>
+                                    <td>{{ ticket.date_created }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Atribuit către:</b></td>
+                                    <td>
+                                        {% if ticket.assigned_to %}
+                                            <img src="{{ ticket.assigned_to.profile_image.url }}"
+                                                 alt="Profile Image of {{ ticket.assigned_to.username }}"
+                                                 class="profile-image">
+                                            <span class="assigned-username">{{ ticket.assigned_to.username }}</span>
+                                        {% else %}
+                                            <small>Neatribuit</small>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Data Acceptat:</b></td>
+                                    <td>{{ ticket.accepted_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Prioritate:</b></td>
+                                    <td>
+                                        {% if ticket.priority == 'Very Low' %}
+                                            <span class="badge badge-very-low">Foarte Scăzută</span>
+                                        {% elif ticket.priority == 'Low' %}
+                                            <span class="badge badge-low">Scăzută</span>
+                                        {% elif ticket.priority == 'Medium' %}
+                                            <span class="badge badge-medium">Medie</span>
+                                        {% elif ticket.priority == 'High' %}
+                                            <span class="badge badge-high">Ridicată</span>
+                                        {% elif ticket.priority == 'Very High' %}
+                                            <span class="badge badge-very-high">Foarte Ridicată</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Categorie:</b></td>
+                                    <td>{{ ticket.get_category_display }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Creat de:</b></td>
+                                    <td><img src="{{ ticket.created_by.profile_image.url }}"
+                                             alt="Profile Image of {{ ticket.created_by.username }}"
+                                             class="profile-image">{{ ticket.created_by }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Status:</b></td>
+                                    <td>
+                                        {% if ticket.ticket_status == 'Active' %}
+                                            <span class="badge badge-open">Deschis</span>
+                                        {% elif ticket.ticket_status == 'Pending' %}
+                                            <span class="badge badge-pending">În așteptare</span>
+                                        {% elif ticket.ticket_status == 'Completed' %}
+                                            <span class="badge badge-closed">Închis</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if ticket.ticket_status == 'Completed' %}
+                                    <tr>
+                                        <td><b>Data Rezolvat:</b></td>
+                                        <td>{{ ticket.closed_date }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if ticket.updated_at != ticket.closed_date and ticket.updated_at != ticket.date_created and ticket.updated_at != ticket.accepted_date %}
+                                    <tr>
+                                        <td><b>Ultima Actualizare la:</b></td>
+                                        <td>{{ ticket.updated_at }}</td>
+                                    </tr>
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Toate Tichetele Create De {{ ticket.created_by }}</h5>
+                            <div class="list-group">
+                                {% for user_ticket in tickets_per_user %}
+                                    <a href="{% url 'ticket-details' user_ticket.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between
                    {% if user_ticket.ticket_status == 'Active' %}ticket-status-active
                    {% elif user_ticket.ticket_status == 'Pending' %}ticket-status-pending
                    {% elif user_ticket.ticket_status == 'Completed' %}ticket-status-completed
                    {% endif %}">
-                  <span>{{ user_ticket.id }} - {{ user_ticket.title }}</span>
-                  <span class="badge badge-{{ user_ticket.priority|hyphenate }} ml-auto">
+                                        <span>{{ user_ticket.id }} - {{ user_ticket.title }}</span>
+                                        <span class="badge badge-{{ user_ticket.priority|hyphenate }} ml-auto">
                     {% if user_ticket.priority == 'Very Low' %}
-                      Foarte Scăzută
+                        Foarte Scăzută
                     {% elif user_ticket.priority == 'Low' %}
-                      Scăzută
+                        Scăzută
                     {% elif user_ticket.priority == 'Medium' %}
-                      Medie
+                        Medie
                     {% elif user_ticket.priority == 'High' %}
-                      Ridicată
+                        Ridicată
                     {% elif user_ticket.priority == 'Very High' %}
-                      Foarte Ridicată
+                        Foarte Ridicată
                     {% endif %}
                   </span>
-                </a>
-              {% endfor %}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if request.user.is_engineer and not ticket.is_resolved %}
+                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmă
+                        Rezolvarea</a>
+                {% endif %}
+
+                {% if request.user.is_customer and not ticket.is_resolved %}
+                    <a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-primary">Actualizează Tichet</a>
+                {% endif %}
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmă Rezolvarea</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Închide"></button>
+                            </div>
+                            <div class="modal-body">
+                                Dorești să închizi tichetul?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Închide</button>
+                                <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-primary">Salvează
+                                    Modificările</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-
-      {% if request.user.is_engineer and not ticket.is_resolved %}
-      <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmă Rezolvarea</a>
-      {% endif %}
-
-      {% if request.user.is_customer and not ticket.is_resolved %}
-      <a href="{% url 'update-ticket' ticket.pk %}" class="btn btn-primary">Actualizează Tichet</a>
-      {% endif %}
-
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Confirmă Rezolvarea</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Închide"></button>
-            </div>
-            <div class="modal-body">
-              Dorești să închizi tichetul?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Închide</button>
-              <a href="{% url 'close-ticket' ticket.pk %}" class="btn btn-primary">Salvează Modificările</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
+    
 {% endblock content %}

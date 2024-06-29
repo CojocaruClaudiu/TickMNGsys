@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { format, parseISO, subDays } from 'date-fns';
+import {Tooltip as ReactTooltip} from 'react-tooltip';
+import {format, parseISO, subDays} from 'date-fns';
 import 'react-calendar-heatmap/dist/styles.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import './dashboard.css';
@@ -52,7 +52,7 @@ const CalendarHeatmapChart = () => {
                 monthLabels={monthNames}
                 weekdayLabels={dayNames}
             />
-            <ReactTooltip id="heatmap-tooltip" className="white-tooltip" />
+            <ReactTooltip id="heatmap-tooltip" className="white-tooltip"/>
         </div>
     );
 };

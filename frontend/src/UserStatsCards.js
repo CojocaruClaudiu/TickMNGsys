@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './dashboard.css';
 
 const UserStatsCards = () => {
-    const [stats, setStats] = useState({ customers: 0, engineers: 0, admins: 0 });
+    const [stats, setStats] = useState({customers: 0, engineers: 0, admins: 0});
     const totalUsers = stats.customers + stats.engineers + stats.admins;
 
     useEffect(() => {

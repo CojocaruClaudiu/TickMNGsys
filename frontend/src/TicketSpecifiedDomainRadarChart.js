@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import React, {useEffect, useState} from 'react';
+import {Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip, ResponsiveContainer} from 'recharts';
 import './dashboard.css';
 
 const SpecifiedDomainRadarChart = () => {
@@ -34,11 +34,11 @@ const SpecifiedDomainRadarChart = () => {
             <div className="chart-container">
                 <ResponsiveContainer width="100%" height="100%">
                     <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="category" tick={{ textAnchor: 'middle', fontSize: 14 }} />
-                        <PolarRadiusAxis />
-                        <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc' }} />
-                        <Radar name="Tichete" dataKey="count" stroke="#5e87ff" fill="#49beff" fillOpacity={0.6} />
+                        <PolarGrid/>
+                        <PolarAngleAxis dataKey="category" tick={{textAnchor: 'middle', fontSize: 14}}/>
+                        <PolarRadiusAxis/>
+                        <Tooltip contentStyle={{backgroundColor: '#fff', border: '1px solid #ccc'}}/>
+                        <Radar name="Tichete" dataKey="count" stroke="#5e87ff" fill="#49beff" fillOpacity={0.6}/>
                     </RadarChart>
                 </ResponsiveContainer>
             </div>

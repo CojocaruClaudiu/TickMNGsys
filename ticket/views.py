@@ -1,4 +1,6 @@
 import datetime
+
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Ticket
@@ -69,14 +71,33 @@ def update_ticket(request, pk):
 # vizualizarea tuturor tichetelor create
 @login_required
 def all_tickets(request):
-    # Get the status filter from the request
+    # Get filter parameters from the request
     status_filter = request.GET.get('status', 'all')
+    search_query = request.GET.get('search', '')
+    date_filter = request.GET.get('date', '')
+    assigned_to_filter = request.GET.get('assigned_to', '')
+    priority_filter = request.GET.get('priority', '')
+    category_filter = request.GET.get('category', '')
 
     # Determine the base queryset based on the user's role
-    if request.user.is_superuser:  # Admin users see all tickets
+    if request.user.is_superuser or request.user.is_engineer:  # Admin users and engineers see all tickets
         base_queryset = Ticket.objects.all()
-    else:  # Non-admin users see only their tickets
+    else:  # Non-admin, non-engineer users see only their tickets
         base_queryset = Ticket.objects.filter(created_by=request.user)
+
+    # Apply filters to the queryset
+    if status_filter and status_filter != 'all':
+        base_queryset = base_queryset.filter(ticket_status=status_filter)
+    if date_filter:
+        base_queryset = base_queryset.filter(date_created__date=date_filter)
+    if assigned_to_filter:
+        base_queryset = base_queryset.filter(assigned_to__username__icontains=assigned_to_filter)
+    if priority_filter:
+        base_queryset = base_queryset.filter(priority=priority_filter)
+    if category_filter:
+        base_queryset = base_queryset.filter(category=category_filter)
+    if search_query:
+        base_queryset = base_queryset.filter(Q(title__icontains=search_query) | Q(id__icontains=search_query))
 
     # Calculate the counts for each ticket type
     total_tickets = base_queryset.count()
@@ -84,22 +105,14 @@ def all_tickets(request):
     open_tickets = base_queryset.filter(ticket_status='Active').count()
     closed_tickets = base_queryset.filter(ticket_status='Completed').count()
 
-    # Apply status filter to the base queryset
-    if status_filter != 'all':
-        tickets_list = base_queryset.filter(ticket_status=status_filter.capitalize())
-    else:
-        tickets_list = base_queryset
-
     # Setup pagination
-    paginator = Paginator(tickets_list, 8)  # Show 8 tickets per page
+    paginator = Paginator(base_queryset, 8)  # Show 8 tickets per page
     page = request.GET.get('page')
     try:
         tickets = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         tickets = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         tickets = paginator.page(paginator.num_pages)
 
     context = {
@@ -110,15 +123,43 @@ def all_tickets(request):
         'closed_tickets': closed_tickets,
         'page': page,
         'status_filter': status_filter,
+        'search_query': search_query,  # Add search query to context
+        'date_filter': date_filter,
+        'assigned_to_filter': assigned_to_filter,
+        'priority_filter': priority_filter,
+        'category_filter': category_filter,
     }
+
     return render(request, 'ticket/all_tickets.html', context)
 
 
 # Pentru ingineri
 @login_required
 def ticket_queue(request):
-    # Filter tickets to only include pending ones
+    # Get filtering parameters
+    date = request.GET.get('date')
+    created_by = request.GET.get('created_by')
+    priority = request.GET.get('priority')
+    category = request.GET.get('category')
+    status = request.GET.get('status')
+    search_query = request.GET.get('search', '')
+
+    # Filter tickets to only include pending ones and apply additional filters
     tickets = Ticket.objects.filter(ticket_status='Pending')
+
+    if date:
+        tickets = tickets.filter(date_created=date)
+    if created_by:
+        tickets = tickets.filter(created_by__username__icontains=created_by)
+    if priority:
+        tickets = tickets.filter(priority=priority)
+    if category:
+        tickets = tickets.filter(category=category)
+    if status:
+        tickets = tickets.filter(ticket_status=status)
+    if search_query:
+        tickets = tickets.filter(Q(title__icontains=search_query) | Q(id__icontains=search_query))
+
     pending_tickets_count = tickets.count()
 
     engineers = User.objects.filter(is_engineer=True)  # Fetch all users who are engineers
@@ -190,15 +231,31 @@ def close_ticket(request, pk):
 # tichetul la care lucrează inginerul
 @login_required
 def workspace(request):
+    # Get filtering parameters
+    date = request.GET.get('date')
+    assigned_to = request.GET.get('assigned_to')
+    priority = request.GET.get('priority')
+    category = request.GET.get('category')
+    search_query = request.GET.get('search', '')
+
+    # Filter tickets based on user role and additional filters
     if request.user.is_superuser or request.user.is_admin:
-        # Admins and superusers see all active unresolved tickets
-        tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active').order_by('date_created')
+        tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active')
     elif request.user.is_engineer:
-        # Engineers see only the tickets assigned to them
-        tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active', assigned_to=request.user).order_by('date_created')
+        tickets = Ticket.objects.filter(is_resolved=False, ticket_status='Active', assigned_to=request.user)
     else:
-        # Other users might not see any tickets, adjust according to your requirements
         tickets = Ticket.objects.none()
+
+    if date:
+        tickets = tickets.filter(date_created=date)
+    if assigned_to:
+        tickets = tickets.filter(assigned_to__username__icontains=assigned_to)
+    if priority:
+        tickets = tickets.filter(priority=priority)
+    if category:
+        tickets = tickets.filter(category=category)
+    if search_query:
+        tickets = tickets.filter(Q(title__icontains=search_query) | Q(id__icontains=search_query))
 
     open_tickets = tickets.count()
 
@@ -215,6 +272,7 @@ def workspace(request):
         'tickets': tickets,
         'open_tickets': open_tickets,
         'page': page,
+        'search_query': search_query,  # Add search query to context
     }
     return render(request, 'ticket/workspace.html', context)
 
@@ -222,7 +280,28 @@ def workspace(request):
 # toate tichetelor închise/rezolvate
 @login_required
 def all_closed_tickets(request):
-    tickets = Ticket.objects.filter(is_resolved=True).order_by('closed_date')
+    # Get filtering parameters
+    closed_date = request.GET.get('closed_date')
+    assigned_to = request.GET.get('assigned_to')
+    priority = request.GET.get('priority')
+    category = request.GET.get('category')
+    search_query = request.GET.get('search', '')
+
+    # Filter tickets to only include closed ones and apply additional filters
+    tickets = Ticket.objects.filter(is_resolved=True)
+
+    if closed_date:
+        tickets = tickets.filter(closed_date=closed_date)
+    if assigned_to:
+        tickets = tickets.filter(assigned_to__username__icontains=assigned_to)
+    if priority:
+        tickets = tickets.filter(priority=priority)
+    if category:
+        tickets = tickets.filter(category=category)
+    if search_query:
+        tickets = tickets.filter(Q(title__icontains=search_query) | Q(id__icontains=search_query))
+
+    tickets = tickets.order_by('closed_date')
     closed_tickets = tickets.count()
 
     paginator = Paginator(tickets, 8)  # Show 8 tickets per page
@@ -248,4 +327,3 @@ def delete_ticket(request, pk):
     ticket.delete()
     messages.info(request, "Tichetul dumneavoastră a fost șters cu succes.")
     return redirect('all-tickets')
-

@@ -31,20 +31,20 @@
       "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\453.d855a71b.chunk.js.map",
       "publicPath": "/static/js/453.d855a71b.chunk.js.map"
     },
-    "static/js/main.09e4b0f6.js": {
-      "name": "static/js/main.09e4b0f6.js",
-      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.09e4b0f6.js",
-      "publicPath": "/static/js/main.09e4b0f6.js"
+    "static/js/main.74bf1c8e.js": {
+      "name": "static/js/main.74bf1c8e.js",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.74bf1c8e.js",
+      "publicPath": "/static/js/main.74bf1c8e.js"
     },
-    "static/js/main.09e4b0f6.js.LICENSE.txt": {
-      "name": "static/js/main.09e4b0f6.js.LICENSE.txt",
-      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.09e4b0f6.js.LICENSE.txt",
-      "publicPath": "/static/js/main.09e4b0f6.js.LICENSE.txt"
+    "static/js/main.74bf1c8e.js.LICENSE.txt": {
+      "name": "static/js/main.74bf1c8e.js.LICENSE.txt",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.74bf1c8e.js.LICENSE.txt",
+      "publicPath": "/static/js/main.74bf1c8e.js.LICENSE.txt"
     },
-    "static/js/main.09e4b0f6.js.map": {
-      "name": "static/js/main.09e4b0f6.js.map",
-      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.09e4b0f6.js.map",
-      "publicPath": "/static/js/main.09e4b0f6.js.map"
+    "static/js/main.74bf1c8e.js.map": {
+      "name": "static/js/main.74bf1c8e.js.map",
+      "path": "C:\\Users\\claud\\Desktop\\LICENTA\\ticket_env\\django_project\\frontend\\build\\static\\js\\main.74bf1c8e.js.map",
+      "publicPath": "/static/js/main.74bf1c8e.js.map"
     },
     "static/media/bootstrap-icons.39795c0b4513de014cf8.woff": {
       "name": "static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
@@ -62,7 +62,7 @@
   "chunks": {
     "main": [
       "static/css/main.39815ee1.css",
-      "static/js/main.09e4b0f6.js"
+      "static/js/main.74bf1c8e.js"
     ]
   },
   "publicPath": "/"

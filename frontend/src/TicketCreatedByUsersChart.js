@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
+import React, {useEffect, useState} from 'react';
+import {Bar} from 'react-chartjs-2';
 import 'chart.js/auto';
 import './dashboard.css';
-import { Spin } from 'antd';
+import {Spin} from 'antd';
 
 const TicketsCreatedByUsersChart = () => {
     const [chartData, setChartData] = useState(null);
@@ -27,11 +27,9 @@ const TicketsCreatedByUsersChart = () => {
                             backgroundColor: data.map(() => {
 
 
-
                                 return '#49beff';
                             }),
                             borderColor: data.map(() => {
-
 
 
                                 return '#49beff';
@@ -53,7 +51,7 @@ const TicketsCreatedByUsersChart = () => {
     if (loading) {
         return (
             <div className="loader">
-                <Spin tip="Încărcare..." />
+                <Spin tip="Încărcare..."/>
             </div>
         );
     }
