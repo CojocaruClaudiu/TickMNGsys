@@ -2,9 +2,22 @@
 
 A role-based ticketing web application for managing internal/external support requests. Users can create and track tickets, admins assign them to engineers, and engineers resolve them via a dedicated workspace. Includes dashboards with ticket analytics (status, priority, category, time windows).
 
-
-## Demo 
+## Demo
 ▶️ Demo video (1:40): https://youtu.be/269aH_s_Q-w
+
+## Screenshots
+<details>
+  <summary>Click to expand</summary>
+
+  <br/>
+
+  <img width="1142" height="587" alt="Authentification Page" src="https://github.com/user-attachments/assets/2b5eaa0e-9506-4fb8-b7d9-a897ac14f562" />
+  <img width="1133" height="576" alt="Dashboard 1" src="https://github.com/user-attachments/assets/7b33e10e-ec1b-4889-ad50-b8563e6eb1a5" />
+  <img width="574" height="518" alt="Dashboard 2" src="https://github.com/user-attachments/assets/cac174db-d532-43fa-96aa-cf091c081ce7" />
+  <img width="1145" height="582" alt="Ticket List" src="https://github.com/user-attachments/assets/24bfe34a-f5b0-4fae-af62-b8417693dc47" />
+
+</details>
+
 ---
 
 ## Key Features
@@ -22,8 +35,8 @@ A role-based ticketing web application for managing internal/external support re
 ### Ticket Management UX
 - Ticket list view with:
   - **search + filtering**
-  - **pagination** (optimized list browsing)
-  - modal confirmation for destructive actions (delete)
+  - **pagination**
+  - confirmation for destructive actions (delete)
 - Ticket details page with editing restrictions (e.g., editable while not closed)
 
 ### Engineer Workspace
@@ -45,7 +58,7 @@ A role-based ticketing web application for managing internal/external support re
 - **Backend:** Python, Django
 - **Database:** SQLite
 - **Frontend:** Django templates + Bootstrap (UI)
-- **Charts/Dashboard:** React components for charts (e.g., react-chartjs-2 / Chart.js) where applicable
+- **Charts/Dashboard:** Chart.js / React chart components (where applicable)
 
 ---
 
