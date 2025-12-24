@@ -13,7 +13,8 @@ A role-based ticketing web application for managing internal/external support re
 
   <img width="1142" height="587" alt="Authentification Page" src="https://github.com/user-attachments/assets/2b5eaa0e-9506-4fb8-b7d9-a897ac14f562" />
   <img width="1133" height="576" alt="Dashboard 1" src="https://github.com/user-attachments/assets/7b33e10e-ec1b-4889-ad50-b8563e6eb1a5" />
-  <img width="574" height="518" alt="Dashboard 2" src="https://github.com/user-attachments/assets/cac174db-d532-43fa-96aa-cf091c081ce7" />
+  <img width="574" height="443" alt="Dasbhoard 2" src="https://github.com/user-attachments/assets/316e4646-8fcb-4ae5-86c0-be7af53c0667" />
+  <img width="574" height="518" alt="Dashboard 3" src="https://github.com/user-attachments/assets/cac174db-d532-43fa-96aa-cf091c081ce7" />
   <img width="1145" height="582" alt="Ticket List" src="https://github.com/user-attachments/assets/24bfe34a-f5b0-4fae-af62-b8417693dc47" />
 
 </details>
