@@ -2,6 +2,9 @@
 
 A role-based ticketing web application for managing internal/external support requests. Users can create and track tickets, admins assign them to engineers, and engineers resolve them via a dedicated workspace. Includes dashboards with ticket analytics (status, priority, category, time windows).
 
+
+## Demo 
+▶️ Demo video (1:40): https://youtu.be/269aH_s_Q-w
 ---
 
 ## Key Features
