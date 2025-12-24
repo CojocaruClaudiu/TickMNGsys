@@ -63,7 +63,9 @@ A role-based ticketing web application for managing internal/external support re
 ```bash
 git clone https://github.com/CojocaruClaudiu/TickMNGsys.git
 cd TickMNGsys
+```
 2) Create & activate a virtual environment
+```
 bash
 Copy code
 python -m venv .venv
@@ -79,25 +81,35 @@ macOS / Linux:
 bash
 Copy code
 source .venv/bin/activate
+```
+
 3) Install dependencies
+```
 bash
 Copy code
 pip install -r requirements.txt
-4) Run migrations
+```
+5) Run migrations
+```
 bash
 Copy code
 python manage.py migrate
-5) Create an admin user
+```
+6) Create an admin user
+```
 bash
 Copy code
 python manage.py createsuperuser
-6) Run the server
+```
+7) Run the server
+```
 bash
 Copy code
 python manage.py runserver
 Open:
 
 http://127.0.0.1:8000/
+```
 
 Usage (Quick Demo Flow)
 Register a Client account → create a new ticket
