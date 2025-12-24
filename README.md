@@ -63,3 +63,56 @@ A role-based ticketing web application for managing internal/external support re
 ```bash
 git clone https://github.com/CojocaruClaudiu/TickMNGsys.git
 cd TickMNGsys
+2) Create & activate a virtual environment
+bash
+Copy code
+python -m venv .venv
+Activate:
+
+Windows (PowerShell):
+
+powershell
+Copy code
+.\.venv\Scripts\Activate.ps1
+macOS / Linux:
+
+bash
+Copy code
+source .venv/bin/activate
+3) Install dependencies
+bash
+Copy code
+pip install -r requirements.txt
+4) Run migrations
+bash
+Copy code
+python manage.py migrate
+5) Create an admin user
+bash
+Copy code
+python manage.py createsuperuser
+6) Run the server
+bash
+Copy code
+python manage.py runserver
+Open:
+
+http://127.0.0.1:8000/
+
+Usage (Quick Demo Flow)
+Register a Client account → create a new ticket
+
+Login as Admin → assign the ticket to an Engineer
+
+Login as Engineer → open the workspace → update ticket status → resolve/close
+
+Visit the Dashboard to view ticket analytics (status/priority/category + time windows)
+
+Configuration Notes
+Media / profile images
+The app uses Django MEDIA_ROOT for user profile images. For local development, ensure MEDIA_URL and MEDIA_ROOT are configured in settings.py, and that media is served in urls.py (development only).
+
+Database
+Default database is SQLite.
+To switch to PostgreSQL/MySQL, update DATABASES in settings.py and rerun migrations.
+
